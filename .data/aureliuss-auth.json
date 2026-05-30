@@ -1,0 +1,71 @@
+{
+  "invites": [
+    {
+      "id": "inv-seed-dev",
+      "code": "AURA",
+      "label": "Development access",
+      "tier": "founding",
+      "maxUses": 100,
+      "useCount": 0,
+      "expiresAt": null,
+      "status": "active",
+      "createdAt": "2026-05-30T18:36:18.108Z",
+      "createdBy": "system",
+      "notes": "Temporary development code — remove in production"
+    },
+    {
+      "id": "inv-seed-founder",
+      "code": "AURE-FOUND-2026",
+      "label": "Founding circle",
+      "tier": "founding",
+      "maxUses": 5,
+      "useCount": 0,
+      "expiresAt": null,
+      "status": "active",
+      "createdAt": "2026-05-30T18:36:18.108Z",
+      "createdBy": "system",
+      "notes": "Development seed — no expiry"
+    },
+    {
+      "id": "inv-seed-principal",
+      "code": "AURE-PRIN-DEMO",
+      "label": "Principal preview",
+      "tier": "principal",
+      "maxUses": 1,
+      "useCount": 0,
+      "expiresAt": "2026-06-29T18:36:18.105Z",
+      "status": "active",
+      "createdAt": "2026-05-30T18:36:18.108Z",
+      "createdBy": "system"
+    }
+  ],
+  "waitlist": [
+    {
+      "fullName": "Rishav",
+      "email": "bansalrishav2007@gmail.com",
+      "phone": "7973005260",
+      "profession": "ceo",
+      "whyAccess": "I am a foundrr",
+      "id": "wl-1f3d139a-6eb1-4e75-bb62-1de6fc0e8be0",
+      "status": "pending",
+      "createdAt": "2026-05-30T18:59:00.552Z"
+    }
+  ],
+  "members": [
+    {
+      "id": "mem-founder-super-admin",
+      "email": "rishav@aureliuss.ai",
+      "fullName": "Rishav Aggarwal",
+      "tier": "founding",
+      "role": "SUPER_ADMIN",
+      "inviteCodeId": "system-founder",
+      "createdAt": "2026-05-30T18:57:42.722Z",
+      "expiresAt": "2099-12-31T23:59:59.000Z",
+      "passwordHash": "75602fdf8a27e0c3cc509c8711967ba6:5adf0cc8dd958f3e83013ab9e03fe97ef8b6144806bddad67b3de9cd1c5c6049ce00d3c711e461ff133894d1e41d2c366b65673539c23bf9fd9c1782ef02e653",
+      "subscription": "active",
+      "subscriptionPlan": "founding-unlimited",
+      "revoked": false
+    }
+  ],
+  "admins": []
+}
