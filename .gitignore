@@ -19,6 +19,9 @@ dist-ssr
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars
+.env
+node_modules
+dist
 
 # Editor directories and files
 .vscode/*
