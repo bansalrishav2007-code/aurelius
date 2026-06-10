@@ -16,7 +16,7 @@ export function TrustPage({ title, subtitle, children }: Props) {
     <ImmersiveScene variant="auth" className="min-h-screen flex flex-col">
       <header className="px-6 lg:px-10 pt-8">
         <Link to="/" className="inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground mb-8 transition-colors">
-          <ArrowLeft className="h-3.5 w-3.5" /> Aureliuss
+          <ArrowLeft className="h-3.5 w-3.5" /> Aurelius
         </Link>
         <Logo />
       </header>

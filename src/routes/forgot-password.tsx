@@ -8,7 +8,7 @@ import { Logo } from "@/components/Logo";
 import { requestPasswordReset } from "@/lib/platform/client";
 
 export const Route = createFileRoute("/forgot-password")({
-  head: () => ({ meta: [{ title: "Reset Password — Aureliuss" }] }),
+  head: () => ({ meta: [{ title: "Reset Password — Aurelius" }] }),
   component: ForgotPasswordPage,
 });
 

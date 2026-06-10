@@ -1,0 +1,21 @@
+{
+  "name": "Aurelius",
+  "short_name": "Aurelius",
+  "description": "Private Wealth Intelligence",
+  "icons": [
+    {
+      "src": "/aurelius-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#09090B",
+  "background_color": "#09090B",
+  "display": "standalone"
+}

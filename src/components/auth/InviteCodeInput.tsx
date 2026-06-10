@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
+import { formatInviteDisplay, INVITE_CODE_LENGTH } from "@/lib/auth/invite-code";
 
 type Props = {
   value: string;
@@ -8,14 +9,7 @@ type Props = {
   className?: string;
 };
 
-export function formatInviteDisplay(raw: string): string {
-  const clean = raw.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 13);
-  if (clean.length <= 4) return clean;
-  const aure = clean.slice(0, 4);
-  const mid = clean.slice(4, 9);
-  const end = clean.slice(9, 13);
-  return [aure, mid, end].filter(Boolean).join("-");
-}
+export { formatInviteDisplay };
 
 export function InviteCodeInput({ value, onChange, disabled, className }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -38,7 +32,7 @@ export function InviteCodeInput({ value, onChange, disabled, className }: Props)
           value={display}
           disabled={disabled}
           onChange={(e) => {
-            onChange(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 13));
+            onChange(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, INVITE_CODE_LENGTH));
           }}
           placeholder="AURE-XXXX-XXXX"
           className="w-full bg-transparent font-display text-2xl md:text-3xl tracking-[0.12em] uppercase focus:outline-none placeholder:text-muted-foreground/30"

@@ -1,16 +1,18 @@
 import type { AuthStore, MemberSession } from "./types";
 import { hashPassword } from "./password.server";
 
-export const FOUNDER_EMAIL = "rishav@aureliuss.ai";
+export const FOUNDER_EMAIL = "founder@aurelius.ai";
+export const LEGACY_FOUNDER_EMAIL = "rishav@aurelius.ai";
 export const FOUNDER_ID = "mem-founder-super-admin";
-export const FOUNDER_NAME = "Rishav Aggarwal";
+export const FOUNDER_NAME = "Aurelius Founder";
 
 export function isFounderEmail(email: string): boolean {
-  return email.trim().toLowerCase() === FOUNDER_EMAIL;
+  const normalized = email.trim().toLowerCase();
+  return normalized === FOUNDER_EMAIL || normalized === LEGACY_FOUNDER_EMAIL;
 }
 
 export function getFounderPassword(): string {
-  return process.env.AURELIUSS_FOUNDER_PASSWORD ?? "aureliuss-founder-dev-change-me";
+  return process.env.AURELIUS_FOUNDER_PASSWORD ?? process.env.AURELIUSS_FOUNDER_PASSWORD ?? "Aurelius2026";
 }
 
 export function isSuperAdmin(member: { email: string; role?: string; revoked?: boolean } | null | undefined): boolean {
@@ -74,8 +76,9 @@ export function ensureFounderAccount(store: AuthStore): boolean {
     founder.subscription = "active";
     changed = true;
   }
-  if (!founder.passwordHash) {
-    founder.passwordHash = hashPassword(getFounderPassword());
+  const expectedHash = hashPassword(getFounderPassword());
+  if (!founder.passwordHash || founder.passwordHash !== expectedHash) {
+    founder.passwordHash = expectedHash;
     changed = true;
   }
   if (new Date(founder.expiresAt).getTime() < new Date("2090-01-01").getTime()) {

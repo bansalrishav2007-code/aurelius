@@ -10,6 +10,7 @@ import {
 
 import { Toaster } from "sonner";
 
+import { DevBypassSideEntry } from "@/components/dev/DevBypassSideEntry";
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -74,12 +75,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aureliuss — Private Wealth Intelligence" },
+      { title: "Aurelius — Private Wealth Intelligence" },
       {
         name: "description",
         content: "Invite-only private wealth intelligence for India's principals and family offices.",
       },
-      { property: "og:title", content: "Aureliuss — Private Wealth Intelligence" },
+      { property: "og:title", content: "Aurelius — Private Wealth Intelligence" },
+      { name: "application-name", content: "Aurelius" },
+      { name: "theme-color", content: "#0A0A0A" },
       {
         property: "og:description",
         content: "Discreet wealth intelligence for India's HNWIs. By invitation only.",
@@ -93,6 +96,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "apple-touch-icon", href: "/aurelius-mark.svg" },
+      { rel: "manifest", href: "/site.webmanifest" },
     ],
   }),
   shellComponent: RootShell,
@@ -122,6 +128,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <DevBypassSideEntry />
       <Toaster theme="dark" position="top-right" />
     </QueryClientProvider>
   );

@@ -1,4 +1,4 @@
-import { mockAllocation, mockLiabilityTrend } from "@/lib/mock-data";
+import type { AllocationSlice, LiabilityPoint } from "@/lib/wealth/insights";
 import {
   Area,
   AreaChart,
@@ -22,10 +22,10 @@ const tooltipStyle = {
   color: "var(--foreground)",
 };
 
-export function LiabilityChart() {
+export function LiabilityChart({ data }: { data: LiabilityPoint[] }) {
   return (
     <ResponsiveContainer width="100%" height={220}>
-      <AreaChart data={mockLiabilityTrend} margin={{ top: 8, right: 8, left: -18, bottom: 0 }}>
+      <AreaChart data={data} margin={{ top: 8, right: 8, left: -18, bottom: 0 }}>
         <defs>
           <linearGradient id="proj" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="var(--primary)" stopOpacity={0.35} />
@@ -42,7 +42,7 @@ export function LiabilityChart() {
         <Tooltip
           cursor={{ stroke: "var(--gold)", strokeOpacity: 0.4, strokeDasharray: 4 }}
           contentStyle={tooltipStyle}
-          formatter={(v: number, name: string) => [`₹${v.toFixed(2)} Cr`, name === "projected" ? "Pre-optimisation" : "After Auralis"]}
+          formatter={(v: number, name: string) => [`₹${v.toFixed(2)} Cr`, name === "projected" ? "Pre-optimisation" : "After Aurelius"]}
           labelStyle={{ color: "var(--muted-foreground)", fontSize: 10, textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 6 }}
         />
         <Area type="monotone" dataKey="projected" stroke="var(--primary)" strokeWidth={1.5} fill="url(#proj)" />
@@ -52,19 +52,19 @@ export function LiabilityChart() {
   );
 }
 
-export function AllocationDonut() {
+export function AllocationDonut({ data }: { data: AllocationSlice[] }) {
   return (
     <ResponsiveContainer width="100%" height={210}>
       <PieChart>
         <Pie
-          data={mockAllocation}
+          data={data}
           dataKey="value"
           innerRadius={62}
           outerRadius={88}
           paddingAngle={2}
           stroke="none"
         >
-          {mockAllocation.map((d, i) => (
+          {data.map((d, i) => (
             <Cell key={i} fill={d.color} opacity={0.85} />
           ))}
         </Pie>

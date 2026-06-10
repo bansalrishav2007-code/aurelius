@@ -77,7 +77,7 @@ export async function createRazorpayOrder(input: CreateOrderInput): Promise<Crea
     body: JSON.stringify({
       amount: plan.amountPaise,
       currency: "INR",
-      receipt: `aureliuss_${input.email}_${Date.now()}`,
+      receipt: `aurelius_${input.email}_${Date.now()}`,
       notes: { planId: plan.id, email: input.email, waitlistId: input.waitlistId ?? "" },
     }),
   });

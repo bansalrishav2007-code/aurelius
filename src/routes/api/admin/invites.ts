@@ -16,17 +16,25 @@ export const Route = createFileRoute("/api/admin/invites")({
           maxUses?: number;
           expiresInDays?: number | null;
           notes?: string;
+          assignedEmail?: string;
         };
 
-        const invite = await createInvite({
-          label: body.label,
-          tier: body.tier ?? "principal",
-          maxUses: body.maxUses ?? 1,
-          expiresInDays: body.expiresInDays ?? 30,
-          notes: body.notes,
-        });
-
-        return Response.json({ invite });
+        try {
+          const invite = await createInvite({
+            label: body.label,
+            tier: body.tier ?? "principal",
+            maxUses: body.maxUses ?? 1,
+            expiresInDays: body.expiresInDays ?? 30,
+            notes: body.notes,
+            assignedEmail: body.assignedEmail,
+          });
+          return Response.json({ invite });
+        } catch (err) {
+          return Response.json(
+            { error: err instanceof Error ? err.message : "Failed to create invite." },
+            { status: 400 },
+          );
+        }
       },
     },
   },

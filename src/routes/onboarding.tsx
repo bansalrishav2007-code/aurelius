@@ -6,6 +6,7 @@ import { Logo } from "@/components/Logo";
 import { ImmersiveScene } from "@/components/immersive";
 import { PremiumFooter } from "@/components/PremiumFooter";
 import { completeOnboarding } from "@/lib/auth/client";
+import { getPostAuthPath, redirectToDashboardAfterAuth } from "@/lib/auth/redirect-after-auth";
 import { getAuthSession, getPendingInvite } from "@/lib/auth/session.functions";
 
 type OnboardingSearch = { code?: string };
@@ -16,7 +17,7 @@ export const Route = createFileRoute("/onboarding")({
   }),
   loader: async ({ search }) => {
     const session = await getAuthSession();
-    if (session) throw redirect({ to: "/dashboard" });
+    if (session) throw redirect({ to: getPostAuthPath(session) });
 
     const codeFromSearch = search.code?.trim();
     if (codeFromSearch) return { inviteCode: codeFromSearch };
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/onboarding")({
     if (!pending) throw redirect({ to: "/access" });
     return { inviteCode: pending };
   },
-  head: () => ({ meta: [{ title: "Private Onboarding — Aureliuss" }] }),
+  head: () => ({ meta: [{ title: "Private Onboarding — Aurelius" }] }),
   component: OnboardingPage,
 });
 
@@ -39,7 +40,7 @@ function OnboardingPage() {
     () =>
       loaderCode ??
       searchCode ??
-      (typeof sessionStorage !== "undefined" ? sessionStorage.getItem("aureliuss_invite") : null) ??
+      (typeof sessionStorage !== "undefined" ? sessionStorage.getItem("aurelius_invite") : null) ??
       "",
     [loaderCode, searchCode],
   );
@@ -47,7 +48,7 @@ function OnboardingPage() {
   const [step, setStep] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState(() =>
-    typeof sessionStorage !== "undefined" ? sessionStorage.getItem("aureliuss_invite_email") ?? "" : "",
+    typeof sessionStorage !== "undefined" ? sessionStorage.getItem("aurelius_invite_email") ?? "" : "",
   );
   const [password, setPassword] = useState("");
   const [firm, setFirm] = useState("");
@@ -79,9 +80,9 @@ function OnboardingPage() {
     setError(null);
     try {
       await completeOnboarding({ code: inviteCode, email, fullName, firm: firm || undefined, password: password || undefined });
-      sessionStorage.removeItem("aureliuss_invite");
-      sessionStorage.removeItem("aureliuss_invite_email");
-      navigate({ to: "/dashboard" });
+      sessionStorage.removeItem("aurelius_invite");
+      sessionStorage.removeItem("aurelius_invite_email");
+      await redirectToDashboardAfterAuth();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Onboarding failed.");
     } finally {
@@ -206,7 +207,7 @@ function OnboardingPage() {
                       className="mt-1 rounded border-border"
                     />
                     <span className="text-xs text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors">
-                      I confirm this invitation is personal, non-transferable, and subject to Aureliuss private membership terms and DPDP compliance.
+                      I confirm this invitation is personal, non-transferable, and subject to Aurelius private membership terms and DPDP compliance.
                     </span>
                   </label>
                 </>
@@ -254,7 +255,7 @@ function OnboardingPage() {
               }}
               className="flex-1 h-12 rounded-xl bg-foreground text-background text-sm font-medium hover:bg-foreground/92 disabled:opacity-40 transition-all inline-flex items-center justify-center gap-2"
             >
-              {step < 2 ? "Continue" : loading ? "Provisioning…" : "Enter Aureliuss"}
+              {step < 2 ? "Continue" : loading ? "Provisioning…" : "Enter Aurelius"}
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </button>
           </div>

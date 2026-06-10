@@ -1,6 +1,12 @@
-const MEMBER_COOKIE = "aureliuss_member";
-const ADMIN_COOKIE = "aureliuss_admin";
-const PENDING_INVITE_COOKIE = "aureliuss_pending_invite";
+const MEMBER_COOKIE = "aurelius_member";
+const ACCESS_COOKIE = "aurelius_access";
+const REFRESH_COOKIE = "aurelius_refresh";
+const ADMIN_COOKIE = "aurelius_admin";
+const PENDING_INVITE_COOKIE = "aurelius_pending_invite";
+
+const ACCESS_MAX_AGE = 60 * 60 * 24 * 7;
+const REFRESH_MAX_AGE = 60 * 60 * 24 * 30;
+const REFRESH_MAX_AGE_SHORT = 60 * 60 * 24 * 7;
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -10,6 +16,48 @@ function cookieBase(maxAgeSec: number): string {
 
 export function setMemberSessionCookie(sessionId: string): string {
   return `${MEMBER_COOKIE}=${sessionId}; ${cookieBase(60 * 60 * 24 * 30)}`;
+}
+
+export function setAccessTokenCookie(accessToken: string): string {
+  return `${ACCESS_COOKIE}=${accessToken}; ${cookieBase(ACCESS_MAX_AGE)}`;
+}
+
+export function setRefreshTokenCookie(refreshToken: string, rememberDevice?: boolean): string {
+  const maxAge = rememberDevice ? REFRESH_MAX_AGE : REFRESH_MAX_AGE_SHORT;
+  return `${REFRESH_COOKIE}=${refreshToken}; ${cookieBase(maxAge)}`;
+}
+
+export function clearAccessTokenCookie(): string {
+  return `${ACCESS_COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`;
+}
+
+export function clearRefreshTokenCookie(): string {
+  return `${REFRESH_COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`;
+}
+
+export function getAccessToken(cookieHeader: string | null): string | undefined {
+  return parseCookies(cookieHeader)[ACCESS_COOKIE];
+}
+
+export function getRefreshToken(cookieHeader: string | null): string | undefined {
+  return parseCookies(cookieHeader)[REFRESH_COOKIE];
+}
+
+export function setAuthCookies(opts: {
+  memberId: string;
+  accessToken: string;
+  refreshToken: string;
+  rememberDevice?: boolean;
+}): string[] {
+  return [
+    setMemberSessionCookie(opts.memberId),
+    setAccessTokenCookie(opts.accessToken),
+    setRefreshTokenCookie(opts.refreshToken, opts.rememberDevice),
+  ];
+}
+
+export function clearAuthCookies(): string[] {
+  return [clearMemberSessionCookie(), clearAccessTokenCookie(), clearRefreshTokenCookie()];
 }
 
 export function setAdminSessionCookie(sessionId: string): string {

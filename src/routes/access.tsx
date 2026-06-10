@@ -1,13 +1,14 @@
-import { createFileRoute, Link, redirect, useNavigate } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "framer-motion";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { ArrowRight, Crown, KeyRound, Lock, Mail, Sparkles } from "lucide-react";
+import { ArrowRight, KeyRound, Lock, Mail, Sparkles } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { ImmersiveScene } from "@/components/immersive";
 import { PremiumFooter } from "@/components/PremiumFooter";
 import { InviteCodeInput, formatInviteDisplay } from "@/components/auth/InviteCodeInput";
-import { verifyInviteCode, reserveInviteCode } from "@/lib/auth/client";
-import type { PublicInvitePreview } from "@/lib/auth/types";
+import { isCompleteInviteCode } from "@/lib/auth/invite-code";
+import { registerWithInvite } from "@/lib/auth/client";
+import { getPostAuthPath, redirectToDashboardAfterAuth } from "@/lib/auth/redirect-after-auth";
 import { getAuthSession } from "@/lib/auth/session.functions";
 
 type AccessSearch = {
@@ -22,24 +23,18 @@ export const Route = createFileRoute("/access")({
   }),
   beforeLoad: async () => {
     const session = await getAuthSession();
-    if (session) throw redirect({ to: "/dashboard" });
+    if (session) throw redirect({ to: getPostAuthPath(session) });
   },
-  head: () => ({ meta: [{ title: "Private Access — Aureliuss" }] }),
+  head: () => ({ meta: [{ title: "Activate Membership — Aurelius" }] }),
   component: AccessPage,
 });
 
-const tierCopy: Record<NonNullable<PublicInvitePreview["tier"]>, string> = {
-  founding: "Founding circle",
-  principal: "Principal membership",
-  "family-office": "Family office charter",
-};
-
 function AccessPage() {
-  const navigate = useNavigate();
   const { code: codeParam, email: emailParam } = Route.useSearch();
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [code, setCode] = useState("AURA");
-  const [preview, setPreview] = useState<PublicInvitePreview | null>(null);
+  const [password, setPassword] = useState("");
+  const [code, setCode] = useState("AURE");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -49,42 +44,23 @@ function AccessPage() {
   }, [codeParam, emailParam]);
 
   const displayCode = formatInviteDisplay(code);
-  const clean = code.replace(/[^A-Z0-9]/g, "");
-  const isDevCode = clean === "AURA";
-  const emailReady = isDevCode || email.trim().includes("@");
-  const codeReady = isDevCode || clean.length >= 13;
-  const ready = emailReady && codeReady;
+  const ready = email.trim().includes("@") && password.length >= 8 && isCompleteInviteCode(code);
 
-  async function handleVerify() {
+  async function handleRegister(e: React.FormEvent) {
+    e.preventDefault();
     if (!ready) return;
     setLoading(true);
     setError(null);
-    setPreview(null);
     try {
-      const result = await verifyInviteCode(displayCode, email.trim());
-      if (!result.valid) {
-        setError(result.error ?? "Invalid invitation.");
-        return;
-      }
-      setPreview(result);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Unable to verify invitation.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function handleEnter() {
-    if (!preview?.valid) return;
-    setLoading(true);
-    setError(null);
-    try {
-      await reserveInviteCode(displayCode, email.trim());
-      sessionStorage.setItem("aureliuss_invite", displayCode);
-      sessionStorage.setItem("aureliuss_invite_email", email.trim().toLowerCase());
-      navigate({ to: "/onboarding", search: { code: displayCode } });
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Unable to reserve invitation.");
+      await registerWithInvite({
+        email: email.trim().toLowerCase(),
+        password,
+        inviteCode: displayCode,
+        fullName: fullName.trim() || undefined,
+      });
+      await redirectToDashboardAfterAuth();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Registration failed.");
     } finally {
       setLoading(false);
     }
@@ -112,13 +88,27 @@ function AccessPage() {
           </div>
 
           <h1 className="font-display text-4xl md:text-5xl tracking-tight text-balance leading-[1.05]">
-            Enter your <span className="gold-text italic">private invitation.</span>
+            Activate your <span className="gold-text italic">membership.</span>
           </h1>
           <p className="mt-5 text-sm text-muted-foreground leading-relaxed max-w-md">
-            Aureliuss is reserved for principals, family offices, and their counsel. Your invitation is tied to your registered email — both must match to proceed.
+            Enter the email from your approval letter, create a secure password, and your personal invitation code to access Aurelius.
           </p>
 
-          <div className="mt-10 space-y-4">
+          <form onSubmit={handleRegister} className="mt-10 space-y-4">
+            <div>
+              <label className="text-xs text-muted-foreground tracking-wide mb-1.5 block">Full name</label>
+              <input
+                type="text"
+                required
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                disabled={loading}
+                placeholder="As on your invitation"
+                className="field-input"
+                autoComplete="name"
+              />
+            </div>
+
             <div>
               <label className="text-xs text-muted-foreground tracking-wide flex items-center gap-1.5 mb-1.5">
                 <Mail className="h-3 w-3 text-gold/70" strokeWidth={1.4} />
@@ -127,11 +117,9 @@ function AccessPage() {
               </label>
               <input
                 type="email"
+                required
                 value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  setPreview(null);
-                }}
+                onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
                 placeholder="The email from your approval letter"
                 className="field-input"
@@ -139,88 +127,66 @@ function AccessPage() {
               />
             </div>
 
-            <InviteCodeInput value={code} onChange={(v) => { setCode(v); setPreview(null); }} disabled={loading} />
-
-            <AnimatePresence mode="wait">
-              {error && (
-                <motion.p
-                  key="err"
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="text-sm text-destructive/90 px-1"
-                >
-                  {error}
-                </motion.p>
-              )}
-              {preview?.valid && (
-                <motion.div
-                  key="ok"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  className="panel rounded-2xl p-5 border border-gold/20"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-gold/10 grid place-items-center shrink-0">
-                      <Crown className="h-4 w-4 text-gold" strokeWidth={1.4} />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium tracking-tight">
-                        {preview.label ?? tierCopy[preview.tier!]}
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        {tierCopy[preview.tier!]} ·{" "}
-                        {preview.expiresAt
-                          ? `Valid until ${new Date(preview.expiresAt).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}`
-                          : "No expiry — founding allocation"}
-                      </p>
-                      {preview.assignedEmail && (
-                        <p className="text-xs text-gold/80 mt-1.5">
-                          Issued to {preview.assignedEmail}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              {!preview?.valid ? (
-                <button
-                  type="button"
-                  disabled={!ready || loading}
-                  onClick={handleVerify}
-                  className="flex-1 h-12 rounded-xl bg-foreground text-background text-sm font-medium hover:bg-foreground/92 disabled:opacity-40 transition-all duration-500 inline-flex items-center justify-center gap-2"
-                >
-                  {loading ? "Verifying…" : "Verify invitation"}
-                  <KeyRound className="h-4 w-4" strokeWidth={1.5} />
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  disabled={loading}
-                  onClick={handleEnter}
-                  className="flex-1 h-12 rounded-xl bg-foreground text-background text-sm font-medium hover:bg-foreground/92 transition-all duration-500 inline-flex items-center justify-center gap-2 shadow-luxury"
-                >
-                  Begin private onboarding
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-                </button>
-              )}
+            <div>
+              <label className="text-xs text-muted-foreground tracking-wide flex items-center gap-1.5 mb-1.5">
+                <Lock className="h-3 w-3 text-gold/70" strokeWidth={1.4} />
+                Password
+                <span className="text-gold/80"> *</span>
+              </label>
+              <input
+                type="password"
+                required
+                minLength={8}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
+                placeholder="Minimum 8 characters"
+                className="field-input"
+                autoComplete="new-password"
+              />
             </div>
+
+            <InviteCodeInput value={code} onChange={setCode} disabled={loading} />
+
+            {error && <p className="text-sm text-destructive/90 px-1">{error}</p>}
+
+            <button
+              type="submit"
+              disabled={!ready || loading}
+              className="btn-primary w-full h-12 shadow-luxury"
+            >
+              {loading ? "Creating your account…" : "Create account & enter Aurelius"}
+              <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+            </button>
+
+            <p className="text-[11px] text-muted-foreground/70 text-center leading-relaxed">
+              Your invitation code is single-use and bound to your registered email.
+            </p>
+          </form>
+
+          <div className="mt-10 pt-8 border-t border-border/30">
+            <p className="label-caps mb-3">Explore first</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Preview the Aurelius dashboard with sample data — no invitation required.
+            </p>
+            <Link
+              to="/demo"
+              className="mt-4 inline-flex items-center gap-2 text-sm text-gold hover:text-gold/80 transition-colors"
+            >
+              Try the interactive demo <Sparkles className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
           </div>
 
-          <div className="mt-14 pt-10 border-t border-border/30">
+          <div className="mt-10 pt-10 border-t border-border/30">
             <p className="label-caps mb-3">Without an invitation</p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Membership is curated. Submit a confidential application and our private office will review your profile.
+              Membership is curated. Submit a confidential application — email verification is required before review.
             </p>
             <Link
               to="/waitlist"
               className="mt-5 inline-flex items-center gap-2 text-sm text-foreground hover:text-gold transition-colors"
             >
-              Apply to the waitlist <Sparkles className="h-3.5 w-3.5 text-gold/70" strokeWidth={1.5} />
+              Apply for membership <Sparkles className="h-3.5 w-3.5 text-gold/70" strokeWidth={1.5} />
             </Link>
           </div>
         </motion.div>

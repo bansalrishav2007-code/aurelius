@@ -24,6 +24,18 @@ export const Route = createFileRoute("/api/payments/create-order")({
         });
 
         if (!result.ok) return Response.json({ error: result.error }, { status: 400 });
+
+        const { recordPayment } = await import("@/lib/payments/store.server");
+        await recordPayment({
+          memberEmail: body.email,
+          memberName: body.fullName,
+          planId: body.planId,
+          amountPaise: result.amount,
+          currency: result.currency,
+          orderId: result.orderId,
+          status: "pending",
+        });
+
         return Response.json(result);
       },
     },

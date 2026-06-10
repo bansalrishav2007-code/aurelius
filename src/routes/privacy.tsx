@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { TrustPage, TrustSection } from "@/components/TrustPage";
 
 export const Route = createFileRoute("/privacy")({
-  head: () => ({ meta: [{ title: "Privacy Policy — Aureliuss" }] }),
+  head: () => ({ meta: [{ title: "Privacy Policy — Aurelius" }] }),
   component: PrivacyPage,
 });
 
@@ -10,11 +10,11 @@ function PrivacyPage() {
   return (
     <TrustPage
       title="Privacy Policy"
-      subtitle="How Aureliuss handles your data with the discretion expected of a private wealth institution."
+      subtitle="How Aurelius handles your data with the discretion expected of a private wealth institution."
     >
       <TrustSection title="Confidentiality first">
         <p>
-          Aureliuss is designed for principals, promoters, and family offices. We collect only information necessary to
+          Aurelius is designed for principals, promoters, and family offices. We collect only information necessary to
           provide private wealth intelligence, secure document custody, and compliance support.
         </p>
       </TrustSection>

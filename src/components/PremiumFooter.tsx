@@ -1,13 +1,14 @@
 import { Link } from "@tanstack/react-router";
+import { ContactChannels } from "@/components/ContactChannels";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/Logo";
 
-const COPYRIGHT = "© 2026 Aureliuss. All rights reserved.";
+const COPYRIGHT = "© 2026 Aurelius. All rights reserved.";
 const FOUNDER_LINE = "Founder & Director — Rishav Aggarwal";
 
 const legalLinks = [
   { label: "Privacy", to: "/privacy" as const },
-  { label: "Terms", to: "/terms" as const },
+  { label: "Terms", to: "/terms-and-conditions" as const },
   { label: "Security", to: "/security" as const },
   { label: "Contact", to: "/contact" as const },
 ] as const;
@@ -52,6 +53,8 @@ export function PremiumFooter({ variant = "full", className }: PremiumFooterProp
             </p>
           )}
         </div>
+
+        <ContactChannels className="premium-footer__contact" />
 
         <div className="premium-footer__bottom">
           <p className="premium-footer__copyright">{COPYRIGHT}</p>

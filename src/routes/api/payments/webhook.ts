@@ -20,6 +20,7 @@ export const Route = createFileRoute("/api/payments/webhook")({
         if (event.event === "payment.captured") {
           const email = event.payload?.payment?.entity?.notes?.email;
           const planId = event.payload?.payment?.entity?.notes?.planId;
+          const orderId = (event.payload?.payment?.entity as { order_id?: string } | undefined)?.order_id;
           if (email) {
             const { readStore, writeStore } = await import("@/lib/auth/store.server");
             const store = await readStore();
@@ -29,6 +30,8 @@ export const Route = createFileRoute("/api/payments/webhook")({
               member.subscriptionPlan = planId;
               await writeStore(store);
             }
+            const { capturePaymentByOrder } = await import("@/lib/payments/store.server");
+            if (orderId) await capturePaymentByOrder(orderId, email);
           }
         }
 

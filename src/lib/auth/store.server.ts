@@ -1,9 +1,14 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { dirname } from "node:path";
 import type { AuthStore, InviteCode, WaitlistApplication } from "./types";
 import { ensureFounderAccount } from "./founder.server";
+import { resolveDataFile } from "@/lib/data-path.server";
 
-const DATA_PATH = join(process.cwd(), ".data", "aureliuss-auth.json");
+let dataPathPromise: Promise<string> | null = null;
+async function getDataPath() {
+  dataPathPromise ??= resolveDataFile("aurelius-auth.json", "aureliuss-auth.json");
+  return dataPathPromise;
+}
 
 function defaultStore(): AuthStore {
   const in30Days = new Date();
@@ -53,6 +58,9 @@ function defaultStore(): AuthStore {
   return {
     invites: seedInvites,
     waitlist: [],
+    membershipApplications: [],
+    upgradeRequests: [],
+    adminActivity: [],
     members: [],
     admins: [],
   };
@@ -67,6 +75,7 @@ function seedDefaultStore(): AuthStore {
 let memoryStore: AuthStore | null = null;
 
 async function ensureDataFile(): Promise<void> {
+  const DATA_PATH = await getDataPath();
   await mkdir(dirname(DATA_PATH), { recursive: true });
   try {
     await readFile(DATA_PATH, "utf-8");
@@ -79,10 +88,14 @@ export async function readStore(): Promise<AuthStore> {
   if (memoryStore) return structuredClone(memoryStore);
 
   await ensureDataFile();
+  const DATA_PATH = await getDataPath();
   try {
     const raw = await readFile(DATA_PATH, "utf-8");
     const parsed = JSON.parse(raw) as AuthStore;
     parsed.waitlist = parsed.waitlist.map(normalizeWaitlistEntry);
+    parsed.membershipApplications = parsed.membershipApplications ?? [];
+    parsed.upgradeRequests = parsed.upgradeRequests ?? [];
+    parsed.adminActivity = parsed.adminActivity ?? [];
     if (ensureFounderAccount(parsed)) {
       await writeStore(parsed);
     }
@@ -105,19 +118,25 @@ function normalizeWaitlistEntry(
     email: w.email,
     phone: w.phone ?? "",
     profession: w.profession ?? w.role ?? "",
+    wealthConcern: w.wealthConcern || undefined,
     netWorthBand: w.netWorthBand || undefined,
     whyAccess: w.whyAccess ?? w.message ?? "",
     status: w.status,
     createdAt: w.createdAt,
     reviewedAt: w.reviewedAt,
+    company: w.company || undefined,
+    emailVerifiedAt: w.emailVerifiedAt,
     inviteCodeId: w.inviteCodeId,
     inviteCode: w.inviteCode,
     invitationSentAt: w.invitationSentAt,
+    adminNotes: w.adminNotes,
+    declineReason: w.declineReason,
   };
 }
 
 export async function writeStore(store: AuthStore): Promise<void> {
   memoryStore = structuredClone(store);
+  const DATA_PATH = await getDataPath();
   await mkdir(dirname(DATA_PATH), { recursive: true });
   await writeFile(DATA_PATH, JSON.stringify(store, null, 2), "utf-8");
 }
@@ -139,11 +158,7 @@ export function normalizeInviteInput(raw: string): string {
   return cleaned;
 }
 
-export function generateInviteCode(): string {
-  const seg = () =>
-    Array.from({ length: 4 }, () => "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[Math.floor(Math.random() * 32)]).join("");
-  return `AURE-${seg()}-${seg()}`;
-}
+export { generateInviteCode, generateUniqueInviteCode, INVITE_CODE_LENGTH } from "./invite-code";
 
 export function refreshInviteStatuses(invites: InviteCode[]): void {
   const now = Date.now();
@@ -160,26 +175,44 @@ export function refreshInviteStatuses(invites: InviteCode[]): void {
 }
 
 export async function addWaitlistEntry(
-  entry: Omit<WaitlistApplication, "id" | "status" | "createdAt">,
+  entry: Omit<WaitlistApplication, "id" | "status" | "createdAt"> & { emailVerifiedAt: string },
 ) {
   return mutateStore((store) => {
     const email = entry.email.trim().toLowerCase();
-    const duplicate = store.waitlist.some((w) => w.email.toLowerCase() === email);
-    if (duplicate) {
+    const duplicateWaitlist = store.waitlist.some((w) => w.email.toLowerCase() === email);
+    if (duplicateWaitlist) {
       return { ok: false as const, error: "An application with this email already exists." };
     }
+    const existingMember = store.members.some((m) => m.email === email && !m.revoked);
+    if (existingMember) {
+      return { ok: false as const, error: "This email is already registered as an Aurelius member." };
+    }
+    const referenceNumber =
+      entry.referenceNumber?.trim() ||
+      `AUR-2026-${crypto.randomUUID().replace(/-/g, "").slice(0, 5).toUpperCase()}`;
+
     const row: WaitlistApplication = {
       fullName: entry.fullName.trim(),
       email,
       phone: entry.phone.trim(),
+      company: entry.company?.trim() || undefined,
       profession: entry.profession.trim(),
+      wealthNature: entry.wealthNature?.trim() || undefined,
+      wealthConcern: entry.wealthConcern?.trim() || undefined,
       netWorthBand: entry.netWorthBand?.trim() || undefined,
-      whyAccess: entry.whyAccess.trim(),
+      city: entry.city?.trim() || undefined,
+      hasCA: entry.hasCA,
+      hasLawyer: entry.hasLawyer,
+      applicationNote: entry.applicationNote?.trim() || undefined,
+      hearAbout: entry.hearAbout?.trim() || undefined,
+      whyAccess: entry.whyAccess?.trim() || entry.applicationNote?.trim() || undefined,
+      referenceNumber,
+      emailVerifiedAt: entry.emailVerifiedAt,
       id: `wl-${crypto.randomUUID()}`,
       status: "pending",
       createdAt: new Date().toISOString(),
     };
     store.waitlist.unshift(row);
-    return { ok: true as const, id: row.id };
+    return { ok: true as const, id: row.id, reference: referenceNumber };
   });
 }

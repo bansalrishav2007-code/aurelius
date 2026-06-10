@@ -10,7 +10,8 @@ export const Route = createFileRoute("/api/admin/waitlist/$waitlistId/decline")(
           return Response.json({ error: "Admin session required." }, { status: 401 });
         }
 
-        const ok = await declineWaitlistApplication(params.waitlistId);
+        const body = (await request.json().catch(() => ({}))) as { reason?: string };
+        const ok = await declineWaitlistApplication(params.waitlistId, body.reason?.trim());
         if (!ok) {
           return Response.json({ error: "Application not found." }, { status: 404 });
         }

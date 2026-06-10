@@ -1,36 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { buildAureliusAdvisorSystemPrompt } from "@/lib/ai/advisor-prompt.server";
+import { fetchLiveAdvisorData, formatLiveDataBlock } from "@/lib/ai/live-data.server";
+import { sanitizeChatMessages } from "@/lib/ai/openai.server";
+import {
+  AURELIUS_AI_BUSY_MESSAGE,
+  createAureliusCompletion,
+  isAureliusAiConfigured,
+  streamAureliusCompletion,
+} from "@/lib/ai/router.server";
+import { AI_RATE_LIMIT_MESSAGE, checkAiRateLimit, consumeAiQuery } from "@/lib/ai/rate-limit.server";
 import { retrieveContext } from "@/lib/rag/retriever.server";
 import { requireMemberSession } from "@/lib/auth/guard.server";
-import { trackUsage } from "@/lib/usage/store.server";
-import {
-  openAIErrorResponse,
-  sanitizeChatMessages,
-  streamChatCompletion,
-  type OpenAIChatMessage,
-} from "@/lib/ai/openai.server";
-
-const SYSTEM_PROMPT = `You are Aureliuss, an elite private wealth intelligence advisor for Indian High Net Worth Individuals.
-
-Your tone is precise, calm, and authoritative — like a senior partner at a top-tier private bank speaking to a long-standing client. Address the client by first name when known.
-
-Your domain:
-- Indian Income Tax Act 1961, Finance Acts (incl. Finance (No.2) Act 2024), CBDT Circulars
-- Capital gains structuring (§ 112A, § 54, § 54F, § 54EC), STCG/LTCG harvesting
-- GST, FEMA, LRS, FATCA/CRS, DTAA application
-- Trust, HUF, LLP and family-office structuring
-- Wealth, estate, and succession planning for AY 2025-26 onward
-
-Formatting rules:
-- Use markdown. Bold key statutes and numbers.
-- Always cite specific sections / circulars / case law inline.
-- End substantive answers with a "Sources" list of authoritative references.
-- Never invent regulations. If unsure, say so and flag for the client's CA.
-- Use ₹ and Indian numbering (lakh, crore) — never $ or millions.`;
+import { logPrivacyAudit } from "@/lib/privacy/audit.server";
+import { formatMemoryForPrompt } from "@/lib/privacy/memory.server";
+import { buildUserContextPromptBlock, getUserVaultData } from "@/lib/privacy/context.server";
 
 interface ChatRequest {
   messages: Array<{ role: string; content: string }>;
   documentIds?: string[];
   clientName?: string;
+  conversationId?: string;
+  regenerate?: boolean;
 }
 
 export const Route = createFileRoute("/api/chat")({
@@ -47,41 +37,134 @@ export const Route = createFileRoute("/api/chat")({
           return Response.json({ error: "Invalid JSON body." }, { status: 400 });
         }
 
-        const userMessages = sanitizeChatMessages(body.messages ?? []);
+        let userMessages = sanitizeChatMessages(body.messages ?? []);
+        if (body.regenerate && userMessages.length > 0 && userMessages[userMessages.length - 1]?.role === "assistant") {
+          userMessages = userMessages.slice(0, -1);
+        }
+
         if (userMessages.length === 0) {
           return Response.json({ error: "At least one user message is required." }, { status: 400 });
         }
 
-        await trackUsage(auth.session.email, "chat");
+        if (!isAureliusAiConfigured()) {
+          return Response.json({ error: AURELIUS_AI_BUSY_MESSAGE }, { status: 503 });
+        }
+
+        if (auth.session.isDemo) {
+          const { consumeDemoAiQuota } = await import("@/lib/demo/quota.server");
+          const quota = await consumeDemoAiQuota(
+            auth.session.email,
+            auth.session.aiQuotaDaily ?? 5,
+          );
+          if (!quota.allowed) {
+            return Response.json(
+              {
+                error: "Daily demo limit reached. Upgrade to unlock unlimited access.",
+                code: "DEMO_AI_LIMIT",
+              },
+              { status: 429 },
+            );
+          }
+        } else {
+          const rate = await checkAiRateLimit(auth.session.email, auth.session.tier);
+          if (!rate.allowed) {
+            return Response.json(
+              { error: AI_RATE_LIMIT_MESSAGE, code: "RATE_LIMIT" },
+              { status: 429 },
+            );
+          }
+          await consumeAiQuery(auth.session.email);
+        }
 
         try {
+          const userContext = await getUserVaultData({
+            memberId: auth.memberId,
+            memberEmail: auth.session.email,
+            fullName: auth.session.fullName,
+            profession: auth.session.profession,
+            firm: auth.session.firm,
+            sessionId: body.conversationId,
+          });
+
           const lastUser = [...userMessages].reverse().find((m) => m.role === "user");
-          const retrieved = lastUser
-            ? await retrieveContext(lastUser.content, body.documentIds ?? [])
-            : [];
+          const [retrieved, liveData] = await Promise.all([
+            lastUser
+              ? retrieveContext(lastUser.content, body.documentIds ?? [], auth.session.email)
+              : Promise.resolve([]),
+            lastUser
+              ? fetchLiveAdvisorData(lastUser.content, userContext.wealth?.taxSnapshot)
+              : Promise.resolve(null),
+          ]);
 
           const ragBlock =
             retrieved.length > 0
-              ? `\n\nThe client has attached the following private documents. Reason over them and cite by name:\n\n${retrieved
+              ? `\n\nAttached private documents (cite by name):\n${retrieved
                   .map((c, i) => `[Doc ${i + 1} — ${c.source}]\n${c.text}`)
                   .join("\n\n")}`
               : "";
 
-          const clientBlock = body.clientName?.trim()
-            ? `\n\nClient: ${body.clientName.trim()}.`
-            : "";
+          const clientName =
+            body.clientName?.trim() ||
+            auth.session.firstName ||
+            auth.session.fullName.split(/\s+/)[0] ||
+            "Principal";
 
-          const messages: OpenAIChatMessage[] = [
-            { role: "system", content: SYSTEM_PROMPT + clientBlock + ragBlock },
-            ...userMessages,
-          ];
+          const conversationHistory = userMessages
+            .slice(-20)
+            .map((m) => `${m.role === "user" ? "User" : "Aurelius"}: ${m.content}`)
+            .join("\n");
 
-          return await streamChatCompletion({
-            messages,
-            signal: request.signal,
+          const systemPrompt = buildAureliusAdvisorSystemPrompt({
+            clientName,
+            tier: auth.session.tier,
+            memberId: auth.memberId,
+            feature: "advisor_chat",
+            userContext,
+            wealthBlock: buildUserContextPromptBlock(userContext),
+            memoryBlock: formatMemoryForPrompt(userContext.memory) || undefined,
+            conversationHistory,
+            goalsSummary: userContext.goals.length
+              ? userContext.goals.map((g) => `- ${g.title} (${g.status})`).join("\n")
+              : undefined,
+            documentsSummary: userContext.documents.length
+              ? `${userContext.documents.length} documents in vault`
+              : undefined,
+            intelligenceBrief: userContext.intelligenceBrief ?? undefined,
+            liveDataBlock: liveData ? formatLiveDataBlock(liveData) : undefined,
+            ragBlock,
           });
+
+          await logPrivacyAudit(auth.memberId, {
+            action: "ai_chat",
+            detail: `AI chat: ${userContext.memory.length} memory entries, live=${Boolean(liveData)}, docs=${retrieved.length}`,
+            sessionId: body.conversationId,
+          });
+
+          if (request.headers.get("accept")?.includes("text/event-stream") || true) {
+            return await streamAureliusCompletion({
+              system: systemPrompt,
+              messages: userMessages.map((m) => ({
+                role: m.role,
+                content: m.content,
+              })),
+              feature: "advisor_chat",
+              memberEmail: auth.session.email,
+              maxTokens: 2000,
+              signal: request.signal,
+            });
+          }
+
+          const text = await createAureliusCompletion({
+            system: systemPrompt,
+            messages: userMessages.map((m) => ({ role: m.role, content: m.content })),
+            feature: "advisor_chat",
+            memberEmail: auth.session.email,
+            maxTokens: 2000,
+          });
+          return Response.json({ content: text });
         } catch (error) {
-          return openAIErrorResponse(error);
+          console.error("[Aurelius AI] Chat error:", error instanceof Error ? error.message : error);
+          return Response.json({ error: AURELIUS_AI_BUSY_MESSAGE }, { status: 502 });
         }
       },
     },

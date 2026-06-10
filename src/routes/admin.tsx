@@ -14,11 +14,11 @@ import {
   fetchAdminDashboard,
   revokeAdminInvite,
 } from "@/lib/auth/client";
-import { fetchAdminUsage, revokeMemberAccess } from "@/lib/platform/client";
+import { fetchAdminAiSettings, fetchAdminUsage, revokeMemberAccess, updateAdminAiProvider } from "@/lib/platform/client";
 import type { InviteCode, PublicMember, WaitlistApplication } from "@/lib/auth/types";
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Admin — Aureliuss" }] }),
+  head: () => ({ meta: [{ title: "Admin — Aurelius" }] }),
   component: AdminPage,
 });
 
@@ -34,6 +34,17 @@ function AdminPage() {
   const [members, setMembers] = useState<PublicMember[]>([]);
   const [memberCount, setMemberCount] = useState(0);
   const [usage, setUsage] = useState<{ totalEvents: number; byMember: Record<string, { chat: number; upload: number; analyze: number }> } | null>(null);
+  const [aiSettings, setAiSettings] = useState<{
+    primaryProvider: "claude" | "gpt" | "both";
+    costs: {
+      monthClaudeUsd: number;
+      monthGptUsd: number;
+      monthCostUsd: number;
+      todayCalls: number;
+      avgResponseTimeMs: number;
+      errorRate: number;
+    };
+  } | null>(null);
 
   const [form, setForm] = useState({
     label: "",
@@ -62,10 +73,12 @@ function AdminPage() {
     setAuthed(true);
     setSuperAdminMode(Boolean(data.superAdminAccess));
     try {
-      const u = await fetchAdminUsage();
+      const [u, ai] = await Promise.all([fetchAdminUsage(), fetchAdminAiSettings()]);
       setUsage(u);
+      setAiSettings({ primaryProvider: ai.settings.primaryProvider, costs: ai.costs });
     } catch {
       setUsage(null);
+      setAiSettings(null);
     }
   }
 
@@ -177,10 +190,15 @@ function AdminPage() {
             <Logo size="sm" />
           </div>
           <h1 className="font-display text-2xl tracking-tight mb-2">Private office admin</h1>
+          <p className="text-xs mb-4">
+            <Link to="/admin/applications" className="text-gold hover:underline underline-offset-4">
+              Membership applications dashboard →
+            </Link>
+          </p>
           <p className="text-xs text-muted-foreground mb-6 leading-relaxed">
-            Restricted to Aureliuss operators. Super Admin founders can access this panel after signing in at{" "}
+            Restricted to Aurelius operators. Super Admin founders can access this panel after signing in at{" "}
             <Link to="/login" className="text-foreground hover:underline underline-offset-4">Sign in</Link>
-            . Others may use <code className="text-[10px]">AURELIUSS_ADMIN_KEY</code>.
+            . Others may use <code className="text-[10px]">AURELIUS_ADMIN_KEY</code>.
           </p>
           <form onSubmit={handleLogin} className="space-y-4">
             <input
@@ -223,13 +241,18 @@ function AdminPage() {
               )}
             </div>
           </div>
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="text-xs text-muted-foreground hover:text-foreground inline-flex items-center gap-2"
-          >
-            <LogOut className="h-3.5 w-3.5" /> Sign out
-          </button>
+          <div className="flex items-center gap-4">
+            <Link to="/admin/applications" className="text-xs text-gold hover:underline underline-offset-4">
+              Membership admin
+            </Link>
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="text-xs text-muted-foreground hover:text-foreground inline-flex items-center gap-2"
+            >
+              <LogOut className="h-3.5 w-3.5" /> Sign out
+            </button>
+          </div>
         </header>
 
         <div className="grid sm:grid-cols-3 gap-4 mb-10">
@@ -408,9 +431,67 @@ function AdminPage() {
           )}
         </section>
 
+        <section className="panel-elevated rounded-2xl p-6 mt-8">
+          <h2 className="font-display text-xl mb-1">Expert Bookings</h2>
+          <p className="text-xs text-muted-foreground mb-4">Manage consultation requests, overrides, and session revenue.</p>
+          <Link to="/admin/bookings" className="inline-flex h-9 px-4 items-center rounded-lg bg-gold/15 text-gold text-xs font-medium">
+            Open bookings dashboard
+          </Link>
+        </section>
+
+        {aiSettings && (
+          <section className="panel-elevated rounded-2xl p-6 mt-8">
+            <h2 className="font-display text-xl mb-1">Aurelius AI — Admin</h2>
+            <p className="text-xs text-muted-foreground mb-6">
+              Dual AI routing (Claude primary, GPT fallback). Members only see &quot;Aurelius AI&quot;.
+            </p>
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <span className="text-xs text-muted-foreground">Primary AI:</span>
+              {(["claude", "gpt", "both"] as const).map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={async () => {
+                    await updateAdminAiProvider(p);
+                    await loadDashboard();
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs uppercase tracking-wider ${
+                    aiSettings.primaryProvider === p
+                      ? "bg-gold/20 text-gold border border-gold/30"
+                      : "hairline text-muted-foreground"
+                  }`}
+                >
+                  {p === "both" ? "Both (failover)" : p}
+                </button>
+              ))}
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+              <div className="panel-muted rounded-xl p-4">
+                <p className="text-[10px] uppercase text-muted-foreground mb-1">This month</p>
+                <p className="font-display text-lg">${aiSettings.costs.monthCostUsd.toFixed(2)}</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Claude ${aiSettings.costs.monthClaudeUsd.toFixed(2)} · GPT ${aiSettings.costs.monthGptUsd.toFixed(2)}
+                </p>
+              </div>
+              <div className="panel-muted rounded-xl p-4">
+                <p className="text-[10px] uppercase text-muted-foreground mb-1">Calls today</p>
+                <p className="font-display text-lg">{aiSettings.costs.todayCalls}</p>
+              </div>
+              <div className="panel-muted rounded-xl p-4">
+                <p className="text-[10px] uppercase text-muted-foreground mb-1">Avg response</p>
+                <p className="font-display text-lg">{(aiSettings.costs.avgResponseTimeMs / 1000).toFixed(1)}s</p>
+              </div>
+              <div className="panel-muted rounded-xl p-4">
+                <p className="text-[10px] uppercase text-muted-foreground mb-1">Error rate</p>
+                <p className="font-display text-lg">{aiSettings.costs.errorRate}%</p>
+              </div>
+            </div>
+          </section>
+        )}
+
         {usage && (
           <section className="panel-elevated rounded-2xl p-6 mt-8">
-            <h2 className="font-display text-xl mb-4">AI usage</h2>
+            <h2 className="font-display text-xl mb-4">AI usage (events)</h2>
             <p className="text-xs text-muted-foreground mb-4">{usage.totalEvents} tracked events</p>
             <div className="grid sm:grid-cols-3 gap-3">
               {Object.entries(usage.byMember).slice(0, 6).map(([email, counts]) => (
@@ -537,6 +618,10 @@ function AdminPage() {
                         <div>
                           <dt className="text-muted-foreground">Profession</dt>
                           <dd className="mt-0.5">{w.profession}</dd>
+                        </div>
+                        <div>
+                          <dt className="text-muted-foreground">Primary concern</dt>
+                          <dd className="mt-0.5">{w.wealthConcern ?? "—"}</dd>
                         </div>
                         <div>
                           <dt className="text-muted-foreground">Net worth</dt>

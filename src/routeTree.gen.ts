@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WaitlistRouteImport } from './routes/waitlist'
+import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
@@ -17,47 +18,201 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as DemoRouteImport } from './routes/demo'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ApplyAsExpertRouteImport } from './routes/apply-as-expert'
+import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AccessRouteImport } from './routes/access'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DemoIndexRouteImport } from './routes/demo.index'
+import { Route as DevEnterRouteImport } from './routes/dev.enter'
+import { Route as DemoWorkspaceRouteImport } from './routes/demo.workspace'
 import { Route as ApiWaitlistRouteImport } from './routes/api/waitlist'
 import { Route as ApiUploadRouteImport } from './routes/api/upload'
+import { Route as ApiSupportRouteImport } from './routes/api/support'
+import { Route as ApiSendOtpRouteImport } from './routes/api/send-otp'
+import { Route as ApiNewsRouteImport } from './routes/api/news'
+import { Route as ApiMarketIntelligenceRouteImport } from './routes/api/market-intelligence'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
+import { Route as AdminApplicationsRouteImport } from './routes/admin.applications'
+import { Route as AppWelcomeRouteImport } from './routes/_app/welcome'
+import { Route as AppWealthRouteImport } from './routes/_app/wealth'
 import { Route as AppVaultRouteImport } from './routes/_app/vault'
+import { Route as AppSupportRouteImport } from './routes/_app/support'
+import { Route as AppSuccessionRouteImport } from './routes/_app/succession'
+import { Route as AppProfileRouteImport } from './routes/_app/profile'
+import { Route as AppMembershipRouteImport } from './routes/_app/membership'
+import { Route as AppMarketIntelligenceRouteImport } from './routes/_app/market-intelligence'
+import { Route as AppGoalsPlanningRouteImport } from './routes/_app/goals-planning'
+import { Route as AppGoalsRouteImport } from './routes/_app/goals'
+import { Route as AppGettingStartedRouteImport } from './routes/_app/getting-started'
+import { Route as AppFounderRouteImport } from './routes/_app/founder'
+import { Route as AppFamilyMembersRouteImport } from './routes/_app/family-members'
+import { Route as AppExpertsRouteImport } from './routes/_app/experts'
+import { Route as AppEntitiesRouteImport } from './routes/_app/entities'
+import { Route as AppDocumentsRouteImport } from './routes/_app/documents'
 import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
 import { Route as AppChatRouteImport } from './routes/_app/chat'
 import { Route as AppAdvisorsRouteImport } from './routes/_app/advisors'
 import { Route as ApiVaultIndexRouteImport } from './routes/api/vault/index'
+import { Route as ApiMarketIntelIndexRouteImport } from './routes/api/market-intel/index'
 import { Route as ApiConversationsIndexRouteImport } from './routes/api/conversations/index'
+import { Route as AppFounderIndexRouteImport } from './routes/_app/founder/index'
+import { Route as AppExpertIndexRouteImport } from './routes/_app/expert/index'
+import { Route as AppDashboardIndexRouteImport } from './routes/_app/dashboard.index'
+import { Route as ApiWaitlistVerifyOtpRouteImport } from './routes/api/waitlist/verify-otp'
+import { Route as ApiWaitlistSendOtpRouteImport } from './routes/api/waitlist/send-otp'
+import { Route as ApiWaitlistResendOtpRouteImport } from './routes/api/waitlist/resend-otp'
+import { Route as ApiVaultBulkRouteImport } from './routes/api/vault/bulk'
+import { Route as ApiVaultAskRouteImport } from './routes/api/vault/ask'
 import { Route as ApiVaultDocumentIdRouteImport } from './routes/api/vault/$documentId'
 import { Route as ApiPaymentsWebhookRouteImport } from './routes/api/payments/webhook'
 import { Route as ApiPaymentsCreateOrderRouteImport } from './routes/api/payments/create-order'
+import { Route as ApiOtpVerifyRouteImport } from './routes/api/otp/verify'
+import { Route as ApiOtpSendRouteImport } from './routes/api/otp/send'
+import { Route as ApiMembershipSettingsRouteImport } from './routes/api/membership/settings'
+import { Route as ApiMembershipApplyRouteImport } from './routes/api/membership/apply'
+import { Route as ApiMemberWealthOverviewRouteImport } from './routes/api/member/wealth-overview'
+import { Route as ApiMemberUpgradeRequestRouteImport } from './routes/api/member/upgrade-request'
+import { Route as ApiMemberTaxCalculatorRouteImport } from './routes/api/member/tax-calculator'
+import { Route as ApiMemberSupportRouteImport } from './routes/api/member/support'
+import { Route as ApiMemberSuccessionRouteImport } from './routes/api/member/succession'
+import { Route as ApiMemberSecurityRouteImport } from './routes/api/member/security'
+import { Route as ApiMemberProfileRouteImport } from './routes/api/member/profile'
+import { Route as ApiMemberPreferencesRouteImport } from './routes/api/member/preferences'
+import { Route as ApiMemberOverviewRouteImport } from './routes/api/member/overview'
+import { Route as ApiMemberOnboardingChecklistRouteImport } from './routes/api/member/onboarding-checklist'
+import { Route as ApiMemberOnboardingRouteImport } from './routes/api/member/onboarding'
+import { Route as ApiMemberNotificationsRouteImport } from './routes/api/member/notifications'
+import { Route as ApiMemberLegalEntitiesRouteImport } from './routes/api/member/legal-entities'
+import { Route as ApiMemberIdentityCardRouteImport } from './routes/api/member/identity-card'
+import { Route as ApiMemberGoalsRouteImport } from './routes/api/member/goals'
+import { Route as ApiMemberFamilyRouteImport } from './routes/api/member/family'
+import { Route as ApiMemberExpertsRouteImport } from './routes/api/member/experts'
+import { Route as ApiMemberExpertVaultShareRouteImport } from './routes/api/member/expert-vault-share'
+import { Route as ApiMemberExpertBookingsRouteImport } from './routes/api/member/expert-bookings'
+import { Route as ApiMemberAuditRouteImport } from './routes/api/member/audit'
+import { Route as ApiMarketIntelBriefRouteImport } from './routes/api/market-intel/brief'
+import { Route as ApiMarketIntelBookmarkRouteImport } from './routes/api/market-intel/bookmark'
+import { Route as ApiHealthSupabaseRouteImport } from './routes/api/health/supabase'
+import { Route as ApiFounderOverviewRouteImport } from './routes/api/founder/overview'
+import { Route as ApiFounderExpertsRouteImport } from './routes/api/founder/experts'
+import { Route as ApiFounderExpertBookingsRouteImport } from './routes/api/founder/expert-bookings'
+import { Route as ApiFounderAdminsRouteImport } from './routes/api/founder/admins'
+import { Route as ApiExpertsApplyRouteImport } from './routes/api/experts/apply'
+import { Route as ApiExpertNdaRouteImport } from './routes/api/expert/nda'
+import { Route as ApiExpertClientsRouteImport } from './routes/api/expert/clients'
+import { Route as ApiExpertAvailabilityRouteImport } from './routes/api/expert/availability'
+import { Route as ApiExpertAppointmentsRouteImport } from './routes/api/expert/appointments'
 import { Route as ApiConversationsConversationIdRouteImport } from './routes/api/conversations/$conversationId'
+import { Route as ApiChatStatusRouteImport } from './routes/api/chat/status'
 import { Route as ApiAuthVerifyInviteRouteImport } from './routes/api/auth/verify-invite'
+import { Route as ApiAuthVerifyClientOtpRouteImport } from './routes/api/auth/verify-client-otp'
 import { Route as ApiAuthSignOutRouteImport } from './routes/api/auth/sign-out'
 import { Route as ApiAuthSignInRouteImport } from './routes/api/auth/sign-in'
 import { Route as ApiAuthSessionRouteImport } from './routes/api/auth/session'
 import { Route as ApiAuthResetPasswordRouteImport } from './routes/api/auth/reset-password'
 import { Route as ApiAuthReserveInviteRouteImport } from './routes/api/auth/reserve-invite'
+import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
+import { Route as ApiAuthRefreshRouteImport } from './routes/api/auth/refresh'
 import { Route as ApiAuthOnboardRouteImport } from './routes/api/auth/onboard'
 import { Route as ApiAuthForgotPasswordRouteImport } from './routes/api/auth/forgot-password'
+import { Route as ApiAuthDevBypassRouteImport } from './routes/api/auth/dev-bypass'
+import { Route as ApiAuthDemoRouteImport } from './routes/api/auth/demo'
 import { Route as ApiAdminUsageRouteImport } from './routes/api/admin/usage'
 import { Route as ApiAdminLogoutRouteImport } from './routes/api/admin/logout'
 import { Route as ApiAdminLoginRouteImport } from './routes/api/admin/login'
 import { Route as ApiAdminInvitesRouteImport } from './routes/api/admin/invites'
 import { Route as ApiAdminDashboardRouteImport } from './routes/api/admin/dashboard'
+import { Route as ApiAdminBookingsRouteImport } from './routes/api/admin/bookings'
+import { Route as ApiAdminAiSettingsRouteImport } from './routes/api/admin/ai-settings'
+import { Route as AppFounderSupportRouteImport } from './routes/_app/founder/support'
+import { Route as AppFounderSettingsRouteImport } from './routes/_app/founder/settings'
+import { Route as AppFounderPaymentsRouteImport } from './routes/_app/founder/payments'
+import { Route as AppFounderInvitesRouteImport } from './routes/_app/founder/invites'
+import { Route as AppFounderExpertsRouteImport } from './routes/_app/founder/experts'
+import { Route as AppFounderExpertBookingsRouteImport } from './routes/_app/founder/expert-bookings'
+import { Route as AppFounderClientsRouteImport } from './routes/_app/founder/clients'
+import { Route as AppFounderApplicationsRouteImport } from './routes/_app/founder/applications'
+import { Route as AppFounderAnalyticsRouteImport } from './routes/_app/founder/analytics'
+import { Route as AppExpertsBookingsRouteImport } from './routes/_app/experts/bookings'
+import { Route as AppExpertsExpertIdRouteImport } from './routes/_app/experts/$expertId'
+import { Route as AppExpertDashboardRouteImport } from './routes/_app/expert/dashboard'
+import { Route as AppExpertAvailabilityRouteImport } from './routes/_app/expert/availability'
+import { Route as AppDashboardWealthOverviewRouteImport } from './routes/_app/dashboard.wealth-overview'
+import { Route as AppDashboardVaultRouteImport } from './routes/_app/dashboard.vault'
+import { Route as AppDashboardTaxCalculatorRouteImport } from './routes/_app/dashboard.tax-calculator'
+import { Route as AppDashboardSuccessionRouteImport } from './routes/_app/dashboard.succession'
+import { Route as AppDashboardSecurityRouteImport } from './routes/_app/dashboard.security'
+import { Route as AppDashboardMarketIntelRouteImport } from './routes/_app/dashboard.market-intel'
+import { Route as AppDashboardLegalEntitiesRouteImport } from './routes/_app/dashboard.legal-entities'
+import { Route as AppDashboardGoalsPlanningRouteImport } from './routes/_app/dashboard.goals-planning'
+import { Route as AppDashboardGoalsRouteImport } from './routes/_app/dashboard.goals'
+import { Route as AppDashboardFamilyMembersRouteImport } from './routes/_app/dashboard.family-members'
+import { Route as AppDashboardExpertsRouteImport } from './routes/_app/dashboard.experts'
+import { Route as AppDashboardDocumentsRouteImport } from './routes/_app/dashboard.documents'
+import { Route as AppDashboardBookingsRouteImport } from './routes/_app/dashboard.bookings'
+import { Route as AppDashboardAiAdvisorRouteImport } from './routes/_app/dashboard.ai-advisor'
+import { Route as ApiExpertChatIndexRouteImport } from './routes/api/expert/chat/index'
+import { Route as ApiVaultShareTokenRouteImport } from './routes/api/vault/share/$token'
+import { Route as ApiVaultDocumentIdShareRouteImport } from './routes/api/vault/$documentId/share'
+import { Route as ApiMemberWealthOverviewParseRouteImport } from './routes/api/member/wealth-overview/parse'
+import { Route as ApiMemberWealthOverviewBriefDownloadRouteImport } from './routes/api/member/wealth-overview/brief-download'
+import { Route as ApiMemberSecurityExportRouteImport } from './routes/api/member/security/export'
+import { Route as ApiMemberPrivacyMemoryRouteImport } from './routes/api/member/privacy/memory'
+import { Route as ApiMemberPrivacyAuditRouteImport } from './routes/api/member/privacy/audit'
+import { Route as ApiMemberGoalsGoalIdRouteImport } from './routes/api/member/goals/$goalId'
+import { Route as ApiMemberExpertsExpertIdRouteImport } from './routes/api/member/experts/$expertId'
+import { Route as ApiMemberExpertChatExpertIdRouteImport } from './routes/api/member/expert-chat/$expertId'
+import { Route as ApiMemberExpertBookingsBookingIdRouteImport } from './routes/api/member/expert-bookings/$bookingId'
+import { Route as ApiMemberChatTriggersRouteImport } from './routes/api/member/chat/triggers'
+import { Route as ApiMemberChatSaveResponseRouteImport } from './routes/api/member/chat/save-response'
+import { Route as ApiMemberChatExportRouteImport } from './routes/api/member/chat/export'
+import { Route as ApiMemberChatContextRouteImport } from './routes/api/member/chat/context'
+import { Route as ApiFounderMembersMemberIdRouteImport } from './routes/api/founder/members/$memberId'
+import { Route as ApiFounderExpertsExpertIdRouteImport } from './routes/api/founder/experts/$expertId'
+import { Route as ApiExpertMeetingBookingIdRouteImport } from './routes/api/expert/meeting/$bookingId'
+import { Route as ApiExpertAppointmentsBookingIdRouteImport } from './routes/api/expert/appointments/$bookingId'
+import { Route as ApiDocumentsDocumentIdAskRouteImport } from './routes/api/documents/$documentId/ask'
 import { Route as ApiDocumentsDocumentIdAnalyzeRouteImport } from './routes/api/documents/$documentId/analyze'
+import { Route as ApiConversationsConversationIdTitleRouteImport } from './routes/api/conversations/$conversationId/title'
 import { Route as ApiConversationsConversationIdMessagesRouteImport } from './routes/api/conversations/$conversationId/messages'
+import { Route as ApiAdminMembershipSettingsRouteImport } from './routes/api/admin/membership/settings'
 import { Route as ApiAdminInvitesInviteIdRouteImport } from './routes/api/admin/invites/$inviteId'
+import { Route as AppExpertJoinBookingIdRouteImport } from './routes/_app/expert/join.$bookingId'
+import { Route as AppDashboardMeetingBookingIdRouteImport } from './routes/_app/dashboard.meeting.$bookingId'
+import { Route as AppDashboardExpertsExpertIdRouteImport } from './routes/_app/dashboard.experts.$expertId'
+import { Route as ApiAdminMembershipApplicationsIndexRouteImport } from './routes/api/admin/membership/applications/index'
+import { Route as ApiMemberGoalsGoalIdAskRouteImport } from './routes/api/member/goals/$goalId/ask'
+import { Route as ApiMemberGoalsGoalIdAdviseRouteImport } from './routes/api/member/goals/$goalId/advise'
+import { Route as ApiMemberExpertsExpertIdIntroductionRouteImport } from './routes/api/member/experts/$expertId/introduction'
+import { Route as ApiMemberExpertChatThreadIdMessagesRouteImport } from './routes/api/member/expert-chat/$threadId/messages'
+import { Route as ApiMemberExpertBookingsBookingIdPayRouteImport } from './routes/api/member/expert-bookings/$bookingId/pay'
+import { Route as ApiMemberExpertBookingsBookingIdConfirmRouteImport } from './routes/api/member/expert-bookings/$bookingId/confirm'
+import { Route as ApiFounderWaitlistWaitlistIdNotesRouteImport } from './routes/api/founder/waitlist/$waitlistId/notes'
+import { Route as ApiFounderSupportTicketIdStatusRouteImport } from './routes/api/founder/support/$ticketId/status'
+import { Route as ApiFounderSupportTicketIdReplyRouteImport } from './routes/api/founder/support/$ticketId/reply'
+import { Route as ApiExpertChatThreadIdMessagesRouteImport } from './routes/api/expert/chat/$threadId/messages'
+import { Route as ApiExpertAppointmentsBookingIdBriefRouteImport } from './routes/api/expert/appointments/$bookingId/brief'
 import { Route as ApiAdminWaitlistWaitlistIdDeclineRouteImport } from './routes/api/admin/waitlist/$waitlistId/decline'
 import { Route as ApiAdminWaitlistWaitlistIdApproveRouteImport } from './routes/api/admin/waitlist/$waitlistId/approve'
+import { Route as ApiAdminMembershipMembersMemberIdRouteImport } from './routes/api/admin/membership/members/$memberId'
 import { Route as ApiAdminMembersMemberIdRevokeRouteImport } from './routes/api/admin/members/$memberId/revoke'
+import { Route as AppDashboardExpertsExpertIdChatRouteImport } from './routes/_app/dashboard.experts.$expertId.chat'
+import { Route as ApiAdminMembershipApplicationsApplicationIdRejectRouteImport } from './routes/api/admin/membership/applications/$applicationId/reject'
+import { Route as ApiAdminMembershipApplicationsApplicationIdApproveRouteImport } from './routes/api/admin/membership/applications/$applicationId/approve'
 
 const WaitlistRoute = WaitlistRouteImport.update({
   id: '/waitlist',
   path: '/waitlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
+  id: '/terms-and-conditions',
+  path: '/terms-and-conditions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -95,9 +250,24 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DemoRoute = DemoRouteImport.update({
+  id: '/demo',
+  path: '/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplyAsExpertRoute = ApplyAsExpertRouteImport.update({
+  id: '/apply-as-expert',
+  path: '/apply-as-expert',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplyRoute = ApplyRouteImport.update({
+  id: '/apply',
+  path: '/apply',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -119,6 +289,21 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DemoIndexRoute = DemoIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DemoRoute,
+} as any)
+const DevEnterRoute = DevEnterRouteImport.update({
+  id: '/dev/enter',
+  path: '/dev/enter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoWorkspaceRoute = DemoWorkspaceRouteImport.update({
+  id: '/workspace',
+  path: '/workspace',
+  getParentRoute: () => DemoRoute,
+} as any)
 const ApiWaitlistRoute = ApiWaitlistRouteImport.update({
   id: '/api/waitlist',
   path: '/api/waitlist',
@@ -129,14 +314,119 @@ const ApiUploadRoute = ApiUploadRouteImport.update({
   path: '/api/upload',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiSupportRoute = ApiSupportRouteImport.update({
+  id: '/api/support',
+  path: '/api/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSendOtpRoute = ApiSendOtpRouteImport.update({
+  id: '/api/send-otp',
+  path: '/api/send-otp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiNewsRoute = ApiNewsRouteImport.update({
+  id: '/api/news',
+  path: '/api/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMarketIntelligenceRoute = ApiMarketIntelligenceRouteImport.update({
+  id: '/api/market-intelligence',
+  path: '/api/market-intelligence',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminBookingsRoute = AdminBookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminApplicationsRoute = AdminApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AppWelcomeRoute = AppWelcomeRouteImport.update({
+  id: '/welcome',
+  path: '/welcome',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppWealthRoute = AppWealthRouteImport.update({
+  id: '/wealth',
+  path: '/wealth',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppVaultRoute = AppVaultRouteImport.update({
   id: '/vault',
   path: '/vault',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSupportRoute = AppSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSuccessionRoute = AppSuccessionRouteImport.update({
+  id: '/succession',
+  path: '/succession',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMembershipRoute = AppMembershipRouteImport.update({
+  id: '/membership',
+  path: '/membership',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMarketIntelligenceRoute = AppMarketIntelligenceRouteImport.update({
+  id: '/market-intelligence',
+  path: '/market-intelligence',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGoalsPlanningRoute = AppGoalsPlanningRouteImport.update({
+  id: '/goals-planning',
+  path: '/goals-planning',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGoalsRoute = AppGoalsRouteImport.update({
+  id: '/goals',
+  path: '/goals',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGettingStartedRoute = AppGettingStartedRouteImport.update({
+  id: '/getting-started',
+  path: '/getting-started',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFounderRoute = AppFounderRouteImport.update({
+  id: '/founder',
+  path: '/founder',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFamilyMembersRoute = AppFamilyMembersRouteImport.update({
+  id: '/family-members',
+  path: '/family-members',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExpertsRoute = AppExpertsRouteImport.update({
+  id: '/experts',
+  path: '/experts',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEntitiesRoute = AppEntitiesRouteImport.update({
+  id: '/entities',
+  path: '/entities',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDocumentsRoute = AppDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
   getParentRoute: () => AppRoute,
 } as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
@@ -159,9 +449,54 @@ const ApiVaultIndexRoute = ApiVaultIndexRouteImport.update({
   path: '/api/vault/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiMarketIntelIndexRoute = ApiMarketIntelIndexRouteImport.update({
+  id: '/api/market-intel/',
+  path: '/api/market-intel/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiConversationsIndexRoute = ApiConversationsIndexRouteImport.update({
   id: '/api/conversations/',
   path: '/api/conversations/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppFounderIndexRoute = AppFounderIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppFounderRoute,
+} as any)
+const AppExpertIndexRoute = AppExpertIndexRouteImport.update({
+  id: '/expert/',
+  path: '/expert/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDashboardIndexRoute = AppDashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppDashboardRoute,
+} as any)
+const ApiWaitlistVerifyOtpRoute = ApiWaitlistVerifyOtpRouteImport.update({
+  id: '/verify-otp',
+  path: '/verify-otp',
+  getParentRoute: () => ApiWaitlistRoute,
+} as any)
+const ApiWaitlistSendOtpRoute = ApiWaitlistSendOtpRouteImport.update({
+  id: '/send-otp',
+  path: '/send-otp',
+  getParentRoute: () => ApiWaitlistRoute,
+} as any)
+const ApiWaitlistResendOtpRoute = ApiWaitlistResendOtpRouteImport.update({
+  id: '/resend-otp',
+  path: '/resend-otp',
+  getParentRoute: () => ApiWaitlistRoute,
+} as any)
+const ApiVaultBulkRoute = ApiVaultBulkRouteImport.update({
+  id: '/api/vault/bulk',
+  path: '/api/vault/bulk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVaultAskRoute = ApiVaultAskRouteImport.update({
+  id: '/api/vault/ask',
+  path: '/api/vault/ask',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiVaultDocumentIdRoute = ApiVaultDocumentIdRouteImport.update({
@@ -179,15 +514,208 @@ const ApiPaymentsCreateOrderRoute = ApiPaymentsCreateOrderRouteImport.update({
   path: '/api/payments/create-order',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiOtpVerifyRoute = ApiOtpVerifyRouteImport.update({
+  id: '/api/otp/verify',
+  path: '/api/otp/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiOtpSendRoute = ApiOtpSendRouteImport.update({
+  id: '/api/otp/send',
+  path: '/api/otp/send',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMembershipSettingsRoute = ApiMembershipSettingsRouteImport.update({
+  id: '/api/membership/settings',
+  path: '/api/membership/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMembershipApplyRoute = ApiMembershipApplyRouteImport.update({
+  id: '/api/membership/apply',
+  path: '/api/membership/apply',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberWealthOverviewRoute = ApiMemberWealthOverviewRouteImport.update({
+  id: '/api/member/wealth-overview',
+  path: '/api/member/wealth-overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberUpgradeRequestRoute = ApiMemberUpgradeRequestRouteImport.update({
+  id: '/api/member/upgrade-request',
+  path: '/api/member/upgrade-request',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberTaxCalculatorRoute = ApiMemberTaxCalculatorRouteImport.update({
+  id: '/api/member/tax-calculator',
+  path: '/api/member/tax-calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberSupportRoute = ApiMemberSupportRouteImport.update({
+  id: '/api/member/support',
+  path: '/api/member/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberSuccessionRoute = ApiMemberSuccessionRouteImport.update({
+  id: '/api/member/succession',
+  path: '/api/member/succession',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberSecurityRoute = ApiMemberSecurityRouteImport.update({
+  id: '/api/member/security',
+  path: '/api/member/security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberProfileRoute = ApiMemberProfileRouteImport.update({
+  id: '/api/member/profile',
+  path: '/api/member/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberPreferencesRoute = ApiMemberPreferencesRouteImport.update({
+  id: '/api/member/preferences',
+  path: '/api/member/preferences',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberOverviewRoute = ApiMemberOverviewRouteImport.update({
+  id: '/api/member/overview',
+  path: '/api/member/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberOnboardingChecklistRoute =
+  ApiMemberOnboardingChecklistRouteImport.update({
+    id: '/api/member/onboarding-checklist',
+    path: '/api/member/onboarding-checklist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiMemberOnboardingRoute = ApiMemberOnboardingRouteImport.update({
+  id: '/api/member/onboarding',
+  path: '/api/member/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberNotificationsRoute = ApiMemberNotificationsRouteImport.update({
+  id: '/api/member/notifications',
+  path: '/api/member/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberLegalEntitiesRoute = ApiMemberLegalEntitiesRouteImport.update({
+  id: '/api/member/legal-entities',
+  path: '/api/member/legal-entities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberIdentityCardRoute = ApiMemberIdentityCardRouteImport.update({
+  id: '/api/member/identity-card',
+  path: '/api/member/identity-card',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberGoalsRoute = ApiMemberGoalsRouteImport.update({
+  id: '/api/member/goals',
+  path: '/api/member/goals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberFamilyRoute = ApiMemberFamilyRouteImport.update({
+  id: '/api/member/family',
+  path: '/api/member/family',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberExpertsRoute = ApiMemberExpertsRouteImport.update({
+  id: '/api/member/experts',
+  path: '/api/member/experts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberExpertVaultShareRoute =
+  ApiMemberExpertVaultShareRouteImport.update({
+    id: '/api/member/expert-vault-share',
+    path: '/api/member/expert-vault-share',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiMemberExpertBookingsRoute = ApiMemberExpertBookingsRouteImport.update({
+  id: '/api/member/expert-bookings',
+  path: '/api/member/expert-bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberAuditRoute = ApiMemberAuditRouteImport.update({
+  id: '/api/member/audit',
+  path: '/api/member/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMarketIntelBriefRoute = ApiMarketIntelBriefRouteImport.update({
+  id: '/api/market-intel/brief',
+  path: '/api/market-intel/brief',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMarketIntelBookmarkRoute = ApiMarketIntelBookmarkRouteImport.update({
+  id: '/api/market-intel/bookmark',
+  path: '/api/market-intel/bookmark',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiHealthSupabaseRoute = ApiHealthSupabaseRouteImport.update({
+  id: '/api/health/supabase',
+  path: '/api/health/supabase',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFounderOverviewRoute = ApiFounderOverviewRouteImport.update({
+  id: '/api/founder/overview',
+  path: '/api/founder/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFounderExpertsRoute = ApiFounderExpertsRouteImport.update({
+  id: '/api/founder/experts',
+  path: '/api/founder/experts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFounderExpertBookingsRoute =
+  ApiFounderExpertBookingsRouteImport.update({
+    id: '/api/founder/expert-bookings',
+    path: '/api/founder/expert-bookings',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiFounderAdminsRoute = ApiFounderAdminsRouteImport.update({
+  id: '/api/founder/admins',
+  path: '/api/founder/admins',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiExpertsApplyRoute = ApiExpertsApplyRouteImport.update({
+  id: '/api/experts/apply',
+  path: '/api/experts/apply',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiExpertNdaRoute = ApiExpertNdaRouteImport.update({
+  id: '/api/expert/nda',
+  path: '/api/expert/nda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiExpertClientsRoute = ApiExpertClientsRouteImport.update({
+  id: '/api/expert/clients',
+  path: '/api/expert/clients',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiExpertAvailabilityRoute = ApiExpertAvailabilityRouteImport.update({
+  id: '/api/expert/availability',
+  path: '/api/expert/availability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiExpertAppointmentsRoute = ApiExpertAppointmentsRouteImport.update({
+  id: '/api/expert/appointments',
+  path: '/api/expert/appointments',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiConversationsConversationIdRoute =
   ApiConversationsConversationIdRouteImport.update({
     id: '/api/conversations/$conversationId',
     path: '/api/conversations/$conversationId',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiChatStatusRoute = ApiChatStatusRouteImport.update({
+  id: '/status',
+  path: '/status',
+  getParentRoute: () => ApiChatRoute,
+} as any)
 const ApiAuthVerifyInviteRoute = ApiAuthVerifyInviteRouteImport.update({
   id: '/api/auth/verify-invite',
   path: '/api/auth/verify-invite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthVerifyClientOtpRoute = ApiAuthVerifyClientOtpRouteImport.update({
+  id: '/api/auth/verify-client-otp',
+  path: '/api/auth/verify-client-otp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAuthSignOutRoute = ApiAuthSignOutRouteImport.update({
@@ -215,6 +743,16 @@ const ApiAuthReserveInviteRoute = ApiAuthReserveInviteRouteImport.update({
   path: '/api/auth/reserve-invite',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAuthRegisterRoute = ApiAuthRegisterRouteImport.update({
+  id: '/api/auth/register',
+  path: '/api/auth/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthRefreshRoute = ApiAuthRefreshRouteImport.update({
+  id: '/api/auth/refresh',
+  path: '/api/auth/refresh',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthOnboardRoute = ApiAuthOnboardRouteImport.update({
   id: '/api/auth/onboard',
   path: '/api/auth/onboard',
@@ -223,6 +761,16 @@ const ApiAuthOnboardRoute = ApiAuthOnboardRouteImport.update({
 const ApiAuthForgotPasswordRoute = ApiAuthForgotPasswordRouteImport.update({
   id: '/api/auth/forgot-password',
   path: '/api/auth/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthDevBypassRoute = ApiAuthDevBypassRouteImport.update({
+  id: '/api/auth/dev-bypass',
+  path: '/api/auth/dev-bypass',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthDemoRoute = ApiAuthDemoRouteImport.update({
+  id: '/api/auth/demo',
+  path: '/api/auth/demo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAdminUsageRoute = ApiAdminUsageRouteImport.update({
@@ -250,11 +798,284 @@ const ApiAdminDashboardRoute = ApiAdminDashboardRouteImport.update({
   path: '/api/admin/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminBookingsRoute = ApiAdminBookingsRouteImport.update({
+  id: '/api/admin/bookings',
+  path: '/api/admin/bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminAiSettingsRoute = ApiAdminAiSettingsRouteImport.update({
+  id: '/api/admin/ai-settings',
+  path: '/api/admin/ai-settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppFounderSupportRoute = AppFounderSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => AppFounderRoute,
+} as any)
+const AppFounderSettingsRoute = AppFounderSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppFounderRoute,
+} as any)
+const AppFounderPaymentsRoute = AppFounderPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => AppFounderRoute,
+} as any)
+const AppFounderInvitesRoute = AppFounderInvitesRouteImport.update({
+  id: '/invites',
+  path: '/invites',
+  getParentRoute: () => AppFounderRoute,
+} as any)
+const AppFounderExpertsRoute = AppFounderExpertsRouteImport.update({
+  id: '/experts',
+  path: '/experts',
+  getParentRoute: () => AppFounderRoute,
+} as any)
+const AppFounderExpertBookingsRoute =
+  AppFounderExpertBookingsRouteImport.update({
+    id: '/expert-bookings',
+    path: '/expert-bookings',
+    getParentRoute: () => AppFounderRoute,
+  } as any)
+const AppFounderClientsRoute = AppFounderClientsRouteImport.update({
+  id: '/clients',
+  path: '/clients',
+  getParentRoute: () => AppFounderRoute,
+} as any)
+const AppFounderApplicationsRoute = AppFounderApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => AppFounderRoute,
+} as any)
+const AppFounderAnalyticsRoute = AppFounderAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AppFounderRoute,
+} as any)
+const AppExpertsBookingsRoute = AppExpertsBookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => AppExpertsRoute,
+} as any)
+const AppExpertsExpertIdRoute = AppExpertsExpertIdRouteImport.update({
+  id: '/$expertId',
+  path: '/$expertId',
+  getParentRoute: () => AppExpertsRoute,
+} as any)
+const AppExpertDashboardRoute = AppExpertDashboardRouteImport.update({
+  id: '/expert/dashboard',
+  path: '/expert/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExpertAvailabilityRoute = AppExpertAvailabilityRouteImport.update({
+  id: '/expert/availability',
+  path: '/expert/availability',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDashboardWealthOverviewRoute =
+  AppDashboardWealthOverviewRouteImport.update({
+    id: '/wealth-overview',
+    path: '/wealth-overview',
+    getParentRoute: () => AppDashboardRoute,
+  } as any)
+const AppDashboardVaultRoute = AppDashboardVaultRouteImport.update({
+  id: '/vault',
+  path: '/vault',
+  getParentRoute: () => AppDashboardRoute,
+} as any)
+const AppDashboardTaxCalculatorRoute =
+  AppDashboardTaxCalculatorRouteImport.update({
+    id: '/tax-calculator',
+    path: '/tax-calculator',
+    getParentRoute: () => AppDashboardRoute,
+  } as any)
+const AppDashboardSuccessionRoute = AppDashboardSuccessionRouteImport.update({
+  id: '/succession',
+  path: '/succession',
+  getParentRoute: () => AppDashboardRoute,
+} as any)
+const AppDashboardSecurityRoute = AppDashboardSecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => AppDashboardRoute,
+} as any)
+const AppDashboardMarketIntelRoute = AppDashboardMarketIntelRouteImport.update({
+  id: '/market-intel',
+  path: '/market-intel',
+  getParentRoute: () => AppDashboardRoute,
+} as any)
+const AppDashboardLegalEntitiesRoute =
+  AppDashboardLegalEntitiesRouteImport.update({
+    id: '/legal-entities',
+    path: '/legal-entities',
+    getParentRoute: () => AppDashboardRoute,
+  } as any)
+const AppDashboardGoalsPlanningRoute =
+  AppDashboardGoalsPlanningRouteImport.update({
+    id: '/goals-planning',
+    path: '/goals-planning',
+    getParentRoute: () => AppDashboardRoute,
+  } as any)
+const AppDashboardGoalsRoute = AppDashboardGoalsRouteImport.update({
+  id: '/goals',
+  path: '/goals',
+  getParentRoute: () => AppDashboardRoute,
+} as any)
+const AppDashboardFamilyMembersRoute =
+  AppDashboardFamilyMembersRouteImport.update({
+    id: '/family-members',
+    path: '/family-members',
+    getParentRoute: () => AppDashboardRoute,
+  } as any)
+const AppDashboardExpertsRoute = AppDashboardExpertsRouteImport.update({
+  id: '/experts',
+  path: '/experts',
+  getParentRoute: () => AppDashboardRoute,
+} as any)
+const AppDashboardDocumentsRoute = AppDashboardDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => AppDashboardRoute,
+} as any)
+const AppDashboardBookingsRoute = AppDashboardBookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => AppDashboardRoute,
+} as any)
+const AppDashboardAiAdvisorRoute = AppDashboardAiAdvisorRouteImport.update({
+  id: '/ai-advisor',
+  path: '/ai-advisor',
+  getParentRoute: () => AppDashboardRoute,
+} as any)
+const ApiExpertChatIndexRoute = ApiExpertChatIndexRouteImport.update({
+  id: '/api/expert/chat/',
+  path: '/api/expert/chat/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVaultShareTokenRoute = ApiVaultShareTokenRouteImport.update({
+  id: '/api/vault/share/$token',
+  path: '/api/vault/share/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVaultDocumentIdShareRoute = ApiVaultDocumentIdShareRouteImport.update({
+  id: '/share',
+  path: '/share',
+  getParentRoute: () => ApiVaultDocumentIdRoute,
+} as any)
+const ApiMemberWealthOverviewParseRoute =
+  ApiMemberWealthOverviewParseRouteImport.update({
+    id: '/parse',
+    path: '/parse',
+    getParentRoute: () => ApiMemberWealthOverviewRoute,
+  } as any)
+const ApiMemberWealthOverviewBriefDownloadRoute =
+  ApiMemberWealthOverviewBriefDownloadRouteImport.update({
+    id: '/brief-download',
+    path: '/brief-download',
+    getParentRoute: () => ApiMemberWealthOverviewRoute,
+  } as any)
+const ApiMemberSecurityExportRoute = ApiMemberSecurityExportRouteImport.update({
+  id: '/export',
+  path: '/export',
+  getParentRoute: () => ApiMemberSecurityRoute,
+} as any)
+const ApiMemberPrivacyMemoryRoute = ApiMemberPrivacyMemoryRouteImport.update({
+  id: '/api/member/privacy/memory',
+  path: '/api/member/privacy/memory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberPrivacyAuditRoute = ApiMemberPrivacyAuditRouteImport.update({
+  id: '/api/member/privacy/audit',
+  path: '/api/member/privacy/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberGoalsGoalIdRoute = ApiMemberGoalsGoalIdRouteImport.update({
+  id: '/$goalId',
+  path: '/$goalId',
+  getParentRoute: () => ApiMemberGoalsRoute,
+} as any)
+const ApiMemberExpertsExpertIdRoute =
+  ApiMemberExpertsExpertIdRouteImport.update({
+    id: '/$expertId',
+    path: '/$expertId',
+    getParentRoute: () => ApiMemberExpertsRoute,
+  } as any)
+const ApiMemberExpertChatExpertIdRoute =
+  ApiMemberExpertChatExpertIdRouteImport.update({
+    id: '/api/member/expert-chat/$expertId',
+    path: '/api/member/expert-chat/$expertId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiMemberExpertBookingsBookingIdRoute =
+  ApiMemberExpertBookingsBookingIdRouteImport.update({
+    id: '/$bookingId',
+    path: '/$bookingId',
+    getParentRoute: () => ApiMemberExpertBookingsRoute,
+  } as any)
+const ApiMemberChatTriggersRoute = ApiMemberChatTriggersRouteImport.update({
+  id: '/api/member/chat/triggers',
+  path: '/api/member/chat/triggers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberChatSaveResponseRoute =
+  ApiMemberChatSaveResponseRouteImport.update({
+    id: '/api/member/chat/save-response',
+    path: '/api/member/chat/save-response',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiMemberChatExportRoute = ApiMemberChatExportRouteImport.update({
+  id: '/api/member/chat/export',
+  path: '/api/member/chat/export',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMemberChatContextRoute = ApiMemberChatContextRouteImport.update({
+  id: '/api/member/chat/context',
+  path: '/api/member/chat/context',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFounderMembersMemberIdRoute =
+  ApiFounderMembersMemberIdRouteImport.update({
+    id: '/api/founder/members/$memberId',
+    path: '/api/founder/members/$memberId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiFounderExpertsExpertIdRoute =
+  ApiFounderExpertsExpertIdRouteImport.update({
+    id: '/$expertId',
+    path: '/$expertId',
+    getParentRoute: () => ApiFounderExpertsRoute,
+  } as any)
+const ApiExpertMeetingBookingIdRoute =
+  ApiExpertMeetingBookingIdRouteImport.update({
+    id: '/api/expert/meeting/$bookingId',
+    path: '/api/expert/meeting/$bookingId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiExpertAppointmentsBookingIdRoute =
+  ApiExpertAppointmentsBookingIdRouteImport.update({
+    id: '/$bookingId',
+    path: '/$bookingId',
+    getParentRoute: () => ApiExpertAppointmentsRoute,
+  } as any)
+const ApiDocumentsDocumentIdAskRoute =
+  ApiDocumentsDocumentIdAskRouteImport.update({
+    id: '/api/documents/$documentId/ask',
+    path: '/api/documents/$documentId/ask',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiDocumentsDocumentIdAnalyzeRoute =
   ApiDocumentsDocumentIdAnalyzeRouteImport.update({
     id: '/api/documents/$documentId/analyze',
     path: '/api/documents/$documentId/analyze',
     getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiConversationsConversationIdTitleRoute =
+  ApiConversationsConversationIdTitleRouteImport.update({
+    id: '/title',
+    path: '/title',
+    getParentRoute: () => ApiConversationsConversationIdRoute,
   } as any)
 const ApiConversationsConversationIdMessagesRoute =
   ApiConversationsConversationIdMessagesRouteImport.update({
@@ -262,11 +1083,105 @@ const ApiConversationsConversationIdMessagesRoute =
     path: '/messages',
     getParentRoute: () => ApiConversationsConversationIdRoute,
   } as any)
+const ApiAdminMembershipSettingsRoute =
+  ApiAdminMembershipSettingsRouteImport.update({
+    id: '/api/admin/membership/settings',
+    path: '/api/admin/membership/settings',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiAdminInvitesInviteIdRoute = ApiAdminInvitesInviteIdRouteImport.update({
   id: '/$inviteId',
   path: '/$inviteId',
   getParentRoute: () => ApiAdminInvitesRoute,
 } as any)
+const AppExpertJoinBookingIdRoute = AppExpertJoinBookingIdRouteImport.update({
+  id: '/expert/join/$bookingId',
+  path: '/expert/join/$bookingId',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDashboardMeetingBookingIdRoute =
+  AppDashboardMeetingBookingIdRouteImport.update({
+    id: '/meeting/$bookingId',
+    path: '/meeting/$bookingId',
+    getParentRoute: () => AppDashboardRoute,
+  } as any)
+const AppDashboardExpertsExpertIdRoute =
+  AppDashboardExpertsExpertIdRouteImport.update({
+    id: '/$expertId',
+    path: '/$expertId',
+    getParentRoute: () => AppDashboardExpertsRoute,
+  } as any)
+const ApiAdminMembershipApplicationsIndexRoute =
+  ApiAdminMembershipApplicationsIndexRouteImport.update({
+    id: '/api/admin/membership/applications/',
+    path: '/api/admin/membership/applications/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiMemberGoalsGoalIdAskRoute = ApiMemberGoalsGoalIdAskRouteImport.update({
+  id: '/ask',
+  path: '/ask',
+  getParentRoute: () => ApiMemberGoalsGoalIdRoute,
+} as any)
+const ApiMemberGoalsGoalIdAdviseRoute =
+  ApiMemberGoalsGoalIdAdviseRouteImport.update({
+    id: '/advise',
+    path: '/advise',
+    getParentRoute: () => ApiMemberGoalsGoalIdRoute,
+  } as any)
+const ApiMemberExpertsExpertIdIntroductionRoute =
+  ApiMemberExpertsExpertIdIntroductionRouteImport.update({
+    id: '/introduction',
+    path: '/introduction',
+    getParentRoute: () => ApiMemberExpertsExpertIdRoute,
+  } as any)
+const ApiMemberExpertChatThreadIdMessagesRoute =
+  ApiMemberExpertChatThreadIdMessagesRouteImport.update({
+    id: '/api/member/expert-chat/$threadId/messages',
+    path: '/api/member/expert-chat/$threadId/messages',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiMemberExpertBookingsBookingIdPayRoute =
+  ApiMemberExpertBookingsBookingIdPayRouteImport.update({
+    id: '/pay',
+    path: '/pay',
+    getParentRoute: () => ApiMemberExpertBookingsBookingIdRoute,
+  } as any)
+const ApiMemberExpertBookingsBookingIdConfirmRoute =
+  ApiMemberExpertBookingsBookingIdConfirmRouteImport.update({
+    id: '/confirm',
+    path: '/confirm',
+    getParentRoute: () => ApiMemberExpertBookingsBookingIdRoute,
+  } as any)
+const ApiFounderWaitlistWaitlistIdNotesRoute =
+  ApiFounderWaitlistWaitlistIdNotesRouteImport.update({
+    id: '/api/founder/waitlist/$waitlistId/notes',
+    path: '/api/founder/waitlist/$waitlistId/notes',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiFounderSupportTicketIdStatusRoute =
+  ApiFounderSupportTicketIdStatusRouteImport.update({
+    id: '/api/founder/support/$ticketId/status',
+    path: '/api/founder/support/$ticketId/status',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiFounderSupportTicketIdReplyRoute =
+  ApiFounderSupportTicketIdReplyRouteImport.update({
+    id: '/api/founder/support/$ticketId/reply',
+    path: '/api/founder/support/$ticketId/reply',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiExpertChatThreadIdMessagesRoute =
+  ApiExpertChatThreadIdMessagesRouteImport.update({
+    id: '/api/expert/chat/$threadId/messages',
+    path: '/api/expert/chat/$threadId/messages',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiExpertAppointmentsBookingIdBriefRoute =
+  ApiExpertAppointmentsBookingIdBriefRouteImport.update({
+    id: '/brief',
+    path: '/brief',
+    getParentRoute: () => ApiExpertAppointmentsBookingIdRoute,
+  } as any)
 const ApiAdminWaitlistWaitlistIdDeclineRoute =
   ApiAdminWaitlistWaitlistIdDeclineRouteImport.update({
     id: '/api/admin/waitlist/$waitlistId/decline',
@@ -279,18 +1194,45 @@ const ApiAdminWaitlistWaitlistIdApproveRoute =
     path: '/api/admin/waitlist/$waitlistId/approve',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiAdminMembershipMembersMemberIdRoute =
+  ApiAdminMembershipMembersMemberIdRouteImport.update({
+    id: '/api/admin/membership/members/$memberId',
+    path: '/api/admin/membership/members/$memberId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiAdminMembersMemberIdRevokeRoute =
   ApiAdminMembersMemberIdRevokeRouteImport.update({
     id: '/api/admin/members/$memberId/revoke',
     path: '/api/admin/members/$memberId/revoke',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AppDashboardExpertsExpertIdChatRoute =
+  AppDashboardExpertsExpertIdChatRouteImport.update({
+    id: '/chat',
+    path: '/chat',
+    getParentRoute: () => AppDashboardExpertsExpertIdRoute,
+  } as any)
+const ApiAdminMembershipApplicationsApplicationIdRejectRoute =
+  ApiAdminMembershipApplicationsApplicationIdRejectRouteImport.update({
+    id: '/api/admin/membership/applications/$applicationId/reject',
+    path: '/api/admin/membership/applications/$applicationId/reject',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAdminMembershipApplicationsApplicationIdApproveRoute =
+  ApiAdminMembershipApplicationsApplicationIdApproveRouteImport.update({
+    id: '/api/admin/membership/applications/$applicationId/approve',
+    path: '/api/admin/membership/applications/$applicationId/approve',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/access': typeof AccessRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/apply': typeof ApplyRoute
+  '/apply-as-expert': typeof ApplyAsExpertRoute
   '/contact': typeof ContactRoute
+  '/demo': typeof DemoRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
@@ -298,44 +1240,193 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/security': typeof SecurityRoute
   '/terms': typeof TermsRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/waitlist': typeof WaitlistRoute
   '/advisors': typeof AppAdvisorsRoute
   '/chat': typeof AppChatRoute
-  '/dashboard': typeof AppDashboardRoute
+  '/dashboard': typeof AppDashboardRouteWithChildren
+  '/documents': typeof AppDocumentsRoute
+  '/entities': typeof AppEntitiesRoute
+  '/experts': typeof AppExpertsRouteWithChildren
+  '/family-members': typeof AppFamilyMembersRoute
+  '/founder': typeof AppFounderRouteWithChildren
+  '/getting-started': typeof AppGettingStartedRoute
+  '/goals': typeof AppGoalsRoute
+  '/goals-planning': typeof AppGoalsPlanningRoute
+  '/market-intelligence': typeof AppMarketIntelligenceRoute
+  '/membership': typeof AppMembershipRoute
+  '/profile': typeof AppProfileRoute
+  '/succession': typeof AppSuccessionRoute
+  '/support': typeof AppSupportRoute
   '/vault': typeof AppVaultRoute
-  '/api/chat': typeof ApiChatRoute
+  '/wealth': typeof AppWealthRoute
+  '/welcome': typeof AppWelcomeRoute
+  '/admin/applications': typeof AdminApplicationsRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/api/chat': typeof ApiChatRouteWithChildren
+  '/api/market-intelligence': typeof ApiMarketIntelligenceRoute
+  '/api/news': typeof ApiNewsRoute
+  '/api/send-otp': typeof ApiSendOtpRoute
+  '/api/support': typeof ApiSupportRoute
   '/api/upload': typeof ApiUploadRoute
-  '/api/waitlist': typeof ApiWaitlistRoute
+  '/api/waitlist': typeof ApiWaitlistRouteWithChildren
+  '/demo/workspace': typeof DemoWorkspaceRoute
+  '/dev/enter': typeof DevEnterRoute
+  '/demo/': typeof DemoIndexRoute
+  '/dashboard/ai-advisor': typeof AppDashboardAiAdvisorRoute
+  '/dashboard/bookings': typeof AppDashboardBookingsRoute
+  '/dashboard/documents': typeof AppDashboardDocumentsRoute
+  '/dashboard/experts': typeof AppDashboardExpertsRouteWithChildren
+  '/dashboard/family-members': typeof AppDashboardFamilyMembersRoute
+  '/dashboard/goals': typeof AppDashboardGoalsRoute
+  '/dashboard/goals-planning': typeof AppDashboardGoalsPlanningRoute
+  '/dashboard/legal-entities': typeof AppDashboardLegalEntitiesRoute
+  '/dashboard/market-intel': typeof AppDashboardMarketIntelRoute
+  '/dashboard/security': typeof AppDashboardSecurityRoute
+  '/dashboard/succession': typeof AppDashboardSuccessionRoute
+  '/dashboard/tax-calculator': typeof AppDashboardTaxCalculatorRoute
+  '/dashboard/vault': typeof AppDashboardVaultRoute
+  '/dashboard/wealth-overview': typeof AppDashboardWealthOverviewRoute
+  '/expert/availability': typeof AppExpertAvailabilityRoute
+  '/expert/dashboard': typeof AppExpertDashboardRoute
+  '/experts/$expertId': typeof AppExpertsExpertIdRoute
+  '/experts/bookings': typeof AppExpertsBookingsRoute
+  '/founder/analytics': typeof AppFounderAnalyticsRoute
+  '/founder/applications': typeof AppFounderApplicationsRoute
+  '/founder/clients': typeof AppFounderClientsRoute
+  '/founder/expert-bookings': typeof AppFounderExpertBookingsRoute
+  '/founder/experts': typeof AppFounderExpertsRoute
+  '/founder/invites': typeof AppFounderInvitesRoute
+  '/founder/payments': typeof AppFounderPaymentsRoute
+  '/founder/settings': typeof AppFounderSettingsRoute
+  '/founder/support': typeof AppFounderSupportRoute
+  '/api/admin/ai-settings': typeof ApiAdminAiSettingsRoute
+  '/api/admin/bookings': typeof ApiAdminBookingsRoute
   '/api/admin/dashboard': typeof ApiAdminDashboardRoute
   '/api/admin/invites': typeof ApiAdminInvitesRouteWithChildren
   '/api/admin/login': typeof ApiAdminLoginRoute
   '/api/admin/logout': typeof ApiAdminLogoutRoute
   '/api/admin/usage': typeof ApiAdminUsageRoute
+  '/api/auth/demo': typeof ApiAuthDemoRoute
+  '/api/auth/dev-bypass': typeof ApiAuthDevBypassRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
   '/api/auth/onboard': typeof ApiAuthOnboardRoute
+  '/api/auth/refresh': typeof ApiAuthRefreshRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/auth/reserve-invite': typeof ApiAuthReserveInviteRoute
   '/api/auth/reset-password': typeof ApiAuthResetPasswordRoute
   '/api/auth/session': typeof ApiAuthSessionRoute
   '/api/auth/sign-in': typeof ApiAuthSignInRoute
   '/api/auth/sign-out': typeof ApiAuthSignOutRoute
+  '/api/auth/verify-client-otp': typeof ApiAuthVerifyClientOtpRoute
   '/api/auth/verify-invite': typeof ApiAuthVerifyInviteRoute
+  '/api/chat/status': typeof ApiChatStatusRoute
   '/api/conversations/$conversationId': typeof ApiConversationsConversationIdRouteWithChildren
+  '/api/expert/appointments': typeof ApiExpertAppointmentsRouteWithChildren
+  '/api/expert/availability': typeof ApiExpertAvailabilityRoute
+  '/api/expert/clients': typeof ApiExpertClientsRoute
+  '/api/expert/nda': typeof ApiExpertNdaRoute
+  '/api/experts/apply': typeof ApiExpertsApplyRoute
+  '/api/founder/admins': typeof ApiFounderAdminsRoute
+  '/api/founder/expert-bookings': typeof ApiFounderExpertBookingsRoute
+  '/api/founder/experts': typeof ApiFounderExpertsRouteWithChildren
+  '/api/founder/overview': typeof ApiFounderOverviewRoute
+  '/api/health/supabase': typeof ApiHealthSupabaseRoute
+  '/api/market-intel/bookmark': typeof ApiMarketIntelBookmarkRoute
+  '/api/market-intel/brief': typeof ApiMarketIntelBriefRoute
+  '/api/member/audit': typeof ApiMemberAuditRoute
+  '/api/member/expert-bookings': typeof ApiMemberExpertBookingsRouteWithChildren
+  '/api/member/expert-vault-share': typeof ApiMemberExpertVaultShareRoute
+  '/api/member/experts': typeof ApiMemberExpertsRouteWithChildren
+  '/api/member/family': typeof ApiMemberFamilyRoute
+  '/api/member/goals': typeof ApiMemberGoalsRouteWithChildren
+  '/api/member/identity-card': typeof ApiMemberIdentityCardRoute
+  '/api/member/legal-entities': typeof ApiMemberLegalEntitiesRoute
+  '/api/member/notifications': typeof ApiMemberNotificationsRoute
+  '/api/member/onboarding': typeof ApiMemberOnboardingRoute
+  '/api/member/onboarding-checklist': typeof ApiMemberOnboardingChecklistRoute
+  '/api/member/overview': typeof ApiMemberOverviewRoute
+  '/api/member/preferences': typeof ApiMemberPreferencesRoute
+  '/api/member/profile': typeof ApiMemberProfileRoute
+  '/api/member/security': typeof ApiMemberSecurityRouteWithChildren
+  '/api/member/succession': typeof ApiMemberSuccessionRoute
+  '/api/member/support': typeof ApiMemberSupportRoute
+  '/api/member/tax-calculator': typeof ApiMemberTaxCalculatorRoute
+  '/api/member/upgrade-request': typeof ApiMemberUpgradeRequestRoute
+  '/api/member/wealth-overview': typeof ApiMemberWealthOverviewRouteWithChildren
+  '/api/membership/apply': typeof ApiMembershipApplyRoute
+  '/api/membership/settings': typeof ApiMembershipSettingsRoute
+  '/api/otp/send': typeof ApiOtpSendRoute
+  '/api/otp/verify': typeof ApiOtpVerifyRoute
   '/api/payments/create-order': typeof ApiPaymentsCreateOrderRoute
   '/api/payments/webhook': typeof ApiPaymentsWebhookRoute
-  '/api/vault/$documentId': typeof ApiVaultDocumentIdRoute
+  '/api/vault/$documentId': typeof ApiVaultDocumentIdRouteWithChildren
+  '/api/vault/ask': typeof ApiVaultAskRoute
+  '/api/vault/bulk': typeof ApiVaultBulkRoute
+  '/api/waitlist/resend-otp': typeof ApiWaitlistResendOtpRoute
+  '/api/waitlist/send-otp': typeof ApiWaitlistSendOtpRoute
+  '/api/waitlist/verify-otp': typeof ApiWaitlistVerifyOtpRoute
+  '/dashboard/': typeof AppDashboardIndexRoute
+  '/expert/': typeof AppExpertIndexRoute
+  '/founder/': typeof AppFounderIndexRoute
   '/api/conversations/': typeof ApiConversationsIndexRoute
+  '/api/market-intel/': typeof ApiMarketIntelIndexRoute
   '/api/vault/': typeof ApiVaultIndexRoute
+  '/dashboard/experts/$expertId': typeof AppDashboardExpertsExpertIdRouteWithChildren
+  '/dashboard/meeting/$bookingId': typeof AppDashboardMeetingBookingIdRoute
+  '/expert/join/$bookingId': typeof AppExpertJoinBookingIdRoute
   '/api/admin/invites/$inviteId': typeof ApiAdminInvitesInviteIdRoute
+  '/api/admin/membership/settings': typeof ApiAdminMembershipSettingsRoute
   '/api/conversations/$conversationId/messages': typeof ApiConversationsConversationIdMessagesRoute
+  '/api/conversations/$conversationId/title': typeof ApiConversationsConversationIdTitleRoute
   '/api/documents/$documentId/analyze': typeof ApiDocumentsDocumentIdAnalyzeRoute
+  '/api/documents/$documentId/ask': typeof ApiDocumentsDocumentIdAskRoute
+  '/api/expert/appointments/$bookingId': typeof ApiExpertAppointmentsBookingIdRouteWithChildren
+  '/api/expert/meeting/$bookingId': typeof ApiExpertMeetingBookingIdRoute
+  '/api/founder/experts/$expertId': typeof ApiFounderExpertsExpertIdRoute
+  '/api/founder/members/$memberId': typeof ApiFounderMembersMemberIdRoute
+  '/api/member/chat/context': typeof ApiMemberChatContextRoute
+  '/api/member/chat/export': typeof ApiMemberChatExportRoute
+  '/api/member/chat/save-response': typeof ApiMemberChatSaveResponseRoute
+  '/api/member/chat/triggers': typeof ApiMemberChatTriggersRoute
+  '/api/member/expert-bookings/$bookingId': typeof ApiMemberExpertBookingsBookingIdRouteWithChildren
+  '/api/member/expert-chat/$expertId': typeof ApiMemberExpertChatExpertIdRoute
+  '/api/member/experts/$expertId': typeof ApiMemberExpertsExpertIdRouteWithChildren
+  '/api/member/goals/$goalId': typeof ApiMemberGoalsGoalIdRouteWithChildren
+  '/api/member/privacy/audit': typeof ApiMemberPrivacyAuditRoute
+  '/api/member/privacy/memory': typeof ApiMemberPrivacyMemoryRoute
+  '/api/member/security/export': typeof ApiMemberSecurityExportRoute
+  '/api/member/wealth-overview/brief-download': typeof ApiMemberWealthOverviewBriefDownloadRoute
+  '/api/member/wealth-overview/parse': typeof ApiMemberWealthOverviewParseRoute
+  '/api/vault/$documentId/share': typeof ApiVaultDocumentIdShareRoute
+  '/api/vault/share/$token': typeof ApiVaultShareTokenRoute
+  '/api/expert/chat/': typeof ApiExpertChatIndexRoute
+  '/dashboard/experts/$expertId/chat': typeof AppDashboardExpertsExpertIdChatRoute
   '/api/admin/members/$memberId/revoke': typeof ApiAdminMembersMemberIdRevokeRoute
+  '/api/admin/membership/members/$memberId': typeof ApiAdminMembershipMembersMemberIdRoute
   '/api/admin/waitlist/$waitlistId/approve': typeof ApiAdminWaitlistWaitlistIdApproveRoute
   '/api/admin/waitlist/$waitlistId/decline': typeof ApiAdminWaitlistWaitlistIdDeclineRoute
+  '/api/expert/appointments/$bookingId/brief': typeof ApiExpertAppointmentsBookingIdBriefRoute
+  '/api/expert/chat/$threadId/messages': typeof ApiExpertChatThreadIdMessagesRoute
+  '/api/founder/support/$ticketId/reply': typeof ApiFounderSupportTicketIdReplyRoute
+  '/api/founder/support/$ticketId/status': typeof ApiFounderSupportTicketIdStatusRoute
+  '/api/founder/waitlist/$waitlistId/notes': typeof ApiFounderWaitlistWaitlistIdNotesRoute
+  '/api/member/expert-bookings/$bookingId/confirm': typeof ApiMemberExpertBookingsBookingIdConfirmRoute
+  '/api/member/expert-bookings/$bookingId/pay': typeof ApiMemberExpertBookingsBookingIdPayRoute
+  '/api/member/expert-chat/$threadId/messages': typeof ApiMemberExpertChatThreadIdMessagesRoute
+  '/api/member/experts/$expertId/introduction': typeof ApiMemberExpertsExpertIdIntroductionRoute
+  '/api/member/goals/$goalId/advise': typeof ApiMemberGoalsGoalIdAdviseRoute
+  '/api/member/goals/$goalId/ask': typeof ApiMemberGoalsGoalIdAskRoute
+  '/api/admin/membership/applications/': typeof ApiAdminMembershipApplicationsIndexRoute
+  '/api/admin/membership/applications/$applicationId/approve': typeof ApiAdminMembershipApplicationsApplicationIdApproveRoute
+  '/api/admin/membership/applications/$applicationId/reject': typeof ApiAdminMembershipApplicationsApplicationIdRejectRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/access': typeof AccessRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/apply': typeof ApplyRoute
+  '/apply-as-expert': typeof ApplyAsExpertRoute
   '/contact': typeof ContactRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
@@ -344,47 +1435,195 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/security': typeof SecurityRoute
   '/terms': typeof TermsRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/waitlist': typeof WaitlistRoute
   '/advisors': typeof AppAdvisorsRoute
   '/chat': typeof AppChatRoute
-  '/dashboard': typeof AppDashboardRoute
+  '/documents': typeof AppDocumentsRoute
+  '/entities': typeof AppEntitiesRoute
+  '/experts': typeof AppExpertsRouteWithChildren
+  '/family-members': typeof AppFamilyMembersRoute
+  '/getting-started': typeof AppGettingStartedRoute
+  '/goals': typeof AppGoalsRoute
+  '/goals-planning': typeof AppGoalsPlanningRoute
+  '/market-intelligence': typeof AppMarketIntelligenceRoute
+  '/membership': typeof AppMembershipRoute
+  '/profile': typeof AppProfileRoute
+  '/succession': typeof AppSuccessionRoute
+  '/support': typeof AppSupportRoute
   '/vault': typeof AppVaultRoute
-  '/api/chat': typeof ApiChatRoute
+  '/wealth': typeof AppWealthRoute
+  '/welcome': typeof AppWelcomeRoute
+  '/admin/applications': typeof AdminApplicationsRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/api/chat': typeof ApiChatRouteWithChildren
+  '/api/market-intelligence': typeof ApiMarketIntelligenceRoute
+  '/api/news': typeof ApiNewsRoute
+  '/api/send-otp': typeof ApiSendOtpRoute
+  '/api/support': typeof ApiSupportRoute
   '/api/upload': typeof ApiUploadRoute
-  '/api/waitlist': typeof ApiWaitlistRoute
+  '/api/waitlist': typeof ApiWaitlistRouteWithChildren
+  '/demo/workspace': typeof DemoWorkspaceRoute
+  '/dev/enter': typeof DevEnterRoute
+  '/demo': typeof DemoIndexRoute
+  '/dashboard/ai-advisor': typeof AppDashboardAiAdvisorRoute
+  '/dashboard/bookings': typeof AppDashboardBookingsRoute
+  '/dashboard/documents': typeof AppDashboardDocumentsRoute
+  '/dashboard/experts': typeof AppDashboardExpertsRouteWithChildren
+  '/dashboard/family-members': typeof AppDashboardFamilyMembersRoute
+  '/dashboard/goals': typeof AppDashboardGoalsRoute
+  '/dashboard/goals-planning': typeof AppDashboardGoalsPlanningRoute
+  '/dashboard/legal-entities': typeof AppDashboardLegalEntitiesRoute
+  '/dashboard/market-intel': typeof AppDashboardMarketIntelRoute
+  '/dashboard/security': typeof AppDashboardSecurityRoute
+  '/dashboard/succession': typeof AppDashboardSuccessionRoute
+  '/dashboard/tax-calculator': typeof AppDashboardTaxCalculatorRoute
+  '/dashboard/vault': typeof AppDashboardVaultRoute
+  '/dashboard/wealth-overview': typeof AppDashboardWealthOverviewRoute
+  '/expert/availability': typeof AppExpertAvailabilityRoute
+  '/expert/dashboard': typeof AppExpertDashboardRoute
+  '/experts/$expertId': typeof AppExpertsExpertIdRoute
+  '/experts/bookings': typeof AppExpertsBookingsRoute
+  '/founder/analytics': typeof AppFounderAnalyticsRoute
+  '/founder/applications': typeof AppFounderApplicationsRoute
+  '/founder/clients': typeof AppFounderClientsRoute
+  '/founder/expert-bookings': typeof AppFounderExpertBookingsRoute
+  '/founder/experts': typeof AppFounderExpertsRoute
+  '/founder/invites': typeof AppFounderInvitesRoute
+  '/founder/payments': typeof AppFounderPaymentsRoute
+  '/founder/settings': typeof AppFounderSettingsRoute
+  '/founder/support': typeof AppFounderSupportRoute
+  '/api/admin/ai-settings': typeof ApiAdminAiSettingsRoute
+  '/api/admin/bookings': typeof ApiAdminBookingsRoute
   '/api/admin/dashboard': typeof ApiAdminDashboardRoute
   '/api/admin/invites': typeof ApiAdminInvitesRouteWithChildren
   '/api/admin/login': typeof ApiAdminLoginRoute
   '/api/admin/logout': typeof ApiAdminLogoutRoute
   '/api/admin/usage': typeof ApiAdminUsageRoute
+  '/api/auth/demo': typeof ApiAuthDemoRoute
+  '/api/auth/dev-bypass': typeof ApiAuthDevBypassRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
   '/api/auth/onboard': typeof ApiAuthOnboardRoute
+  '/api/auth/refresh': typeof ApiAuthRefreshRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/auth/reserve-invite': typeof ApiAuthReserveInviteRoute
   '/api/auth/reset-password': typeof ApiAuthResetPasswordRoute
   '/api/auth/session': typeof ApiAuthSessionRoute
   '/api/auth/sign-in': typeof ApiAuthSignInRoute
   '/api/auth/sign-out': typeof ApiAuthSignOutRoute
+  '/api/auth/verify-client-otp': typeof ApiAuthVerifyClientOtpRoute
   '/api/auth/verify-invite': typeof ApiAuthVerifyInviteRoute
+  '/api/chat/status': typeof ApiChatStatusRoute
   '/api/conversations/$conversationId': typeof ApiConversationsConversationIdRouteWithChildren
+  '/api/expert/appointments': typeof ApiExpertAppointmentsRouteWithChildren
+  '/api/expert/availability': typeof ApiExpertAvailabilityRoute
+  '/api/expert/clients': typeof ApiExpertClientsRoute
+  '/api/expert/nda': typeof ApiExpertNdaRoute
+  '/api/experts/apply': typeof ApiExpertsApplyRoute
+  '/api/founder/admins': typeof ApiFounderAdminsRoute
+  '/api/founder/expert-bookings': typeof ApiFounderExpertBookingsRoute
+  '/api/founder/experts': typeof ApiFounderExpertsRouteWithChildren
+  '/api/founder/overview': typeof ApiFounderOverviewRoute
+  '/api/health/supabase': typeof ApiHealthSupabaseRoute
+  '/api/market-intel/bookmark': typeof ApiMarketIntelBookmarkRoute
+  '/api/market-intel/brief': typeof ApiMarketIntelBriefRoute
+  '/api/member/audit': typeof ApiMemberAuditRoute
+  '/api/member/expert-bookings': typeof ApiMemberExpertBookingsRouteWithChildren
+  '/api/member/expert-vault-share': typeof ApiMemberExpertVaultShareRoute
+  '/api/member/experts': typeof ApiMemberExpertsRouteWithChildren
+  '/api/member/family': typeof ApiMemberFamilyRoute
+  '/api/member/goals': typeof ApiMemberGoalsRouteWithChildren
+  '/api/member/identity-card': typeof ApiMemberIdentityCardRoute
+  '/api/member/legal-entities': typeof ApiMemberLegalEntitiesRoute
+  '/api/member/notifications': typeof ApiMemberNotificationsRoute
+  '/api/member/onboarding': typeof ApiMemberOnboardingRoute
+  '/api/member/onboarding-checklist': typeof ApiMemberOnboardingChecklistRoute
+  '/api/member/overview': typeof ApiMemberOverviewRoute
+  '/api/member/preferences': typeof ApiMemberPreferencesRoute
+  '/api/member/profile': typeof ApiMemberProfileRoute
+  '/api/member/security': typeof ApiMemberSecurityRouteWithChildren
+  '/api/member/succession': typeof ApiMemberSuccessionRoute
+  '/api/member/support': typeof ApiMemberSupportRoute
+  '/api/member/tax-calculator': typeof ApiMemberTaxCalculatorRoute
+  '/api/member/upgrade-request': typeof ApiMemberUpgradeRequestRoute
+  '/api/member/wealth-overview': typeof ApiMemberWealthOverviewRouteWithChildren
+  '/api/membership/apply': typeof ApiMembershipApplyRoute
+  '/api/membership/settings': typeof ApiMembershipSettingsRoute
+  '/api/otp/send': typeof ApiOtpSendRoute
+  '/api/otp/verify': typeof ApiOtpVerifyRoute
   '/api/payments/create-order': typeof ApiPaymentsCreateOrderRoute
   '/api/payments/webhook': typeof ApiPaymentsWebhookRoute
-  '/api/vault/$documentId': typeof ApiVaultDocumentIdRoute
+  '/api/vault/$documentId': typeof ApiVaultDocumentIdRouteWithChildren
+  '/api/vault/ask': typeof ApiVaultAskRoute
+  '/api/vault/bulk': typeof ApiVaultBulkRoute
+  '/api/waitlist/resend-otp': typeof ApiWaitlistResendOtpRoute
+  '/api/waitlist/send-otp': typeof ApiWaitlistSendOtpRoute
+  '/api/waitlist/verify-otp': typeof ApiWaitlistVerifyOtpRoute
+  '/dashboard': typeof AppDashboardIndexRoute
+  '/expert': typeof AppExpertIndexRoute
+  '/founder': typeof AppFounderIndexRoute
   '/api/conversations': typeof ApiConversationsIndexRoute
+  '/api/market-intel': typeof ApiMarketIntelIndexRoute
   '/api/vault': typeof ApiVaultIndexRoute
+  '/dashboard/experts/$expertId': typeof AppDashboardExpertsExpertIdRouteWithChildren
+  '/dashboard/meeting/$bookingId': typeof AppDashboardMeetingBookingIdRoute
+  '/expert/join/$bookingId': typeof AppExpertJoinBookingIdRoute
   '/api/admin/invites/$inviteId': typeof ApiAdminInvitesInviteIdRoute
+  '/api/admin/membership/settings': typeof ApiAdminMembershipSettingsRoute
   '/api/conversations/$conversationId/messages': typeof ApiConversationsConversationIdMessagesRoute
+  '/api/conversations/$conversationId/title': typeof ApiConversationsConversationIdTitleRoute
   '/api/documents/$documentId/analyze': typeof ApiDocumentsDocumentIdAnalyzeRoute
+  '/api/documents/$documentId/ask': typeof ApiDocumentsDocumentIdAskRoute
+  '/api/expert/appointments/$bookingId': typeof ApiExpertAppointmentsBookingIdRouteWithChildren
+  '/api/expert/meeting/$bookingId': typeof ApiExpertMeetingBookingIdRoute
+  '/api/founder/experts/$expertId': typeof ApiFounderExpertsExpertIdRoute
+  '/api/founder/members/$memberId': typeof ApiFounderMembersMemberIdRoute
+  '/api/member/chat/context': typeof ApiMemberChatContextRoute
+  '/api/member/chat/export': typeof ApiMemberChatExportRoute
+  '/api/member/chat/save-response': typeof ApiMemberChatSaveResponseRoute
+  '/api/member/chat/triggers': typeof ApiMemberChatTriggersRoute
+  '/api/member/expert-bookings/$bookingId': typeof ApiMemberExpertBookingsBookingIdRouteWithChildren
+  '/api/member/expert-chat/$expertId': typeof ApiMemberExpertChatExpertIdRoute
+  '/api/member/experts/$expertId': typeof ApiMemberExpertsExpertIdRouteWithChildren
+  '/api/member/goals/$goalId': typeof ApiMemberGoalsGoalIdRouteWithChildren
+  '/api/member/privacy/audit': typeof ApiMemberPrivacyAuditRoute
+  '/api/member/privacy/memory': typeof ApiMemberPrivacyMemoryRoute
+  '/api/member/security/export': typeof ApiMemberSecurityExportRoute
+  '/api/member/wealth-overview/brief-download': typeof ApiMemberWealthOverviewBriefDownloadRoute
+  '/api/member/wealth-overview/parse': typeof ApiMemberWealthOverviewParseRoute
+  '/api/vault/$documentId/share': typeof ApiVaultDocumentIdShareRoute
+  '/api/vault/share/$token': typeof ApiVaultShareTokenRoute
+  '/api/expert/chat': typeof ApiExpertChatIndexRoute
+  '/dashboard/experts/$expertId/chat': typeof AppDashboardExpertsExpertIdChatRoute
   '/api/admin/members/$memberId/revoke': typeof ApiAdminMembersMemberIdRevokeRoute
+  '/api/admin/membership/members/$memberId': typeof ApiAdminMembershipMembersMemberIdRoute
   '/api/admin/waitlist/$waitlistId/approve': typeof ApiAdminWaitlistWaitlistIdApproveRoute
   '/api/admin/waitlist/$waitlistId/decline': typeof ApiAdminWaitlistWaitlistIdDeclineRoute
+  '/api/expert/appointments/$bookingId/brief': typeof ApiExpertAppointmentsBookingIdBriefRoute
+  '/api/expert/chat/$threadId/messages': typeof ApiExpertChatThreadIdMessagesRoute
+  '/api/founder/support/$ticketId/reply': typeof ApiFounderSupportTicketIdReplyRoute
+  '/api/founder/support/$ticketId/status': typeof ApiFounderSupportTicketIdStatusRoute
+  '/api/founder/waitlist/$waitlistId/notes': typeof ApiFounderWaitlistWaitlistIdNotesRoute
+  '/api/member/expert-bookings/$bookingId/confirm': typeof ApiMemberExpertBookingsBookingIdConfirmRoute
+  '/api/member/expert-bookings/$bookingId/pay': typeof ApiMemberExpertBookingsBookingIdPayRoute
+  '/api/member/expert-chat/$threadId/messages': typeof ApiMemberExpertChatThreadIdMessagesRoute
+  '/api/member/experts/$expertId/introduction': typeof ApiMemberExpertsExpertIdIntroductionRoute
+  '/api/member/goals/$goalId/advise': typeof ApiMemberGoalsGoalIdAdviseRoute
+  '/api/member/goals/$goalId/ask': typeof ApiMemberGoalsGoalIdAskRoute
+  '/api/admin/membership/applications': typeof ApiAdminMembershipApplicationsIndexRoute
+  '/api/admin/membership/applications/$applicationId/approve': typeof ApiAdminMembershipApplicationsApplicationIdApproveRoute
+  '/api/admin/membership/applications/$applicationId/reject': typeof ApiAdminMembershipApplicationsApplicationIdRejectRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/access': typeof AccessRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/apply': typeof ApplyRoute
+  '/apply-as-expert': typeof ApplyAsExpertRoute
   '/contact': typeof ContactRoute
+  '/demo': typeof DemoRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
@@ -392,39 +1631,186 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/security': typeof SecurityRoute
   '/terms': typeof TermsRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/waitlist': typeof WaitlistRoute
   '/_app/advisors': typeof AppAdvisorsRoute
   '/_app/chat': typeof AppChatRoute
-  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/dashboard': typeof AppDashboardRouteWithChildren
+  '/_app/documents': typeof AppDocumentsRoute
+  '/_app/entities': typeof AppEntitiesRoute
+  '/_app/experts': typeof AppExpertsRouteWithChildren
+  '/_app/family-members': typeof AppFamilyMembersRoute
+  '/_app/founder': typeof AppFounderRouteWithChildren
+  '/_app/getting-started': typeof AppGettingStartedRoute
+  '/_app/goals': typeof AppGoalsRoute
+  '/_app/goals-planning': typeof AppGoalsPlanningRoute
+  '/_app/market-intelligence': typeof AppMarketIntelligenceRoute
+  '/_app/membership': typeof AppMembershipRoute
+  '/_app/profile': typeof AppProfileRoute
+  '/_app/succession': typeof AppSuccessionRoute
+  '/_app/support': typeof AppSupportRoute
   '/_app/vault': typeof AppVaultRoute
-  '/api/chat': typeof ApiChatRoute
+  '/_app/wealth': typeof AppWealthRoute
+  '/_app/welcome': typeof AppWelcomeRoute
+  '/admin/applications': typeof AdminApplicationsRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/api/chat': typeof ApiChatRouteWithChildren
+  '/api/market-intelligence': typeof ApiMarketIntelligenceRoute
+  '/api/news': typeof ApiNewsRoute
+  '/api/send-otp': typeof ApiSendOtpRoute
+  '/api/support': typeof ApiSupportRoute
   '/api/upload': typeof ApiUploadRoute
-  '/api/waitlist': typeof ApiWaitlistRoute
+  '/api/waitlist': typeof ApiWaitlistRouteWithChildren
+  '/demo/workspace': typeof DemoWorkspaceRoute
+  '/dev/enter': typeof DevEnterRoute
+  '/demo/': typeof DemoIndexRoute
+  '/_app/dashboard/ai-advisor': typeof AppDashboardAiAdvisorRoute
+  '/_app/dashboard/bookings': typeof AppDashboardBookingsRoute
+  '/_app/dashboard/documents': typeof AppDashboardDocumentsRoute
+  '/_app/dashboard/experts': typeof AppDashboardExpertsRouteWithChildren
+  '/_app/dashboard/family-members': typeof AppDashboardFamilyMembersRoute
+  '/_app/dashboard/goals': typeof AppDashboardGoalsRoute
+  '/_app/dashboard/goals-planning': typeof AppDashboardGoalsPlanningRoute
+  '/_app/dashboard/legal-entities': typeof AppDashboardLegalEntitiesRoute
+  '/_app/dashboard/market-intel': typeof AppDashboardMarketIntelRoute
+  '/_app/dashboard/security': typeof AppDashboardSecurityRoute
+  '/_app/dashboard/succession': typeof AppDashboardSuccessionRoute
+  '/_app/dashboard/tax-calculator': typeof AppDashboardTaxCalculatorRoute
+  '/_app/dashboard/vault': typeof AppDashboardVaultRoute
+  '/_app/dashboard/wealth-overview': typeof AppDashboardWealthOverviewRoute
+  '/_app/expert/availability': typeof AppExpertAvailabilityRoute
+  '/_app/expert/dashboard': typeof AppExpertDashboardRoute
+  '/_app/experts/$expertId': typeof AppExpertsExpertIdRoute
+  '/_app/experts/bookings': typeof AppExpertsBookingsRoute
+  '/_app/founder/analytics': typeof AppFounderAnalyticsRoute
+  '/_app/founder/applications': typeof AppFounderApplicationsRoute
+  '/_app/founder/clients': typeof AppFounderClientsRoute
+  '/_app/founder/expert-bookings': typeof AppFounderExpertBookingsRoute
+  '/_app/founder/experts': typeof AppFounderExpertsRoute
+  '/_app/founder/invites': typeof AppFounderInvitesRoute
+  '/_app/founder/payments': typeof AppFounderPaymentsRoute
+  '/_app/founder/settings': typeof AppFounderSettingsRoute
+  '/_app/founder/support': typeof AppFounderSupportRoute
+  '/api/admin/ai-settings': typeof ApiAdminAiSettingsRoute
+  '/api/admin/bookings': typeof ApiAdminBookingsRoute
   '/api/admin/dashboard': typeof ApiAdminDashboardRoute
   '/api/admin/invites': typeof ApiAdminInvitesRouteWithChildren
   '/api/admin/login': typeof ApiAdminLoginRoute
   '/api/admin/logout': typeof ApiAdminLogoutRoute
   '/api/admin/usage': typeof ApiAdminUsageRoute
+  '/api/auth/demo': typeof ApiAuthDemoRoute
+  '/api/auth/dev-bypass': typeof ApiAuthDevBypassRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
   '/api/auth/onboard': typeof ApiAuthOnboardRoute
+  '/api/auth/refresh': typeof ApiAuthRefreshRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/auth/reserve-invite': typeof ApiAuthReserveInviteRoute
   '/api/auth/reset-password': typeof ApiAuthResetPasswordRoute
   '/api/auth/session': typeof ApiAuthSessionRoute
   '/api/auth/sign-in': typeof ApiAuthSignInRoute
   '/api/auth/sign-out': typeof ApiAuthSignOutRoute
+  '/api/auth/verify-client-otp': typeof ApiAuthVerifyClientOtpRoute
   '/api/auth/verify-invite': typeof ApiAuthVerifyInviteRoute
+  '/api/chat/status': typeof ApiChatStatusRoute
   '/api/conversations/$conversationId': typeof ApiConversationsConversationIdRouteWithChildren
+  '/api/expert/appointments': typeof ApiExpertAppointmentsRouteWithChildren
+  '/api/expert/availability': typeof ApiExpertAvailabilityRoute
+  '/api/expert/clients': typeof ApiExpertClientsRoute
+  '/api/expert/nda': typeof ApiExpertNdaRoute
+  '/api/experts/apply': typeof ApiExpertsApplyRoute
+  '/api/founder/admins': typeof ApiFounderAdminsRoute
+  '/api/founder/expert-bookings': typeof ApiFounderExpertBookingsRoute
+  '/api/founder/experts': typeof ApiFounderExpertsRouteWithChildren
+  '/api/founder/overview': typeof ApiFounderOverviewRoute
+  '/api/health/supabase': typeof ApiHealthSupabaseRoute
+  '/api/market-intel/bookmark': typeof ApiMarketIntelBookmarkRoute
+  '/api/market-intel/brief': typeof ApiMarketIntelBriefRoute
+  '/api/member/audit': typeof ApiMemberAuditRoute
+  '/api/member/expert-bookings': typeof ApiMemberExpertBookingsRouteWithChildren
+  '/api/member/expert-vault-share': typeof ApiMemberExpertVaultShareRoute
+  '/api/member/experts': typeof ApiMemberExpertsRouteWithChildren
+  '/api/member/family': typeof ApiMemberFamilyRoute
+  '/api/member/goals': typeof ApiMemberGoalsRouteWithChildren
+  '/api/member/identity-card': typeof ApiMemberIdentityCardRoute
+  '/api/member/legal-entities': typeof ApiMemberLegalEntitiesRoute
+  '/api/member/notifications': typeof ApiMemberNotificationsRoute
+  '/api/member/onboarding': typeof ApiMemberOnboardingRoute
+  '/api/member/onboarding-checklist': typeof ApiMemberOnboardingChecklistRoute
+  '/api/member/overview': typeof ApiMemberOverviewRoute
+  '/api/member/preferences': typeof ApiMemberPreferencesRoute
+  '/api/member/profile': typeof ApiMemberProfileRoute
+  '/api/member/security': typeof ApiMemberSecurityRouteWithChildren
+  '/api/member/succession': typeof ApiMemberSuccessionRoute
+  '/api/member/support': typeof ApiMemberSupportRoute
+  '/api/member/tax-calculator': typeof ApiMemberTaxCalculatorRoute
+  '/api/member/upgrade-request': typeof ApiMemberUpgradeRequestRoute
+  '/api/member/wealth-overview': typeof ApiMemberWealthOverviewRouteWithChildren
+  '/api/membership/apply': typeof ApiMembershipApplyRoute
+  '/api/membership/settings': typeof ApiMembershipSettingsRoute
+  '/api/otp/send': typeof ApiOtpSendRoute
+  '/api/otp/verify': typeof ApiOtpVerifyRoute
   '/api/payments/create-order': typeof ApiPaymentsCreateOrderRoute
   '/api/payments/webhook': typeof ApiPaymentsWebhookRoute
-  '/api/vault/$documentId': typeof ApiVaultDocumentIdRoute
+  '/api/vault/$documentId': typeof ApiVaultDocumentIdRouteWithChildren
+  '/api/vault/ask': typeof ApiVaultAskRoute
+  '/api/vault/bulk': typeof ApiVaultBulkRoute
+  '/api/waitlist/resend-otp': typeof ApiWaitlistResendOtpRoute
+  '/api/waitlist/send-otp': typeof ApiWaitlistSendOtpRoute
+  '/api/waitlist/verify-otp': typeof ApiWaitlistVerifyOtpRoute
+  '/_app/dashboard/': typeof AppDashboardIndexRoute
+  '/_app/expert/': typeof AppExpertIndexRoute
+  '/_app/founder/': typeof AppFounderIndexRoute
   '/api/conversations/': typeof ApiConversationsIndexRoute
+  '/api/market-intel/': typeof ApiMarketIntelIndexRoute
   '/api/vault/': typeof ApiVaultIndexRoute
+  '/_app/dashboard/experts/$expertId': typeof AppDashboardExpertsExpertIdRouteWithChildren
+  '/_app/dashboard/meeting/$bookingId': typeof AppDashboardMeetingBookingIdRoute
+  '/_app/expert/join/$bookingId': typeof AppExpertJoinBookingIdRoute
   '/api/admin/invites/$inviteId': typeof ApiAdminInvitesInviteIdRoute
+  '/api/admin/membership/settings': typeof ApiAdminMembershipSettingsRoute
   '/api/conversations/$conversationId/messages': typeof ApiConversationsConversationIdMessagesRoute
+  '/api/conversations/$conversationId/title': typeof ApiConversationsConversationIdTitleRoute
   '/api/documents/$documentId/analyze': typeof ApiDocumentsDocumentIdAnalyzeRoute
+  '/api/documents/$documentId/ask': typeof ApiDocumentsDocumentIdAskRoute
+  '/api/expert/appointments/$bookingId': typeof ApiExpertAppointmentsBookingIdRouteWithChildren
+  '/api/expert/meeting/$bookingId': typeof ApiExpertMeetingBookingIdRoute
+  '/api/founder/experts/$expertId': typeof ApiFounderExpertsExpertIdRoute
+  '/api/founder/members/$memberId': typeof ApiFounderMembersMemberIdRoute
+  '/api/member/chat/context': typeof ApiMemberChatContextRoute
+  '/api/member/chat/export': typeof ApiMemberChatExportRoute
+  '/api/member/chat/save-response': typeof ApiMemberChatSaveResponseRoute
+  '/api/member/chat/triggers': typeof ApiMemberChatTriggersRoute
+  '/api/member/expert-bookings/$bookingId': typeof ApiMemberExpertBookingsBookingIdRouteWithChildren
+  '/api/member/expert-chat/$expertId': typeof ApiMemberExpertChatExpertIdRoute
+  '/api/member/experts/$expertId': typeof ApiMemberExpertsExpertIdRouteWithChildren
+  '/api/member/goals/$goalId': typeof ApiMemberGoalsGoalIdRouteWithChildren
+  '/api/member/privacy/audit': typeof ApiMemberPrivacyAuditRoute
+  '/api/member/privacy/memory': typeof ApiMemberPrivacyMemoryRoute
+  '/api/member/security/export': typeof ApiMemberSecurityExportRoute
+  '/api/member/wealth-overview/brief-download': typeof ApiMemberWealthOverviewBriefDownloadRoute
+  '/api/member/wealth-overview/parse': typeof ApiMemberWealthOverviewParseRoute
+  '/api/vault/$documentId/share': typeof ApiVaultDocumentIdShareRoute
+  '/api/vault/share/$token': typeof ApiVaultShareTokenRoute
+  '/api/expert/chat/': typeof ApiExpertChatIndexRoute
+  '/_app/dashboard/experts/$expertId/chat': typeof AppDashboardExpertsExpertIdChatRoute
   '/api/admin/members/$memberId/revoke': typeof ApiAdminMembersMemberIdRevokeRoute
+  '/api/admin/membership/members/$memberId': typeof ApiAdminMembershipMembersMemberIdRoute
   '/api/admin/waitlist/$waitlistId/approve': typeof ApiAdminWaitlistWaitlistIdApproveRoute
   '/api/admin/waitlist/$waitlistId/decline': typeof ApiAdminWaitlistWaitlistIdDeclineRoute
+  '/api/expert/appointments/$bookingId/brief': typeof ApiExpertAppointmentsBookingIdBriefRoute
+  '/api/expert/chat/$threadId/messages': typeof ApiExpertChatThreadIdMessagesRoute
+  '/api/founder/support/$ticketId/reply': typeof ApiFounderSupportTicketIdReplyRoute
+  '/api/founder/support/$ticketId/status': typeof ApiFounderSupportTicketIdStatusRoute
+  '/api/founder/waitlist/$waitlistId/notes': typeof ApiFounderWaitlistWaitlistIdNotesRoute
+  '/api/member/expert-bookings/$bookingId/confirm': typeof ApiMemberExpertBookingsBookingIdConfirmRoute
+  '/api/member/expert-bookings/$bookingId/pay': typeof ApiMemberExpertBookingsBookingIdPayRoute
+  '/api/member/expert-chat/$threadId/messages': typeof ApiMemberExpertChatThreadIdMessagesRoute
+  '/api/member/experts/$expertId/introduction': typeof ApiMemberExpertsExpertIdIntroductionRoute
+  '/api/member/goals/$goalId/advise': typeof ApiMemberGoalsGoalIdAdviseRoute
+  '/api/member/goals/$goalId/ask': typeof ApiMemberGoalsGoalIdAskRoute
+  '/api/admin/membership/applications/': typeof ApiAdminMembershipApplicationsIndexRoute
+  '/api/admin/membership/applications/$applicationId/approve': typeof ApiAdminMembershipApplicationsApplicationIdApproveRoute
+  '/api/admin/membership/applications/$applicationId/reject': typeof ApiAdminMembershipApplicationsApplicationIdRejectRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -432,7 +1818,10 @@ export interface FileRouteTypes {
     | '/'
     | '/access'
     | '/admin'
+    | '/apply'
+    | '/apply-as-expert'
     | '/contact'
+    | '/demo'
     | '/forgot-password'
     | '/login'
     | '/onboarding'
@@ -440,44 +1829,193 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/security'
     | '/terms'
+    | '/terms-and-conditions'
     | '/waitlist'
     | '/advisors'
     | '/chat'
     | '/dashboard'
+    | '/documents'
+    | '/entities'
+    | '/experts'
+    | '/family-members'
+    | '/founder'
+    | '/getting-started'
+    | '/goals'
+    | '/goals-planning'
+    | '/market-intelligence'
+    | '/membership'
+    | '/profile'
+    | '/succession'
+    | '/support'
     | '/vault'
+    | '/wealth'
+    | '/welcome'
+    | '/admin/applications'
+    | '/admin/bookings'
     | '/api/chat'
+    | '/api/market-intelligence'
+    | '/api/news'
+    | '/api/send-otp'
+    | '/api/support'
     | '/api/upload'
     | '/api/waitlist'
+    | '/demo/workspace'
+    | '/dev/enter'
+    | '/demo/'
+    | '/dashboard/ai-advisor'
+    | '/dashboard/bookings'
+    | '/dashboard/documents'
+    | '/dashboard/experts'
+    | '/dashboard/family-members'
+    | '/dashboard/goals'
+    | '/dashboard/goals-planning'
+    | '/dashboard/legal-entities'
+    | '/dashboard/market-intel'
+    | '/dashboard/security'
+    | '/dashboard/succession'
+    | '/dashboard/tax-calculator'
+    | '/dashboard/vault'
+    | '/dashboard/wealth-overview'
+    | '/expert/availability'
+    | '/expert/dashboard'
+    | '/experts/$expertId'
+    | '/experts/bookings'
+    | '/founder/analytics'
+    | '/founder/applications'
+    | '/founder/clients'
+    | '/founder/expert-bookings'
+    | '/founder/experts'
+    | '/founder/invites'
+    | '/founder/payments'
+    | '/founder/settings'
+    | '/founder/support'
+    | '/api/admin/ai-settings'
+    | '/api/admin/bookings'
     | '/api/admin/dashboard'
     | '/api/admin/invites'
     | '/api/admin/login'
     | '/api/admin/logout'
     | '/api/admin/usage'
+    | '/api/auth/demo'
+    | '/api/auth/dev-bypass'
     | '/api/auth/forgot-password'
     | '/api/auth/onboard'
+    | '/api/auth/refresh'
+    | '/api/auth/register'
     | '/api/auth/reserve-invite'
     | '/api/auth/reset-password'
     | '/api/auth/session'
     | '/api/auth/sign-in'
     | '/api/auth/sign-out'
+    | '/api/auth/verify-client-otp'
     | '/api/auth/verify-invite'
+    | '/api/chat/status'
     | '/api/conversations/$conversationId'
+    | '/api/expert/appointments'
+    | '/api/expert/availability'
+    | '/api/expert/clients'
+    | '/api/expert/nda'
+    | '/api/experts/apply'
+    | '/api/founder/admins'
+    | '/api/founder/expert-bookings'
+    | '/api/founder/experts'
+    | '/api/founder/overview'
+    | '/api/health/supabase'
+    | '/api/market-intel/bookmark'
+    | '/api/market-intel/brief'
+    | '/api/member/audit'
+    | '/api/member/expert-bookings'
+    | '/api/member/expert-vault-share'
+    | '/api/member/experts'
+    | '/api/member/family'
+    | '/api/member/goals'
+    | '/api/member/identity-card'
+    | '/api/member/legal-entities'
+    | '/api/member/notifications'
+    | '/api/member/onboarding'
+    | '/api/member/onboarding-checklist'
+    | '/api/member/overview'
+    | '/api/member/preferences'
+    | '/api/member/profile'
+    | '/api/member/security'
+    | '/api/member/succession'
+    | '/api/member/support'
+    | '/api/member/tax-calculator'
+    | '/api/member/upgrade-request'
+    | '/api/member/wealth-overview'
+    | '/api/membership/apply'
+    | '/api/membership/settings'
+    | '/api/otp/send'
+    | '/api/otp/verify'
     | '/api/payments/create-order'
     | '/api/payments/webhook'
     | '/api/vault/$documentId'
+    | '/api/vault/ask'
+    | '/api/vault/bulk'
+    | '/api/waitlist/resend-otp'
+    | '/api/waitlist/send-otp'
+    | '/api/waitlist/verify-otp'
+    | '/dashboard/'
+    | '/expert/'
+    | '/founder/'
     | '/api/conversations/'
+    | '/api/market-intel/'
     | '/api/vault/'
+    | '/dashboard/experts/$expertId'
+    | '/dashboard/meeting/$bookingId'
+    | '/expert/join/$bookingId'
     | '/api/admin/invites/$inviteId'
+    | '/api/admin/membership/settings'
     | '/api/conversations/$conversationId/messages'
+    | '/api/conversations/$conversationId/title'
     | '/api/documents/$documentId/analyze'
+    | '/api/documents/$documentId/ask'
+    | '/api/expert/appointments/$bookingId'
+    | '/api/expert/meeting/$bookingId'
+    | '/api/founder/experts/$expertId'
+    | '/api/founder/members/$memberId'
+    | '/api/member/chat/context'
+    | '/api/member/chat/export'
+    | '/api/member/chat/save-response'
+    | '/api/member/chat/triggers'
+    | '/api/member/expert-bookings/$bookingId'
+    | '/api/member/expert-chat/$expertId'
+    | '/api/member/experts/$expertId'
+    | '/api/member/goals/$goalId'
+    | '/api/member/privacy/audit'
+    | '/api/member/privacy/memory'
+    | '/api/member/security/export'
+    | '/api/member/wealth-overview/brief-download'
+    | '/api/member/wealth-overview/parse'
+    | '/api/vault/$documentId/share'
+    | '/api/vault/share/$token'
+    | '/api/expert/chat/'
+    | '/dashboard/experts/$expertId/chat'
     | '/api/admin/members/$memberId/revoke'
+    | '/api/admin/membership/members/$memberId'
     | '/api/admin/waitlist/$waitlistId/approve'
     | '/api/admin/waitlist/$waitlistId/decline'
+    | '/api/expert/appointments/$bookingId/brief'
+    | '/api/expert/chat/$threadId/messages'
+    | '/api/founder/support/$ticketId/reply'
+    | '/api/founder/support/$ticketId/status'
+    | '/api/founder/waitlist/$waitlistId/notes'
+    | '/api/member/expert-bookings/$bookingId/confirm'
+    | '/api/member/expert-bookings/$bookingId/pay'
+    | '/api/member/expert-chat/$threadId/messages'
+    | '/api/member/experts/$expertId/introduction'
+    | '/api/member/goals/$goalId/advise'
+    | '/api/member/goals/$goalId/ask'
+    | '/api/admin/membership/applications/'
+    | '/api/admin/membership/applications/$applicationId/approve'
+    | '/api/admin/membership/applications/$applicationId/reject'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/access'
     | '/admin'
+    | '/apply'
+    | '/apply-as-expert'
     | '/contact'
     | '/forgot-password'
     | '/login'
@@ -486,46 +2024,194 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/security'
     | '/terms'
+    | '/terms-and-conditions'
     | '/waitlist'
     | '/advisors'
     | '/chat'
-    | '/dashboard'
+    | '/documents'
+    | '/entities'
+    | '/experts'
+    | '/family-members'
+    | '/getting-started'
+    | '/goals'
+    | '/goals-planning'
+    | '/market-intelligence'
+    | '/membership'
+    | '/profile'
+    | '/succession'
+    | '/support'
     | '/vault'
+    | '/wealth'
+    | '/welcome'
+    | '/admin/applications'
+    | '/admin/bookings'
     | '/api/chat'
+    | '/api/market-intelligence'
+    | '/api/news'
+    | '/api/send-otp'
+    | '/api/support'
     | '/api/upload'
     | '/api/waitlist'
+    | '/demo/workspace'
+    | '/dev/enter'
+    | '/demo'
+    | '/dashboard/ai-advisor'
+    | '/dashboard/bookings'
+    | '/dashboard/documents'
+    | '/dashboard/experts'
+    | '/dashboard/family-members'
+    | '/dashboard/goals'
+    | '/dashboard/goals-planning'
+    | '/dashboard/legal-entities'
+    | '/dashboard/market-intel'
+    | '/dashboard/security'
+    | '/dashboard/succession'
+    | '/dashboard/tax-calculator'
+    | '/dashboard/vault'
+    | '/dashboard/wealth-overview'
+    | '/expert/availability'
+    | '/expert/dashboard'
+    | '/experts/$expertId'
+    | '/experts/bookings'
+    | '/founder/analytics'
+    | '/founder/applications'
+    | '/founder/clients'
+    | '/founder/expert-bookings'
+    | '/founder/experts'
+    | '/founder/invites'
+    | '/founder/payments'
+    | '/founder/settings'
+    | '/founder/support'
+    | '/api/admin/ai-settings'
+    | '/api/admin/bookings'
     | '/api/admin/dashboard'
     | '/api/admin/invites'
     | '/api/admin/login'
     | '/api/admin/logout'
     | '/api/admin/usage'
+    | '/api/auth/demo'
+    | '/api/auth/dev-bypass'
     | '/api/auth/forgot-password'
     | '/api/auth/onboard'
+    | '/api/auth/refresh'
+    | '/api/auth/register'
     | '/api/auth/reserve-invite'
     | '/api/auth/reset-password'
     | '/api/auth/session'
     | '/api/auth/sign-in'
     | '/api/auth/sign-out'
+    | '/api/auth/verify-client-otp'
     | '/api/auth/verify-invite'
+    | '/api/chat/status'
     | '/api/conversations/$conversationId'
+    | '/api/expert/appointments'
+    | '/api/expert/availability'
+    | '/api/expert/clients'
+    | '/api/expert/nda'
+    | '/api/experts/apply'
+    | '/api/founder/admins'
+    | '/api/founder/expert-bookings'
+    | '/api/founder/experts'
+    | '/api/founder/overview'
+    | '/api/health/supabase'
+    | '/api/market-intel/bookmark'
+    | '/api/market-intel/brief'
+    | '/api/member/audit'
+    | '/api/member/expert-bookings'
+    | '/api/member/expert-vault-share'
+    | '/api/member/experts'
+    | '/api/member/family'
+    | '/api/member/goals'
+    | '/api/member/identity-card'
+    | '/api/member/legal-entities'
+    | '/api/member/notifications'
+    | '/api/member/onboarding'
+    | '/api/member/onboarding-checklist'
+    | '/api/member/overview'
+    | '/api/member/preferences'
+    | '/api/member/profile'
+    | '/api/member/security'
+    | '/api/member/succession'
+    | '/api/member/support'
+    | '/api/member/tax-calculator'
+    | '/api/member/upgrade-request'
+    | '/api/member/wealth-overview'
+    | '/api/membership/apply'
+    | '/api/membership/settings'
+    | '/api/otp/send'
+    | '/api/otp/verify'
     | '/api/payments/create-order'
     | '/api/payments/webhook'
     | '/api/vault/$documentId'
+    | '/api/vault/ask'
+    | '/api/vault/bulk'
+    | '/api/waitlist/resend-otp'
+    | '/api/waitlist/send-otp'
+    | '/api/waitlist/verify-otp'
+    | '/dashboard'
+    | '/expert'
+    | '/founder'
     | '/api/conversations'
+    | '/api/market-intel'
     | '/api/vault'
+    | '/dashboard/experts/$expertId'
+    | '/dashboard/meeting/$bookingId'
+    | '/expert/join/$bookingId'
     | '/api/admin/invites/$inviteId'
+    | '/api/admin/membership/settings'
     | '/api/conversations/$conversationId/messages'
+    | '/api/conversations/$conversationId/title'
     | '/api/documents/$documentId/analyze'
+    | '/api/documents/$documentId/ask'
+    | '/api/expert/appointments/$bookingId'
+    | '/api/expert/meeting/$bookingId'
+    | '/api/founder/experts/$expertId'
+    | '/api/founder/members/$memberId'
+    | '/api/member/chat/context'
+    | '/api/member/chat/export'
+    | '/api/member/chat/save-response'
+    | '/api/member/chat/triggers'
+    | '/api/member/expert-bookings/$bookingId'
+    | '/api/member/expert-chat/$expertId'
+    | '/api/member/experts/$expertId'
+    | '/api/member/goals/$goalId'
+    | '/api/member/privacy/audit'
+    | '/api/member/privacy/memory'
+    | '/api/member/security/export'
+    | '/api/member/wealth-overview/brief-download'
+    | '/api/member/wealth-overview/parse'
+    | '/api/vault/$documentId/share'
+    | '/api/vault/share/$token'
+    | '/api/expert/chat'
+    | '/dashboard/experts/$expertId/chat'
     | '/api/admin/members/$memberId/revoke'
+    | '/api/admin/membership/members/$memberId'
     | '/api/admin/waitlist/$waitlistId/approve'
     | '/api/admin/waitlist/$waitlistId/decline'
+    | '/api/expert/appointments/$bookingId/brief'
+    | '/api/expert/chat/$threadId/messages'
+    | '/api/founder/support/$ticketId/reply'
+    | '/api/founder/support/$ticketId/status'
+    | '/api/founder/waitlist/$waitlistId/notes'
+    | '/api/member/expert-bookings/$bookingId/confirm'
+    | '/api/member/expert-bookings/$bookingId/pay'
+    | '/api/member/expert-chat/$threadId/messages'
+    | '/api/member/experts/$expertId/introduction'
+    | '/api/member/goals/$goalId/advise'
+    | '/api/member/goals/$goalId/ask'
+    | '/api/admin/membership/applications'
+    | '/api/admin/membership/applications/$applicationId/approve'
+    | '/api/admin/membership/applications/$applicationId/reject'
   id:
     | '__root__'
     | '/'
     | '/_app'
     | '/access'
     | '/admin'
+    | '/apply'
+    | '/apply-as-expert'
     | '/contact'
+    | '/demo'
     | '/forgot-password'
     | '/login'
     | '/onboarding'
@@ -533,47 +2219,197 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/security'
     | '/terms'
+    | '/terms-and-conditions'
     | '/waitlist'
     | '/_app/advisors'
     | '/_app/chat'
     | '/_app/dashboard'
+    | '/_app/documents'
+    | '/_app/entities'
+    | '/_app/experts'
+    | '/_app/family-members'
+    | '/_app/founder'
+    | '/_app/getting-started'
+    | '/_app/goals'
+    | '/_app/goals-planning'
+    | '/_app/market-intelligence'
+    | '/_app/membership'
+    | '/_app/profile'
+    | '/_app/succession'
+    | '/_app/support'
     | '/_app/vault'
+    | '/_app/wealth'
+    | '/_app/welcome'
+    | '/admin/applications'
+    | '/admin/bookings'
     | '/api/chat'
+    | '/api/market-intelligence'
+    | '/api/news'
+    | '/api/send-otp'
+    | '/api/support'
     | '/api/upload'
     | '/api/waitlist'
+    | '/demo/workspace'
+    | '/dev/enter'
+    | '/demo/'
+    | '/_app/dashboard/ai-advisor'
+    | '/_app/dashboard/bookings'
+    | '/_app/dashboard/documents'
+    | '/_app/dashboard/experts'
+    | '/_app/dashboard/family-members'
+    | '/_app/dashboard/goals'
+    | '/_app/dashboard/goals-planning'
+    | '/_app/dashboard/legal-entities'
+    | '/_app/dashboard/market-intel'
+    | '/_app/dashboard/security'
+    | '/_app/dashboard/succession'
+    | '/_app/dashboard/tax-calculator'
+    | '/_app/dashboard/vault'
+    | '/_app/dashboard/wealth-overview'
+    | '/_app/expert/availability'
+    | '/_app/expert/dashboard'
+    | '/_app/experts/$expertId'
+    | '/_app/experts/bookings'
+    | '/_app/founder/analytics'
+    | '/_app/founder/applications'
+    | '/_app/founder/clients'
+    | '/_app/founder/expert-bookings'
+    | '/_app/founder/experts'
+    | '/_app/founder/invites'
+    | '/_app/founder/payments'
+    | '/_app/founder/settings'
+    | '/_app/founder/support'
+    | '/api/admin/ai-settings'
+    | '/api/admin/bookings'
     | '/api/admin/dashboard'
     | '/api/admin/invites'
     | '/api/admin/login'
     | '/api/admin/logout'
     | '/api/admin/usage'
+    | '/api/auth/demo'
+    | '/api/auth/dev-bypass'
     | '/api/auth/forgot-password'
     | '/api/auth/onboard'
+    | '/api/auth/refresh'
+    | '/api/auth/register'
     | '/api/auth/reserve-invite'
     | '/api/auth/reset-password'
     | '/api/auth/session'
     | '/api/auth/sign-in'
     | '/api/auth/sign-out'
+    | '/api/auth/verify-client-otp'
     | '/api/auth/verify-invite'
+    | '/api/chat/status'
     | '/api/conversations/$conversationId'
+    | '/api/expert/appointments'
+    | '/api/expert/availability'
+    | '/api/expert/clients'
+    | '/api/expert/nda'
+    | '/api/experts/apply'
+    | '/api/founder/admins'
+    | '/api/founder/expert-bookings'
+    | '/api/founder/experts'
+    | '/api/founder/overview'
+    | '/api/health/supabase'
+    | '/api/market-intel/bookmark'
+    | '/api/market-intel/brief'
+    | '/api/member/audit'
+    | '/api/member/expert-bookings'
+    | '/api/member/expert-vault-share'
+    | '/api/member/experts'
+    | '/api/member/family'
+    | '/api/member/goals'
+    | '/api/member/identity-card'
+    | '/api/member/legal-entities'
+    | '/api/member/notifications'
+    | '/api/member/onboarding'
+    | '/api/member/onboarding-checklist'
+    | '/api/member/overview'
+    | '/api/member/preferences'
+    | '/api/member/profile'
+    | '/api/member/security'
+    | '/api/member/succession'
+    | '/api/member/support'
+    | '/api/member/tax-calculator'
+    | '/api/member/upgrade-request'
+    | '/api/member/wealth-overview'
+    | '/api/membership/apply'
+    | '/api/membership/settings'
+    | '/api/otp/send'
+    | '/api/otp/verify'
     | '/api/payments/create-order'
     | '/api/payments/webhook'
     | '/api/vault/$documentId'
+    | '/api/vault/ask'
+    | '/api/vault/bulk'
+    | '/api/waitlist/resend-otp'
+    | '/api/waitlist/send-otp'
+    | '/api/waitlist/verify-otp'
+    | '/_app/dashboard/'
+    | '/_app/expert/'
+    | '/_app/founder/'
     | '/api/conversations/'
+    | '/api/market-intel/'
     | '/api/vault/'
+    | '/_app/dashboard/experts/$expertId'
+    | '/_app/dashboard/meeting/$bookingId'
+    | '/_app/expert/join/$bookingId'
     | '/api/admin/invites/$inviteId'
+    | '/api/admin/membership/settings'
     | '/api/conversations/$conversationId/messages'
+    | '/api/conversations/$conversationId/title'
     | '/api/documents/$documentId/analyze'
+    | '/api/documents/$documentId/ask'
+    | '/api/expert/appointments/$bookingId'
+    | '/api/expert/meeting/$bookingId'
+    | '/api/founder/experts/$expertId'
+    | '/api/founder/members/$memberId'
+    | '/api/member/chat/context'
+    | '/api/member/chat/export'
+    | '/api/member/chat/save-response'
+    | '/api/member/chat/triggers'
+    | '/api/member/expert-bookings/$bookingId'
+    | '/api/member/expert-chat/$expertId'
+    | '/api/member/experts/$expertId'
+    | '/api/member/goals/$goalId'
+    | '/api/member/privacy/audit'
+    | '/api/member/privacy/memory'
+    | '/api/member/security/export'
+    | '/api/member/wealth-overview/brief-download'
+    | '/api/member/wealth-overview/parse'
+    | '/api/vault/$documentId/share'
+    | '/api/vault/share/$token'
+    | '/api/expert/chat/'
+    | '/_app/dashboard/experts/$expertId/chat'
     | '/api/admin/members/$memberId/revoke'
+    | '/api/admin/membership/members/$memberId'
     | '/api/admin/waitlist/$waitlistId/approve'
     | '/api/admin/waitlist/$waitlistId/decline'
+    | '/api/expert/appointments/$bookingId/brief'
+    | '/api/expert/chat/$threadId/messages'
+    | '/api/founder/support/$ticketId/reply'
+    | '/api/founder/support/$ticketId/status'
+    | '/api/founder/waitlist/$waitlistId/notes'
+    | '/api/member/expert-bookings/$bookingId/confirm'
+    | '/api/member/expert-bookings/$bookingId/pay'
+    | '/api/member/expert-chat/$threadId/messages'
+    | '/api/member/experts/$expertId/introduction'
+    | '/api/member/goals/$goalId/advise'
+    | '/api/member/goals/$goalId/ask'
+    | '/api/admin/membership/applications/'
+    | '/api/admin/membership/applications/$applicationId/approve'
+    | '/api/admin/membership/applications/$applicationId/reject'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   AccessRoute: typeof AccessRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  ApplyRoute: typeof ApplyRoute
+  ApplyAsExpertRoute: typeof ApplyAsExpertRoute
   ContactRoute: typeof ContactRoute
+  DemoRoute: typeof DemoRouteWithChildren
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
@@ -581,33 +2417,107 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SecurityRoute: typeof SecurityRoute
   TermsRoute: typeof TermsRoute
+  TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   WaitlistRoute: typeof WaitlistRoute
-  ApiChatRoute: typeof ApiChatRoute
+  ApiChatRoute: typeof ApiChatRouteWithChildren
+  ApiMarketIntelligenceRoute: typeof ApiMarketIntelligenceRoute
+  ApiNewsRoute: typeof ApiNewsRoute
+  ApiSendOtpRoute: typeof ApiSendOtpRoute
+  ApiSupportRoute: typeof ApiSupportRoute
   ApiUploadRoute: typeof ApiUploadRoute
-  ApiWaitlistRoute: typeof ApiWaitlistRoute
+  ApiWaitlistRoute: typeof ApiWaitlistRouteWithChildren
+  DevEnterRoute: typeof DevEnterRoute
+  ApiAdminAiSettingsRoute: typeof ApiAdminAiSettingsRoute
+  ApiAdminBookingsRoute: typeof ApiAdminBookingsRoute
   ApiAdminDashboardRoute: typeof ApiAdminDashboardRoute
   ApiAdminInvitesRoute: typeof ApiAdminInvitesRouteWithChildren
   ApiAdminLoginRoute: typeof ApiAdminLoginRoute
   ApiAdminLogoutRoute: typeof ApiAdminLogoutRoute
   ApiAdminUsageRoute: typeof ApiAdminUsageRoute
+  ApiAuthDemoRoute: typeof ApiAuthDemoRoute
+  ApiAuthDevBypassRoute: typeof ApiAuthDevBypassRoute
   ApiAuthForgotPasswordRoute: typeof ApiAuthForgotPasswordRoute
   ApiAuthOnboardRoute: typeof ApiAuthOnboardRoute
+  ApiAuthRefreshRoute: typeof ApiAuthRefreshRoute
+  ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
   ApiAuthReserveInviteRoute: typeof ApiAuthReserveInviteRoute
   ApiAuthResetPasswordRoute: typeof ApiAuthResetPasswordRoute
   ApiAuthSessionRoute: typeof ApiAuthSessionRoute
   ApiAuthSignInRoute: typeof ApiAuthSignInRoute
   ApiAuthSignOutRoute: typeof ApiAuthSignOutRoute
+  ApiAuthVerifyClientOtpRoute: typeof ApiAuthVerifyClientOtpRoute
   ApiAuthVerifyInviteRoute: typeof ApiAuthVerifyInviteRoute
   ApiConversationsConversationIdRoute: typeof ApiConversationsConversationIdRouteWithChildren
+  ApiExpertAppointmentsRoute: typeof ApiExpertAppointmentsRouteWithChildren
+  ApiExpertAvailabilityRoute: typeof ApiExpertAvailabilityRoute
+  ApiExpertClientsRoute: typeof ApiExpertClientsRoute
+  ApiExpertNdaRoute: typeof ApiExpertNdaRoute
+  ApiExpertsApplyRoute: typeof ApiExpertsApplyRoute
+  ApiFounderAdminsRoute: typeof ApiFounderAdminsRoute
+  ApiFounderExpertBookingsRoute: typeof ApiFounderExpertBookingsRoute
+  ApiFounderExpertsRoute: typeof ApiFounderExpertsRouteWithChildren
+  ApiFounderOverviewRoute: typeof ApiFounderOverviewRoute
+  ApiHealthSupabaseRoute: typeof ApiHealthSupabaseRoute
+  ApiMarketIntelBookmarkRoute: typeof ApiMarketIntelBookmarkRoute
+  ApiMarketIntelBriefRoute: typeof ApiMarketIntelBriefRoute
+  ApiMemberAuditRoute: typeof ApiMemberAuditRoute
+  ApiMemberExpertBookingsRoute: typeof ApiMemberExpertBookingsRouteWithChildren
+  ApiMemberExpertVaultShareRoute: typeof ApiMemberExpertVaultShareRoute
+  ApiMemberExpertsRoute: typeof ApiMemberExpertsRouteWithChildren
+  ApiMemberFamilyRoute: typeof ApiMemberFamilyRoute
+  ApiMemberGoalsRoute: typeof ApiMemberGoalsRouteWithChildren
+  ApiMemberIdentityCardRoute: typeof ApiMemberIdentityCardRoute
+  ApiMemberLegalEntitiesRoute: typeof ApiMemberLegalEntitiesRoute
+  ApiMemberNotificationsRoute: typeof ApiMemberNotificationsRoute
+  ApiMemberOnboardingRoute: typeof ApiMemberOnboardingRoute
+  ApiMemberOnboardingChecklistRoute: typeof ApiMemberOnboardingChecklistRoute
+  ApiMemberOverviewRoute: typeof ApiMemberOverviewRoute
+  ApiMemberPreferencesRoute: typeof ApiMemberPreferencesRoute
+  ApiMemberProfileRoute: typeof ApiMemberProfileRoute
+  ApiMemberSecurityRoute: typeof ApiMemberSecurityRouteWithChildren
+  ApiMemberSuccessionRoute: typeof ApiMemberSuccessionRoute
+  ApiMemberSupportRoute: typeof ApiMemberSupportRoute
+  ApiMemberTaxCalculatorRoute: typeof ApiMemberTaxCalculatorRoute
+  ApiMemberUpgradeRequestRoute: typeof ApiMemberUpgradeRequestRoute
+  ApiMemberWealthOverviewRoute: typeof ApiMemberWealthOverviewRouteWithChildren
+  ApiMembershipApplyRoute: typeof ApiMembershipApplyRoute
+  ApiMembershipSettingsRoute: typeof ApiMembershipSettingsRoute
+  ApiOtpSendRoute: typeof ApiOtpSendRoute
+  ApiOtpVerifyRoute: typeof ApiOtpVerifyRoute
   ApiPaymentsCreateOrderRoute: typeof ApiPaymentsCreateOrderRoute
   ApiPaymentsWebhookRoute: typeof ApiPaymentsWebhookRoute
-  ApiVaultDocumentIdRoute: typeof ApiVaultDocumentIdRoute
+  ApiVaultDocumentIdRoute: typeof ApiVaultDocumentIdRouteWithChildren
+  ApiVaultAskRoute: typeof ApiVaultAskRoute
+  ApiVaultBulkRoute: typeof ApiVaultBulkRoute
   ApiConversationsIndexRoute: typeof ApiConversationsIndexRoute
+  ApiMarketIntelIndexRoute: typeof ApiMarketIntelIndexRoute
   ApiVaultIndexRoute: typeof ApiVaultIndexRoute
+  ApiAdminMembershipSettingsRoute: typeof ApiAdminMembershipSettingsRoute
   ApiDocumentsDocumentIdAnalyzeRoute: typeof ApiDocumentsDocumentIdAnalyzeRoute
+  ApiDocumentsDocumentIdAskRoute: typeof ApiDocumentsDocumentIdAskRoute
+  ApiExpertMeetingBookingIdRoute: typeof ApiExpertMeetingBookingIdRoute
+  ApiFounderMembersMemberIdRoute: typeof ApiFounderMembersMemberIdRoute
+  ApiMemberChatContextRoute: typeof ApiMemberChatContextRoute
+  ApiMemberChatExportRoute: typeof ApiMemberChatExportRoute
+  ApiMemberChatSaveResponseRoute: typeof ApiMemberChatSaveResponseRoute
+  ApiMemberChatTriggersRoute: typeof ApiMemberChatTriggersRoute
+  ApiMemberExpertChatExpertIdRoute: typeof ApiMemberExpertChatExpertIdRoute
+  ApiMemberPrivacyAuditRoute: typeof ApiMemberPrivacyAuditRoute
+  ApiMemberPrivacyMemoryRoute: typeof ApiMemberPrivacyMemoryRoute
+  ApiVaultShareTokenRoute: typeof ApiVaultShareTokenRoute
+  ApiExpertChatIndexRoute: typeof ApiExpertChatIndexRoute
   ApiAdminMembersMemberIdRevokeRoute: typeof ApiAdminMembersMemberIdRevokeRoute
+  ApiAdminMembershipMembersMemberIdRoute: typeof ApiAdminMembershipMembersMemberIdRoute
   ApiAdminWaitlistWaitlistIdApproveRoute: typeof ApiAdminWaitlistWaitlistIdApproveRoute
   ApiAdminWaitlistWaitlistIdDeclineRoute: typeof ApiAdminWaitlistWaitlistIdDeclineRoute
+  ApiExpertChatThreadIdMessagesRoute: typeof ApiExpertChatThreadIdMessagesRoute
+  ApiFounderSupportTicketIdReplyRoute: typeof ApiFounderSupportTicketIdReplyRoute
+  ApiFounderSupportTicketIdStatusRoute: typeof ApiFounderSupportTicketIdStatusRoute
+  ApiFounderWaitlistWaitlistIdNotesRoute: typeof ApiFounderWaitlistWaitlistIdNotesRoute
+  ApiMemberExpertChatThreadIdMessagesRoute: typeof ApiMemberExpertChatThreadIdMessagesRoute
+  ApiAdminMembershipApplicationsIndexRoute: typeof ApiAdminMembershipApplicationsIndexRoute
+  ApiAdminMembershipApplicationsApplicationIdApproveRoute: typeof ApiAdminMembershipApplicationsApplicationIdApproveRoute
+  ApiAdminMembershipApplicationsApplicationIdRejectRoute: typeof ApiAdminMembershipApplicationsApplicationIdRejectRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -617,6 +2527,13 @@ declare module '@tanstack/react-router' {
       path: '/waitlist'
       fullPath: '/waitlist'
       preLoaderRoute: typeof WaitlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-and-conditions': {
+      id: '/terms-and-conditions'
+      path: '/terms-and-conditions'
+      fullPath: '/terms-and-conditions'
+      preLoaderRoute: typeof TermsAndConditionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -668,11 +2585,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo': {
+      id: '/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apply-as-expert': {
+      id: '/apply-as-expert'
+      path: '/apply-as-expert'
+      fullPath: '/apply-as-expert'
+      preLoaderRoute: typeof ApplyAsExpertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apply': {
+      id: '/apply'
+      path: '/apply'
+      fullPath: '/apply'
+      preLoaderRoute: typeof ApplyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -703,6 +2641,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo/': {
+      id: '/demo/'
+      path: '/'
+      fullPath: '/demo/'
+      preLoaderRoute: typeof DemoIndexRouteImport
+      parentRoute: typeof DemoRoute
+    }
+    '/dev/enter': {
+      id: '/dev/enter'
+      path: '/dev/enter'
+      fullPath: '/dev/enter'
+      preLoaderRoute: typeof DevEnterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/workspace': {
+      id: '/demo/workspace'
+      path: '/workspace'
+      fullPath: '/demo/workspace'
+      preLoaderRoute: typeof DemoWorkspaceRouteImport
+      parentRoute: typeof DemoRoute
+    }
     '/api/waitlist': {
       id: '/api/waitlist'
       path: '/api/waitlist'
@@ -717,6 +2676,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiUploadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/support': {
+      id: '/api/support'
+      path: '/api/support'
+      fullPath: '/api/support'
+      preLoaderRoute: typeof ApiSupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/send-otp': {
+      id: '/api/send-otp'
+      path: '/api/send-otp'
+      fullPath: '/api/send-otp'
+      preLoaderRoute: typeof ApiSendOtpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/news': {
+      id: '/api/news'
+      path: '/api/news'
+      fullPath: '/api/news'
+      preLoaderRoute: typeof ApiNewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/market-intelligence': {
+      id: '/api/market-intelligence'
+      path: '/api/market-intelligence'
+      fullPath: '/api/market-intelligence'
+      preLoaderRoute: typeof ApiMarketIntelligenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -724,11 +2711,130 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/bookings': {
+      id: '/admin/bookings'
+      path: '/bookings'
+      fullPath: '/admin/bookings'
+      preLoaderRoute: typeof AdminBookingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/applications': {
+      id: '/admin/applications'
+      path: '/applications'
+      fullPath: '/admin/applications'
+      preLoaderRoute: typeof AdminApplicationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_app/welcome': {
+      id: '/_app/welcome'
+      path: '/welcome'
+      fullPath: '/welcome'
+      preLoaderRoute: typeof AppWelcomeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/wealth': {
+      id: '/_app/wealth'
+      path: '/wealth'
+      fullPath: '/wealth'
+      preLoaderRoute: typeof AppWealthRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/vault': {
       id: '/_app/vault'
       path: '/vault'
       fullPath: '/vault'
       preLoaderRoute: typeof AppVaultRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/support': {
+      id: '/_app/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof AppSupportRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/succession': {
+      id: '/_app/succession'
+      path: '/succession'
+      fullPath: '/succession'
+      preLoaderRoute: typeof AppSuccessionRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/profile': {
+      id: '/_app/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/membership': {
+      id: '/_app/membership'
+      path: '/membership'
+      fullPath: '/membership'
+      preLoaderRoute: typeof AppMembershipRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/market-intelligence': {
+      id: '/_app/market-intelligence'
+      path: '/market-intelligence'
+      fullPath: '/market-intelligence'
+      preLoaderRoute: typeof AppMarketIntelligenceRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/goals-planning': {
+      id: '/_app/goals-planning'
+      path: '/goals-planning'
+      fullPath: '/goals-planning'
+      preLoaderRoute: typeof AppGoalsPlanningRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/goals': {
+      id: '/_app/goals'
+      path: '/goals'
+      fullPath: '/goals'
+      preLoaderRoute: typeof AppGoalsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/getting-started': {
+      id: '/_app/getting-started'
+      path: '/getting-started'
+      fullPath: '/getting-started'
+      preLoaderRoute: typeof AppGettingStartedRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/founder': {
+      id: '/_app/founder'
+      path: '/founder'
+      fullPath: '/founder'
+      preLoaderRoute: typeof AppFounderRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/family-members': {
+      id: '/_app/family-members'
+      path: '/family-members'
+      fullPath: '/family-members'
+      preLoaderRoute: typeof AppFamilyMembersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/experts': {
+      id: '/_app/experts'
+      path: '/experts'
+      fullPath: '/experts'
+      preLoaderRoute: typeof AppExpertsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/entities': {
+      id: '/_app/entities'
+      path: '/entities'
+      fullPath: '/entities'
+      preLoaderRoute: typeof AppEntitiesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/documents': {
+      id: '/_app/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof AppDocumentsRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/dashboard': {
@@ -759,11 +2865,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiVaultIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/market-intel/': {
+      id: '/api/market-intel/'
+      path: '/api/market-intel'
+      fullPath: '/api/market-intel/'
+      preLoaderRoute: typeof ApiMarketIntelIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/conversations/': {
       id: '/api/conversations/'
       path: '/api/conversations'
       fullPath: '/api/conversations/'
       preLoaderRoute: typeof ApiConversationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/founder/': {
+      id: '/_app/founder/'
+      path: '/'
+      fullPath: '/founder/'
+      preLoaderRoute: typeof AppFounderIndexRouteImport
+      parentRoute: typeof AppFounderRoute
+    }
+    '/_app/expert/': {
+      id: '/_app/expert/'
+      path: '/expert'
+      fullPath: '/expert/'
+      preLoaderRoute: typeof AppExpertIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dashboard/': {
+      id: '/_app/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AppDashboardIndexRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/api/waitlist/verify-otp': {
+      id: '/api/waitlist/verify-otp'
+      path: '/verify-otp'
+      fullPath: '/api/waitlist/verify-otp'
+      preLoaderRoute: typeof ApiWaitlistVerifyOtpRouteImport
+      parentRoute: typeof ApiWaitlistRoute
+    }
+    '/api/waitlist/send-otp': {
+      id: '/api/waitlist/send-otp'
+      path: '/send-otp'
+      fullPath: '/api/waitlist/send-otp'
+      preLoaderRoute: typeof ApiWaitlistSendOtpRouteImport
+      parentRoute: typeof ApiWaitlistRoute
+    }
+    '/api/waitlist/resend-otp': {
+      id: '/api/waitlist/resend-otp'
+      path: '/resend-otp'
+      fullPath: '/api/waitlist/resend-otp'
+      preLoaderRoute: typeof ApiWaitlistResendOtpRouteImport
+      parentRoute: typeof ApiWaitlistRoute
+    }
+    '/api/vault/bulk': {
+      id: '/api/vault/bulk'
+      path: '/api/vault/bulk'
+      fullPath: '/api/vault/bulk'
+      preLoaderRoute: typeof ApiVaultBulkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vault/ask': {
+      id: '/api/vault/ask'
+      path: '/api/vault/ask'
+      fullPath: '/api/vault/ask'
+      preLoaderRoute: typeof ApiVaultAskRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/vault/$documentId': {
@@ -787,6 +2956,258 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPaymentsCreateOrderRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/otp/verify': {
+      id: '/api/otp/verify'
+      path: '/api/otp/verify'
+      fullPath: '/api/otp/verify'
+      preLoaderRoute: typeof ApiOtpVerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/otp/send': {
+      id: '/api/otp/send'
+      path: '/api/otp/send'
+      fullPath: '/api/otp/send'
+      preLoaderRoute: typeof ApiOtpSendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/membership/settings': {
+      id: '/api/membership/settings'
+      path: '/api/membership/settings'
+      fullPath: '/api/membership/settings'
+      preLoaderRoute: typeof ApiMembershipSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/membership/apply': {
+      id: '/api/membership/apply'
+      path: '/api/membership/apply'
+      fullPath: '/api/membership/apply'
+      preLoaderRoute: typeof ApiMembershipApplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/wealth-overview': {
+      id: '/api/member/wealth-overview'
+      path: '/api/member/wealth-overview'
+      fullPath: '/api/member/wealth-overview'
+      preLoaderRoute: typeof ApiMemberWealthOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/upgrade-request': {
+      id: '/api/member/upgrade-request'
+      path: '/api/member/upgrade-request'
+      fullPath: '/api/member/upgrade-request'
+      preLoaderRoute: typeof ApiMemberUpgradeRequestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/tax-calculator': {
+      id: '/api/member/tax-calculator'
+      path: '/api/member/tax-calculator'
+      fullPath: '/api/member/tax-calculator'
+      preLoaderRoute: typeof ApiMemberTaxCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/support': {
+      id: '/api/member/support'
+      path: '/api/member/support'
+      fullPath: '/api/member/support'
+      preLoaderRoute: typeof ApiMemberSupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/succession': {
+      id: '/api/member/succession'
+      path: '/api/member/succession'
+      fullPath: '/api/member/succession'
+      preLoaderRoute: typeof ApiMemberSuccessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/security': {
+      id: '/api/member/security'
+      path: '/api/member/security'
+      fullPath: '/api/member/security'
+      preLoaderRoute: typeof ApiMemberSecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/profile': {
+      id: '/api/member/profile'
+      path: '/api/member/profile'
+      fullPath: '/api/member/profile'
+      preLoaderRoute: typeof ApiMemberProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/preferences': {
+      id: '/api/member/preferences'
+      path: '/api/member/preferences'
+      fullPath: '/api/member/preferences'
+      preLoaderRoute: typeof ApiMemberPreferencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/overview': {
+      id: '/api/member/overview'
+      path: '/api/member/overview'
+      fullPath: '/api/member/overview'
+      preLoaderRoute: typeof ApiMemberOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/onboarding-checklist': {
+      id: '/api/member/onboarding-checklist'
+      path: '/api/member/onboarding-checklist'
+      fullPath: '/api/member/onboarding-checklist'
+      preLoaderRoute: typeof ApiMemberOnboardingChecklistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/onboarding': {
+      id: '/api/member/onboarding'
+      path: '/api/member/onboarding'
+      fullPath: '/api/member/onboarding'
+      preLoaderRoute: typeof ApiMemberOnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/notifications': {
+      id: '/api/member/notifications'
+      path: '/api/member/notifications'
+      fullPath: '/api/member/notifications'
+      preLoaderRoute: typeof ApiMemberNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/legal-entities': {
+      id: '/api/member/legal-entities'
+      path: '/api/member/legal-entities'
+      fullPath: '/api/member/legal-entities'
+      preLoaderRoute: typeof ApiMemberLegalEntitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/identity-card': {
+      id: '/api/member/identity-card'
+      path: '/api/member/identity-card'
+      fullPath: '/api/member/identity-card'
+      preLoaderRoute: typeof ApiMemberIdentityCardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/goals': {
+      id: '/api/member/goals'
+      path: '/api/member/goals'
+      fullPath: '/api/member/goals'
+      preLoaderRoute: typeof ApiMemberGoalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/family': {
+      id: '/api/member/family'
+      path: '/api/member/family'
+      fullPath: '/api/member/family'
+      preLoaderRoute: typeof ApiMemberFamilyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/experts': {
+      id: '/api/member/experts'
+      path: '/api/member/experts'
+      fullPath: '/api/member/experts'
+      preLoaderRoute: typeof ApiMemberExpertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/expert-vault-share': {
+      id: '/api/member/expert-vault-share'
+      path: '/api/member/expert-vault-share'
+      fullPath: '/api/member/expert-vault-share'
+      preLoaderRoute: typeof ApiMemberExpertVaultShareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/expert-bookings': {
+      id: '/api/member/expert-bookings'
+      path: '/api/member/expert-bookings'
+      fullPath: '/api/member/expert-bookings'
+      preLoaderRoute: typeof ApiMemberExpertBookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/audit': {
+      id: '/api/member/audit'
+      path: '/api/member/audit'
+      fullPath: '/api/member/audit'
+      preLoaderRoute: typeof ApiMemberAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/market-intel/brief': {
+      id: '/api/market-intel/brief'
+      path: '/api/market-intel/brief'
+      fullPath: '/api/market-intel/brief'
+      preLoaderRoute: typeof ApiMarketIntelBriefRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/market-intel/bookmark': {
+      id: '/api/market-intel/bookmark'
+      path: '/api/market-intel/bookmark'
+      fullPath: '/api/market-intel/bookmark'
+      preLoaderRoute: typeof ApiMarketIntelBookmarkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/health/supabase': {
+      id: '/api/health/supabase'
+      path: '/api/health/supabase'
+      fullPath: '/api/health/supabase'
+      preLoaderRoute: typeof ApiHealthSupabaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/founder/overview': {
+      id: '/api/founder/overview'
+      path: '/api/founder/overview'
+      fullPath: '/api/founder/overview'
+      preLoaderRoute: typeof ApiFounderOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/founder/experts': {
+      id: '/api/founder/experts'
+      path: '/api/founder/experts'
+      fullPath: '/api/founder/experts'
+      preLoaderRoute: typeof ApiFounderExpertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/founder/expert-bookings': {
+      id: '/api/founder/expert-bookings'
+      path: '/api/founder/expert-bookings'
+      fullPath: '/api/founder/expert-bookings'
+      preLoaderRoute: typeof ApiFounderExpertBookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/founder/admins': {
+      id: '/api/founder/admins'
+      path: '/api/founder/admins'
+      fullPath: '/api/founder/admins'
+      preLoaderRoute: typeof ApiFounderAdminsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/experts/apply': {
+      id: '/api/experts/apply'
+      path: '/api/experts/apply'
+      fullPath: '/api/experts/apply'
+      preLoaderRoute: typeof ApiExpertsApplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/expert/nda': {
+      id: '/api/expert/nda'
+      path: '/api/expert/nda'
+      fullPath: '/api/expert/nda'
+      preLoaderRoute: typeof ApiExpertNdaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/expert/clients': {
+      id: '/api/expert/clients'
+      path: '/api/expert/clients'
+      fullPath: '/api/expert/clients'
+      preLoaderRoute: typeof ApiExpertClientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/expert/availability': {
+      id: '/api/expert/availability'
+      path: '/api/expert/availability'
+      fullPath: '/api/expert/availability'
+      preLoaderRoute: typeof ApiExpertAvailabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/expert/appointments': {
+      id: '/api/expert/appointments'
+      path: '/api/expert/appointments'
+      fullPath: '/api/expert/appointments'
+      preLoaderRoute: typeof ApiExpertAppointmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/conversations/$conversationId': {
       id: '/api/conversations/$conversationId'
       path: '/api/conversations/$conversationId'
@@ -794,11 +3215,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiConversationsConversationIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat/status': {
+      id: '/api/chat/status'
+      path: '/status'
+      fullPath: '/api/chat/status'
+      preLoaderRoute: typeof ApiChatStatusRouteImport
+      parentRoute: typeof ApiChatRoute
+    }
     '/api/auth/verify-invite': {
       id: '/api/auth/verify-invite'
       path: '/api/auth/verify-invite'
       fullPath: '/api/auth/verify-invite'
       preLoaderRoute: typeof ApiAuthVerifyInviteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/verify-client-otp': {
+      id: '/api/auth/verify-client-otp'
+      path: '/api/auth/verify-client-otp'
+      fullPath: '/api/auth/verify-client-otp'
+      preLoaderRoute: typeof ApiAuthVerifyClientOtpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/auth/sign-out': {
@@ -836,6 +3271,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthReserveInviteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/auth/register': {
+      id: '/api/auth/register'
+      path: '/api/auth/register'
+      fullPath: '/api/auth/register'
+      preLoaderRoute: typeof ApiAuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/refresh': {
+      id: '/api/auth/refresh'
+      path: '/api/auth/refresh'
+      fullPath: '/api/auth/refresh'
+      preLoaderRoute: typeof ApiAuthRefreshRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/onboard': {
       id: '/api/auth/onboard'
       path: '/api/auth/onboard'
@@ -848,6 +3297,20 @@ declare module '@tanstack/react-router' {
       path: '/api/auth/forgot-password'
       fullPath: '/api/auth/forgot-password'
       preLoaderRoute: typeof ApiAuthForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/dev-bypass': {
+      id: '/api/auth/dev-bypass'
+      path: '/api/auth/dev-bypass'
+      fullPath: '/api/auth/dev-bypass'
+      preLoaderRoute: typeof ApiAuthDevBypassRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/demo': {
+      id: '/api/auth/demo'
+      path: '/api/auth/demo'
+      fullPath: '/api/auth/demo'
+      preLoaderRoute: typeof ApiAuthDemoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/admin/usage': {
@@ -885,12 +3348,369 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/bookings': {
+      id: '/api/admin/bookings'
+      path: '/api/admin/bookings'
+      fullPath: '/api/admin/bookings'
+      preLoaderRoute: typeof ApiAdminBookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/ai-settings': {
+      id: '/api/admin/ai-settings'
+      path: '/api/admin/ai-settings'
+      fullPath: '/api/admin/ai-settings'
+      preLoaderRoute: typeof ApiAdminAiSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/founder/support': {
+      id: '/_app/founder/support'
+      path: '/support'
+      fullPath: '/founder/support'
+      preLoaderRoute: typeof AppFounderSupportRouteImport
+      parentRoute: typeof AppFounderRoute
+    }
+    '/_app/founder/settings': {
+      id: '/_app/founder/settings'
+      path: '/settings'
+      fullPath: '/founder/settings'
+      preLoaderRoute: typeof AppFounderSettingsRouteImport
+      parentRoute: typeof AppFounderRoute
+    }
+    '/_app/founder/payments': {
+      id: '/_app/founder/payments'
+      path: '/payments'
+      fullPath: '/founder/payments'
+      preLoaderRoute: typeof AppFounderPaymentsRouteImport
+      parentRoute: typeof AppFounderRoute
+    }
+    '/_app/founder/invites': {
+      id: '/_app/founder/invites'
+      path: '/invites'
+      fullPath: '/founder/invites'
+      preLoaderRoute: typeof AppFounderInvitesRouteImport
+      parentRoute: typeof AppFounderRoute
+    }
+    '/_app/founder/experts': {
+      id: '/_app/founder/experts'
+      path: '/experts'
+      fullPath: '/founder/experts'
+      preLoaderRoute: typeof AppFounderExpertsRouteImport
+      parentRoute: typeof AppFounderRoute
+    }
+    '/_app/founder/expert-bookings': {
+      id: '/_app/founder/expert-bookings'
+      path: '/expert-bookings'
+      fullPath: '/founder/expert-bookings'
+      preLoaderRoute: typeof AppFounderExpertBookingsRouteImport
+      parentRoute: typeof AppFounderRoute
+    }
+    '/_app/founder/clients': {
+      id: '/_app/founder/clients'
+      path: '/clients'
+      fullPath: '/founder/clients'
+      preLoaderRoute: typeof AppFounderClientsRouteImport
+      parentRoute: typeof AppFounderRoute
+    }
+    '/_app/founder/applications': {
+      id: '/_app/founder/applications'
+      path: '/applications'
+      fullPath: '/founder/applications'
+      preLoaderRoute: typeof AppFounderApplicationsRouteImport
+      parentRoute: typeof AppFounderRoute
+    }
+    '/_app/founder/analytics': {
+      id: '/_app/founder/analytics'
+      path: '/analytics'
+      fullPath: '/founder/analytics'
+      preLoaderRoute: typeof AppFounderAnalyticsRouteImport
+      parentRoute: typeof AppFounderRoute
+    }
+    '/_app/experts/bookings': {
+      id: '/_app/experts/bookings'
+      path: '/bookings'
+      fullPath: '/experts/bookings'
+      preLoaderRoute: typeof AppExpertsBookingsRouteImport
+      parentRoute: typeof AppExpertsRoute
+    }
+    '/_app/experts/$expertId': {
+      id: '/_app/experts/$expertId'
+      path: '/$expertId'
+      fullPath: '/experts/$expertId'
+      preLoaderRoute: typeof AppExpertsExpertIdRouteImport
+      parentRoute: typeof AppExpertsRoute
+    }
+    '/_app/expert/dashboard': {
+      id: '/_app/expert/dashboard'
+      path: '/expert/dashboard'
+      fullPath: '/expert/dashboard'
+      preLoaderRoute: typeof AppExpertDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/expert/availability': {
+      id: '/_app/expert/availability'
+      path: '/expert/availability'
+      fullPath: '/expert/availability'
+      preLoaderRoute: typeof AppExpertAvailabilityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dashboard/wealth-overview': {
+      id: '/_app/dashboard/wealth-overview'
+      path: '/wealth-overview'
+      fullPath: '/dashboard/wealth-overview'
+      preLoaderRoute: typeof AppDashboardWealthOverviewRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/vault': {
+      id: '/_app/dashboard/vault'
+      path: '/vault'
+      fullPath: '/dashboard/vault'
+      preLoaderRoute: typeof AppDashboardVaultRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/tax-calculator': {
+      id: '/_app/dashboard/tax-calculator'
+      path: '/tax-calculator'
+      fullPath: '/dashboard/tax-calculator'
+      preLoaderRoute: typeof AppDashboardTaxCalculatorRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/succession': {
+      id: '/_app/dashboard/succession'
+      path: '/succession'
+      fullPath: '/dashboard/succession'
+      preLoaderRoute: typeof AppDashboardSuccessionRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/security': {
+      id: '/_app/dashboard/security'
+      path: '/security'
+      fullPath: '/dashboard/security'
+      preLoaderRoute: typeof AppDashboardSecurityRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/market-intel': {
+      id: '/_app/dashboard/market-intel'
+      path: '/market-intel'
+      fullPath: '/dashboard/market-intel'
+      preLoaderRoute: typeof AppDashboardMarketIntelRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/legal-entities': {
+      id: '/_app/dashboard/legal-entities'
+      path: '/legal-entities'
+      fullPath: '/dashboard/legal-entities'
+      preLoaderRoute: typeof AppDashboardLegalEntitiesRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/goals-planning': {
+      id: '/_app/dashboard/goals-planning'
+      path: '/goals-planning'
+      fullPath: '/dashboard/goals-planning'
+      preLoaderRoute: typeof AppDashboardGoalsPlanningRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/goals': {
+      id: '/_app/dashboard/goals'
+      path: '/goals'
+      fullPath: '/dashboard/goals'
+      preLoaderRoute: typeof AppDashboardGoalsRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/family-members': {
+      id: '/_app/dashboard/family-members'
+      path: '/family-members'
+      fullPath: '/dashboard/family-members'
+      preLoaderRoute: typeof AppDashboardFamilyMembersRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/experts': {
+      id: '/_app/dashboard/experts'
+      path: '/experts'
+      fullPath: '/dashboard/experts'
+      preLoaderRoute: typeof AppDashboardExpertsRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/documents': {
+      id: '/_app/dashboard/documents'
+      path: '/documents'
+      fullPath: '/dashboard/documents'
+      preLoaderRoute: typeof AppDashboardDocumentsRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/bookings': {
+      id: '/_app/dashboard/bookings'
+      path: '/bookings'
+      fullPath: '/dashboard/bookings'
+      preLoaderRoute: typeof AppDashboardBookingsRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/ai-advisor': {
+      id: '/_app/dashboard/ai-advisor'
+      path: '/ai-advisor'
+      fullPath: '/dashboard/ai-advisor'
+      preLoaderRoute: typeof AppDashboardAiAdvisorRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/api/expert/chat/': {
+      id: '/api/expert/chat/'
+      path: '/api/expert/chat'
+      fullPath: '/api/expert/chat/'
+      preLoaderRoute: typeof ApiExpertChatIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vault/share/$token': {
+      id: '/api/vault/share/$token'
+      path: '/api/vault/share/$token'
+      fullPath: '/api/vault/share/$token'
+      preLoaderRoute: typeof ApiVaultShareTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vault/$documentId/share': {
+      id: '/api/vault/$documentId/share'
+      path: '/share'
+      fullPath: '/api/vault/$documentId/share'
+      preLoaderRoute: typeof ApiVaultDocumentIdShareRouteImport
+      parentRoute: typeof ApiVaultDocumentIdRoute
+    }
+    '/api/member/wealth-overview/parse': {
+      id: '/api/member/wealth-overview/parse'
+      path: '/parse'
+      fullPath: '/api/member/wealth-overview/parse'
+      preLoaderRoute: typeof ApiMemberWealthOverviewParseRouteImport
+      parentRoute: typeof ApiMemberWealthOverviewRoute
+    }
+    '/api/member/wealth-overview/brief-download': {
+      id: '/api/member/wealth-overview/brief-download'
+      path: '/brief-download'
+      fullPath: '/api/member/wealth-overview/brief-download'
+      preLoaderRoute: typeof ApiMemberWealthOverviewBriefDownloadRouteImport
+      parentRoute: typeof ApiMemberWealthOverviewRoute
+    }
+    '/api/member/security/export': {
+      id: '/api/member/security/export'
+      path: '/export'
+      fullPath: '/api/member/security/export'
+      preLoaderRoute: typeof ApiMemberSecurityExportRouteImport
+      parentRoute: typeof ApiMemberSecurityRoute
+    }
+    '/api/member/privacy/memory': {
+      id: '/api/member/privacy/memory'
+      path: '/api/member/privacy/memory'
+      fullPath: '/api/member/privacy/memory'
+      preLoaderRoute: typeof ApiMemberPrivacyMemoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/privacy/audit': {
+      id: '/api/member/privacy/audit'
+      path: '/api/member/privacy/audit'
+      fullPath: '/api/member/privacy/audit'
+      preLoaderRoute: typeof ApiMemberPrivacyAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/goals/$goalId': {
+      id: '/api/member/goals/$goalId'
+      path: '/$goalId'
+      fullPath: '/api/member/goals/$goalId'
+      preLoaderRoute: typeof ApiMemberGoalsGoalIdRouteImport
+      parentRoute: typeof ApiMemberGoalsRoute
+    }
+    '/api/member/experts/$expertId': {
+      id: '/api/member/experts/$expertId'
+      path: '/$expertId'
+      fullPath: '/api/member/experts/$expertId'
+      preLoaderRoute: typeof ApiMemberExpertsExpertIdRouteImport
+      parentRoute: typeof ApiMemberExpertsRoute
+    }
+    '/api/member/expert-chat/$expertId': {
+      id: '/api/member/expert-chat/$expertId'
+      path: '/api/member/expert-chat/$expertId'
+      fullPath: '/api/member/expert-chat/$expertId'
+      preLoaderRoute: typeof ApiMemberExpertChatExpertIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/expert-bookings/$bookingId': {
+      id: '/api/member/expert-bookings/$bookingId'
+      path: '/$bookingId'
+      fullPath: '/api/member/expert-bookings/$bookingId'
+      preLoaderRoute: typeof ApiMemberExpertBookingsBookingIdRouteImport
+      parentRoute: typeof ApiMemberExpertBookingsRoute
+    }
+    '/api/member/chat/triggers': {
+      id: '/api/member/chat/triggers'
+      path: '/api/member/chat/triggers'
+      fullPath: '/api/member/chat/triggers'
+      preLoaderRoute: typeof ApiMemberChatTriggersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/chat/save-response': {
+      id: '/api/member/chat/save-response'
+      path: '/api/member/chat/save-response'
+      fullPath: '/api/member/chat/save-response'
+      preLoaderRoute: typeof ApiMemberChatSaveResponseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/chat/export': {
+      id: '/api/member/chat/export'
+      path: '/api/member/chat/export'
+      fullPath: '/api/member/chat/export'
+      preLoaderRoute: typeof ApiMemberChatExportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/chat/context': {
+      id: '/api/member/chat/context'
+      path: '/api/member/chat/context'
+      fullPath: '/api/member/chat/context'
+      preLoaderRoute: typeof ApiMemberChatContextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/founder/members/$memberId': {
+      id: '/api/founder/members/$memberId'
+      path: '/api/founder/members/$memberId'
+      fullPath: '/api/founder/members/$memberId'
+      preLoaderRoute: typeof ApiFounderMembersMemberIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/founder/experts/$expertId': {
+      id: '/api/founder/experts/$expertId'
+      path: '/$expertId'
+      fullPath: '/api/founder/experts/$expertId'
+      preLoaderRoute: typeof ApiFounderExpertsExpertIdRouteImport
+      parentRoute: typeof ApiFounderExpertsRoute
+    }
+    '/api/expert/meeting/$bookingId': {
+      id: '/api/expert/meeting/$bookingId'
+      path: '/api/expert/meeting/$bookingId'
+      fullPath: '/api/expert/meeting/$bookingId'
+      preLoaderRoute: typeof ApiExpertMeetingBookingIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/expert/appointments/$bookingId': {
+      id: '/api/expert/appointments/$bookingId'
+      path: '/$bookingId'
+      fullPath: '/api/expert/appointments/$bookingId'
+      preLoaderRoute: typeof ApiExpertAppointmentsBookingIdRouteImport
+      parentRoute: typeof ApiExpertAppointmentsRoute
+    }
+    '/api/documents/$documentId/ask': {
+      id: '/api/documents/$documentId/ask'
+      path: '/api/documents/$documentId/ask'
+      fullPath: '/api/documents/$documentId/ask'
+      preLoaderRoute: typeof ApiDocumentsDocumentIdAskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/documents/$documentId/analyze': {
       id: '/api/documents/$documentId/analyze'
       path: '/api/documents/$documentId/analyze'
       fullPath: '/api/documents/$documentId/analyze'
       preLoaderRoute: typeof ApiDocumentsDocumentIdAnalyzeRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/api/conversations/$conversationId/title': {
+      id: '/api/conversations/$conversationId/title'
+      path: '/title'
+      fullPath: '/api/conversations/$conversationId/title'
+      preLoaderRoute: typeof ApiConversationsConversationIdTitleRouteImport
+      parentRoute: typeof ApiConversationsConversationIdRoute
     }
     '/api/conversations/$conversationId/messages': {
       id: '/api/conversations/$conversationId/messages'
@@ -899,12 +3719,124 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiConversationsConversationIdMessagesRouteImport
       parentRoute: typeof ApiConversationsConversationIdRoute
     }
+    '/api/admin/membership/settings': {
+      id: '/api/admin/membership/settings'
+      path: '/api/admin/membership/settings'
+      fullPath: '/api/admin/membership/settings'
+      preLoaderRoute: typeof ApiAdminMembershipSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/admin/invites/$inviteId': {
       id: '/api/admin/invites/$inviteId'
       path: '/$inviteId'
       fullPath: '/api/admin/invites/$inviteId'
       preLoaderRoute: typeof ApiAdminInvitesInviteIdRouteImport
       parentRoute: typeof ApiAdminInvitesRoute
+    }
+    '/_app/expert/join/$bookingId': {
+      id: '/_app/expert/join/$bookingId'
+      path: '/expert/join/$bookingId'
+      fullPath: '/expert/join/$bookingId'
+      preLoaderRoute: typeof AppExpertJoinBookingIdRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dashboard/meeting/$bookingId': {
+      id: '/_app/dashboard/meeting/$bookingId'
+      path: '/meeting/$bookingId'
+      fullPath: '/dashboard/meeting/$bookingId'
+      preLoaderRoute: typeof AppDashboardMeetingBookingIdRouteImport
+      parentRoute: typeof AppDashboardRoute
+    }
+    '/_app/dashboard/experts/$expertId': {
+      id: '/_app/dashboard/experts/$expertId'
+      path: '/$expertId'
+      fullPath: '/dashboard/experts/$expertId'
+      preLoaderRoute: typeof AppDashboardExpertsExpertIdRouteImport
+      parentRoute: typeof AppDashboardExpertsRoute
+    }
+    '/api/admin/membership/applications/': {
+      id: '/api/admin/membership/applications/'
+      path: '/api/admin/membership/applications'
+      fullPath: '/api/admin/membership/applications/'
+      preLoaderRoute: typeof ApiAdminMembershipApplicationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/goals/$goalId/ask': {
+      id: '/api/member/goals/$goalId/ask'
+      path: '/ask'
+      fullPath: '/api/member/goals/$goalId/ask'
+      preLoaderRoute: typeof ApiMemberGoalsGoalIdAskRouteImport
+      parentRoute: typeof ApiMemberGoalsGoalIdRoute
+    }
+    '/api/member/goals/$goalId/advise': {
+      id: '/api/member/goals/$goalId/advise'
+      path: '/advise'
+      fullPath: '/api/member/goals/$goalId/advise'
+      preLoaderRoute: typeof ApiMemberGoalsGoalIdAdviseRouteImport
+      parentRoute: typeof ApiMemberGoalsGoalIdRoute
+    }
+    '/api/member/experts/$expertId/introduction': {
+      id: '/api/member/experts/$expertId/introduction'
+      path: '/introduction'
+      fullPath: '/api/member/experts/$expertId/introduction'
+      preLoaderRoute: typeof ApiMemberExpertsExpertIdIntroductionRouteImport
+      parentRoute: typeof ApiMemberExpertsExpertIdRoute
+    }
+    '/api/member/expert-chat/$threadId/messages': {
+      id: '/api/member/expert-chat/$threadId/messages'
+      path: '/api/member/expert-chat/$threadId/messages'
+      fullPath: '/api/member/expert-chat/$threadId/messages'
+      preLoaderRoute: typeof ApiMemberExpertChatThreadIdMessagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/member/expert-bookings/$bookingId/pay': {
+      id: '/api/member/expert-bookings/$bookingId/pay'
+      path: '/pay'
+      fullPath: '/api/member/expert-bookings/$bookingId/pay'
+      preLoaderRoute: typeof ApiMemberExpertBookingsBookingIdPayRouteImport
+      parentRoute: typeof ApiMemberExpertBookingsBookingIdRoute
+    }
+    '/api/member/expert-bookings/$bookingId/confirm': {
+      id: '/api/member/expert-bookings/$bookingId/confirm'
+      path: '/confirm'
+      fullPath: '/api/member/expert-bookings/$bookingId/confirm'
+      preLoaderRoute: typeof ApiMemberExpertBookingsBookingIdConfirmRouteImport
+      parentRoute: typeof ApiMemberExpertBookingsBookingIdRoute
+    }
+    '/api/founder/waitlist/$waitlistId/notes': {
+      id: '/api/founder/waitlist/$waitlistId/notes'
+      path: '/api/founder/waitlist/$waitlistId/notes'
+      fullPath: '/api/founder/waitlist/$waitlistId/notes'
+      preLoaderRoute: typeof ApiFounderWaitlistWaitlistIdNotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/founder/support/$ticketId/status': {
+      id: '/api/founder/support/$ticketId/status'
+      path: '/api/founder/support/$ticketId/status'
+      fullPath: '/api/founder/support/$ticketId/status'
+      preLoaderRoute: typeof ApiFounderSupportTicketIdStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/founder/support/$ticketId/reply': {
+      id: '/api/founder/support/$ticketId/reply'
+      path: '/api/founder/support/$ticketId/reply'
+      fullPath: '/api/founder/support/$ticketId/reply'
+      preLoaderRoute: typeof ApiFounderSupportTicketIdReplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/expert/chat/$threadId/messages': {
+      id: '/api/expert/chat/$threadId/messages'
+      path: '/api/expert/chat/$threadId/messages'
+      fullPath: '/api/expert/chat/$threadId/messages'
+      preLoaderRoute: typeof ApiExpertChatThreadIdMessagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/expert/appointments/$bookingId/brief': {
+      id: '/api/expert/appointments/$bookingId/brief'
+      path: '/brief'
+      fullPath: '/api/expert/appointments/$bookingId/brief'
+      preLoaderRoute: typeof ApiExpertAppointmentsBookingIdBriefRouteImport
+      parentRoute: typeof ApiExpertAppointmentsBookingIdRoute
     }
     '/api/admin/waitlist/$waitlistId/decline': {
       id: '/api/admin/waitlist/$waitlistId/decline'
@@ -920,6 +3852,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminWaitlistWaitlistIdApproveRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/membership/members/$memberId': {
+      id: '/api/admin/membership/members/$memberId'
+      path: '/api/admin/membership/members/$memberId'
+      fullPath: '/api/admin/membership/members/$memberId'
+      preLoaderRoute: typeof ApiAdminMembershipMembersMemberIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/admin/members/$memberId/revoke': {
       id: '/api/admin/members/$memberId/revoke'
       path: '/api/admin/members/$memberId/revoke'
@@ -927,24 +3866,246 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminMembersMemberIdRevokeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/dashboard/experts/$expertId/chat': {
+      id: '/_app/dashboard/experts/$expertId/chat'
+      path: '/chat'
+      fullPath: '/dashboard/experts/$expertId/chat'
+      preLoaderRoute: typeof AppDashboardExpertsExpertIdChatRouteImport
+      parentRoute: typeof AppDashboardExpertsExpertIdRoute
+    }
+    '/api/admin/membership/applications/$applicationId/reject': {
+      id: '/api/admin/membership/applications/$applicationId/reject'
+      path: '/api/admin/membership/applications/$applicationId/reject'
+      fullPath: '/api/admin/membership/applications/$applicationId/reject'
+      preLoaderRoute: typeof ApiAdminMembershipApplicationsApplicationIdRejectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/membership/applications/$applicationId/approve': {
+      id: '/api/admin/membership/applications/$applicationId/approve'
+      path: '/api/admin/membership/applications/$applicationId/approve'
+      fullPath: '/api/admin/membership/applications/$applicationId/approve'
+      preLoaderRoute: typeof ApiAdminMembershipApplicationsApplicationIdApproveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
+
+interface AppDashboardExpertsExpertIdRouteChildren {
+  AppDashboardExpertsExpertIdChatRoute: typeof AppDashboardExpertsExpertIdChatRoute
+}
+
+const AppDashboardExpertsExpertIdRouteChildren: AppDashboardExpertsExpertIdRouteChildren =
+  {
+    AppDashboardExpertsExpertIdChatRoute: AppDashboardExpertsExpertIdChatRoute,
+  }
+
+const AppDashboardExpertsExpertIdRouteWithChildren =
+  AppDashboardExpertsExpertIdRoute._addFileChildren(
+    AppDashboardExpertsExpertIdRouteChildren,
+  )
+
+interface AppDashboardExpertsRouteChildren {
+  AppDashboardExpertsExpertIdRoute: typeof AppDashboardExpertsExpertIdRouteWithChildren
+}
+
+const AppDashboardExpertsRouteChildren: AppDashboardExpertsRouteChildren = {
+  AppDashboardExpertsExpertIdRoute:
+    AppDashboardExpertsExpertIdRouteWithChildren,
+}
+
+const AppDashboardExpertsRouteWithChildren =
+  AppDashboardExpertsRoute._addFileChildren(AppDashboardExpertsRouteChildren)
+
+interface AppDashboardRouteChildren {
+  AppDashboardAiAdvisorRoute: typeof AppDashboardAiAdvisorRoute
+  AppDashboardBookingsRoute: typeof AppDashboardBookingsRoute
+  AppDashboardDocumentsRoute: typeof AppDashboardDocumentsRoute
+  AppDashboardExpertsRoute: typeof AppDashboardExpertsRouteWithChildren
+  AppDashboardFamilyMembersRoute: typeof AppDashboardFamilyMembersRoute
+  AppDashboardGoalsRoute: typeof AppDashboardGoalsRoute
+  AppDashboardGoalsPlanningRoute: typeof AppDashboardGoalsPlanningRoute
+  AppDashboardLegalEntitiesRoute: typeof AppDashboardLegalEntitiesRoute
+  AppDashboardMarketIntelRoute: typeof AppDashboardMarketIntelRoute
+  AppDashboardSecurityRoute: typeof AppDashboardSecurityRoute
+  AppDashboardSuccessionRoute: typeof AppDashboardSuccessionRoute
+  AppDashboardTaxCalculatorRoute: typeof AppDashboardTaxCalculatorRoute
+  AppDashboardVaultRoute: typeof AppDashboardVaultRoute
+  AppDashboardWealthOverviewRoute: typeof AppDashboardWealthOverviewRoute
+  AppDashboardIndexRoute: typeof AppDashboardIndexRoute
+  AppDashboardMeetingBookingIdRoute: typeof AppDashboardMeetingBookingIdRoute
+}
+
+const AppDashboardRouteChildren: AppDashboardRouteChildren = {
+  AppDashboardAiAdvisorRoute: AppDashboardAiAdvisorRoute,
+  AppDashboardBookingsRoute: AppDashboardBookingsRoute,
+  AppDashboardDocumentsRoute: AppDashboardDocumentsRoute,
+  AppDashboardExpertsRoute: AppDashboardExpertsRouteWithChildren,
+  AppDashboardFamilyMembersRoute: AppDashboardFamilyMembersRoute,
+  AppDashboardGoalsRoute: AppDashboardGoalsRoute,
+  AppDashboardGoalsPlanningRoute: AppDashboardGoalsPlanningRoute,
+  AppDashboardLegalEntitiesRoute: AppDashboardLegalEntitiesRoute,
+  AppDashboardMarketIntelRoute: AppDashboardMarketIntelRoute,
+  AppDashboardSecurityRoute: AppDashboardSecurityRoute,
+  AppDashboardSuccessionRoute: AppDashboardSuccessionRoute,
+  AppDashboardTaxCalculatorRoute: AppDashboardTaxCalculatorRoute,
+  AppDashboardVaultRoute: AppDashboardVaultRoute,
+  AppDashboardWealthOverviewRoute: AppDashboardWealthOverviewRoute,
+  AppDashboardIndexRoute: AppDashboardIndexRoute,
+  AppDashboardMeetingBookingIdRoute: AppDashboardMeetingBookingIdRoute,
+}
+
+const AppDashboardRouteWithChildren = AppDashboardRoute._addFileChildren(
+  AppDashboardRouteChildren,
+)
+
+interface AppExpertsRouteChildren {
+  AppExpertsExpertIdRoute: typeof AppExpertsExpertIdRoute
+  AppExpertsBookingsRoute: typeof AppExpertsBookingsRoute
+}
+
+const AppExpertsRouteChildren: AppExpertsRouteChildren = {
+  AppExpertsExpertIdRoute: AppExpertsExpertIdRoute,
+  AppExpertsBookingsRoute: AppExpertsBookingsRoute,
+}
+
+const AppExpertsRouteWithChildren = AppExpertsRoute._addFileChildren(
+  AppExpertsRouteChildren,
+)
+
+interface AppFounderRouteChildren {
+  AppFounderAnalyticsRoute: typeof AppFounderAnalyticsRoute
+  AppFounderApplicationsRoute: typeof AppFounderApplicationsRoute
+  AppFounderClientsRoute: typeof AppFounderClientsRoute
+  AppFounderExpertBookingsRoute: typeof AppFounderExpertBookingsRoute
+  AppFounderExpertsRoute: typeof AppFounderExpertsRoute
+  AppFounderInvitesRoute: typeof AppFounderInvitesRoute
+  AppFounderPaymentsRoute: typeof AppFounderPaymentsRoute
+  AppFounderSettingsRoute: typeof AppFounderSettingsRoute
+  AppFounderSupportRoute: typeof AppFounderSupportRoute
+  AppFounderIndexRoute: typeof AppFounderIndexRoute
+}
+
+const AppFounderRouteChildren: AppFounderRouteChildren = {
+  AppFounderAnalyticsRoute: AppFounderAnalyticsRoute,
+  AppFounderApplicationsRoute: AppFounderApplicationsRoute,
+  AppFounderClientsRoute: AppFounderClientsRoute,
+  AppFounderExpertBookingsRoute: AppFounderExpertBookingsRoute,
+  AppFounderExpertsRoute: AppFounderExpertsRoute,
+  AppFounderInvitesRoute: AppFounderInvitesRoute,
+  AppFounderPaymentsRoute: AppFounderPaymentsRoute,
+  AppFounderSettingsRoute: AppFounderSettingsRoute,
+  AppFounderSupportRoute: AppFounderSupportRoute,
+  AppFounderIndexRoute: AppFounderIndexRoute,
+}
+
+const AppFounderRouteWithChildren = AppFounderRoute._addFileChildren(
+  AppFounderRouteChildren,
+)
 
 interface AppRouteChildren {
   AppAdvisorsRoute: typeof AppAdvisorsRoute
   AppChatRoute: typeof AppChatRoute
-  AppDashboardRoute: typeof AppDashboardRoute
+  AppDashboardRoute: typeof AppDashboardRouteWithChildren
+  AppDocumentsRoute: typeof AppDocumentsRoute
+  AppEntitiesRoute: typeof AppEntitiesRoute
+  AppExpertsRoute: typeof AppExpertsRouteWithChildren
+  AppFamilyMembersRoute: typeof AppFamilyMembersRoute
+  AppFounderRoute: typeof AppFounderRouteWithChildren
+  AppGettingStartedRoute: typeof AppGettingStartedRoute
+  AppGoalsRoute: typeof AppGoalsRoute
+  AppGoalsPlanningRoute: typeof AppGoalsPlanningRoute
+  AppMarketIntelligenceRoute: typeof AppMarketIntelligenceRoute
+  AppMembershipRoute: typeof AppMembershipRoute
+  AppProfileRoute: typeof AppProfileRoute
+  AppSuccessionRoute: typeof AppSuccessionRoute
+  AppSupportRoute: typeof AppSupportRoute
   AppVaultRoute: typeof AppVaultRoute
+  AppWealthRoute: typeof AppWealthRoute
+  AppWelcomeRoute: typeof AppWelcomeRoute
+  AppExpertAvailabilityRoute: typeof AppExpertAvailabilityRoute
+  AppExpertDashboardRoute: typeof AppExpertDashboardRoute
+  AppExpertIndexRoute: typeof AppExpertIndexRoute
+  AppExpertJoinBookingIdRoute: typeof AppExpertJoinBookingIdRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppAdvisorsRoute: AppAdvisorsRoute,
   AppChatRoute: AppChatRoute,
-  AppDashboardRoute: AppDashboardRoute,
+  AppDashboardRoute: AppDashboardRouteWithChildren,
+  AppDocumentsRoute: AppDocumentsRoute,
+  AppEntitiesRoute: AppEntitiesRoute,
+  AppExpertsRoute: AppExpertsRouteWithChildren,
+  AppFamilyMembersRoute: AppFamilyMembersRoute,
+  AppFounderRoute: AppFounderRouteWithChildren,
+  AppGettingStartedRoute: AppGettingStartedRoute,
+  AppGoalsRoute: AppGoalsRoute,
+  AppGoalsPlanningRoute: AppGoalsPlanningRoute,
+  AppMarketIntelligenceRoute: AppMarketIntelligenceRoute,
+  AppMembershipRoute: AppMembershipRoute,
+  AppProfileRoute: AppProfileRoute,
+  AppSuccessionRoute: AppSuccessionRoute,
+  AppSupportRoute: AppSupportRoute,
   AppVaultRoute: AppVaultRoute,
+  AppWealthRoute: AppWealthRoute,
+  AppWelcomeRoute: AppWelcomeRoute,
+  AppExpertAvailabilityRoute: AppExpertAvailabilityRoute,
+  AppExpertDashboardRoute: AppExpertDashboardRoute,
+  AppExpertIndexRoute: AppExpertIndexRoute,
+  AppExpertJoinBookingIdRoute: AppExpertJoinBookingIdRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
+interface AdminRouteChildren {
+  AdminApplicationsRoute: typeof AdminApplicationsRoute
+  AdminBookingsRoute: typeof AdminBookingsRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminApplicationsRoute: AdminApplicationsRoute,
+  AdminBookingsRoute: AdminBookingsRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface DemoRouteChildren {
+  DemoWorkspaceRoute: typeof DemoWorkspaceRoute
+  DemoIndexRoute: typeof DemoIndexRoute
+}
+
+const DemoRouteChildren: DemoRouteChildren = {
+  DemoWorkspaceRoute: DemoWorkspaceRoute,
+  DemoIndexRoute: DemoIndexRoute,
+}
+
+const DemoRouteWithChildren = DemoRoute._addFileChildren(DemoRouteChildren)
+
+interface ApiChatRouteChildren {
+  ApiChatStatusRoute: typeof ApiChatStatusRoute
+}
+
+const ApiChatRouteChildren: ApiChatRouteChildren = {
+  ApiChatStatusRoute: ApiChatStatusRoute,
+}
+
+const ApiChatRouteWithChildren =
+  ApiChatRoute._addFileChildren(ApiChatRouteChildren)
+
+interface ApiWaitlistRouteChildren {
+  ApiWaitlistResendOtpRoute: typeof ApiWaitlistResendOtpRoute
+  ApiWaitlistSendOtpRoute: typeof ApiWaitlistSendOtpRoute
+  ApiWaitlistVerifyOtpRoute: typeof ApiWaitlistVerifyOtpRoute
+}
+
+const ApiWaitlistRouteChildren: ApiWaitlistRouteChildren = {
+  ApiWaitlistResendOtpRoute: ApiWaitlistResendOtpRoute,
+  ApiWaitlistSendOtpRoute: ApiWaitlistSendOtpRoute,
+  ApiWaitlistVerifyOtpRoute: ApiWaitlistVerifyOtpRoute,
+}
+
+const ApiWaitlistRouteWithChildren = ApiWaitlistRoute._addFileChildren(
+  ApiWaitlistRouteChildren,
+)
 
 interface ApiAdminInvitesRouteChildren {
   ApiAdminInvitesInviteIdRoute: typeof ApiAdminInvitesInviteIdRoute
@@ -960,12 +4121,15 @@ const ApiAdminInvitesRouteWithChildren = ApiAdminInvitesRoute._addFileChildren(
 
 interface ApiConversationsConversationIdRouteChildren {
   ApiConversationsConversationIdMessagesRoute: typeof ApiConversationsConversationIdMessagesRoute
+  ApiConversationsConversationIdTitleRoute: typeof ApiConversationsConversationIdTitleRoute
 }
 
 const ApiConversationsConversationIdRouteChildren: ApiConversationsConversationIdRouteChildren =
   {
     ApiConversationsConversationIdMessagesRoute:
       ApiConversationsConversationIdMessagesRoute,
+    ApiConversationsConversationIdTitleRoute:
+      ApiConversationsConversationIdTitleRoute,
   }
 
 const ApiConversationsConversationIdRouteWithChildren =
@@ -973,12 +4137,178 @@ const ApiConversationsConversationIdRouteWithChildren =
     ApiConversationsConversationIdRouteChildren,
   )
 
+interface ApiExpertAppointmentsBookingIdRouteChildren {
+  ApiExpertAppointmentsBookingIdBriefRoute: typeof ApiExpertAppointmentsBookingIdBriefRoute
+}
+
+const ApiExpertAppointmentsBookingIdRouteChildren: ApiExpertAppointmentsBookingIdRouteChildren =
+  {
+    ApiExpertAppointmentsBookingIdBriefRoute:
+      ApiExpertAppointmentsBookingIdBriefRoute,
+  }
+
+const ApiExpertAppointmentsBookingIdRouteWithChildren =
+  ApiExpertAppointmentsBookingIdRoute._addFileChildren(
+    ApiExpertAppointmentsBookingIdRouteChildren,
+  )
+
+interface ApiExpertAppointmentsRouteChildren {
+  ApiExpertAppointmentsBookingIdRoute: typeof ApiExpertAppointmentsBookingIdRouteWithChildren
+}
+
+const ApiExpertAppointmentsRouteChildren: ApiExpertAppointmentsRouteChildren = {
+  ApiExpertAppointmentsBookingIdRoute:
+    ApiExpertAppointmentsBookingIdRouteWithChildren,
+}
+
+const ApiExpertAppointmentsRouteWithChildren =
+  ApiExpertAppointmentsRoute._addFileChildren(
+    ApiExpertAppointmentsRouteChildren,
+  )
+
+interface ApiFounderExpertsRouteChildren {
+  ApiFounderExpertsExpertIdRoute: typeof ApiFounderExpertsExpertIdRoute
+}
+
+const ApiFounderExpertsRouteChildren: ApiFounderExpertsRouteChildren = {
+  ApiFounderExpertsExpertIdRoute: ApiFounderExpertsExpertIdRoute,
+}
+
+const ApiFounderExpertsRouteWithChildren =
+  ApiFounderExpertsRoute._addFileChildren(ApiFounderExpertsRouteChildren)
+
+interface ApiMemberExpertBookingsBookingIdRouteChildren {
+  ApiMemberExpertBookingsBookingIdConfirmRoute: typeof ApiMemberExpertBookingsBookingIdConfirmRoute
+  ApiMemberExpertBookingsBookingIdPayRoute: typeof ApiMemberExpertBookingsBookingIdPayRoute
+}
+
+const ApiMemberExpertBookingsBookingIdRouteChildren: ApiMemberExpertBookingsBookingIdRouteChildren =
+  {
+    ApiMemberExpertBookingsBookingIdConfirmRoute:
+      ApiMemberExpertBookingsBookingIdConfirmRoute,
+    ApiMemberExpertBookingsBookingIdPayRoute:
+      ApiMemberExpertBookingsBookingIdPayRoute,
+  }
+
+const ApiMemberExpertBookingsBookingIdRouteWithChildren =
+  ApiMemberExpertBookingsBookingIdRoute._addFileChildren(
+    ApiMemberExpertBookingsBookingIdRouteChildren,
+  )
+
+interface ApiMemberExpertBookingsRouteChildren {
+  ApiMemberExpertBookingsBookingIdRoute: typeof ApiMemberExpertBookingsBookingIdRouteWithChildren
+}
+
+const ApiMemberExpertBookingsRouteChildren: ApiMemberExpertBookingsRouteChildren =
+  {
+    ApiMemberExpertBookingsBookingIdRoute:
+      ApiMemberExpertBookingsBookingIdRouteWithChildren,
+  }
+
+const ApiMemberExpertBookingsRouteWithChildren =
+  ApiMemberExpertBookingsRoute._addFileChildren(
+    ApiMemberExpertBookingsRouteChildren,
+  )
+
+interface ApiMemberExpertsExpertIdRouteChildren {
+  ApiMemberExpertsExpertIdIntroductionRoute: typeof ApiMemberExpertsExpertIdIntroductionRoute
+}
+
+const ApiMemberExpertsExpertIdRouteChildren: ApiMemberExpertsExpertIdRouteChildren =
+  {
+    ApiMemberExpertsExpertIdIntroductionRoute:
+      ApiMemberExpertsExpertIdIntroductionRoute,
+  }
+
+const ApiMemberExpertsExpertIdRouteWithChildren =
+  ApiMemberExpertsExpertIdRoute._addFileChildren(
+    ApiMemberExpertsExpertIdRouteChildren,
+  )
+
+interface ApiMemberExpertsRouteChildren {
+  ApiMemberExpertsExpertIdRoute: typeof ApiMemberExpertsExpertIdRouteWithChildren
+}
+
+const ApiMemberExpertsRouteChildren: ApiMemberExpertsRouteChildren = {
+  ApiMemberExpertsExpertIdRoute: ApiMemberExpertsExpertIdRouteWithChildren,
+}
+
+const ApiMemberExpertsRouteWithChildren =
+  ApiMemberExpertsRoute._addFileChildren(ApiMemberExpertsRouteChildren)
+
+interface ApiMemberGoalsGoalIdRouteChildren {
+  ApiMemberGoalsGoalIdAdviseRoute: typeof ApiMemberGoalsGoalIdAdviseRoute
+  ApiMemberGoalsGoalIdAskRoute: typeof ApiMemberGoalsGoalIdAskRoute
+}
+
+const ApiMemberGoalsGoalIdRouteChildren: ApiMemberGoalsGoalIdRouteChildren = {
+  ApiMemberGoalsGoalIdAdviseRoute: ApiMemberGoalsGoalIdAdviseRoute,
+  ApiMemberGoalsGoalIdAskRoute: ApiMemberGoalsGoalIdAskRoute,
+}
+
+const ApiMemberGoalsGoalIdRouteWithChildren =
+  ApiMemberGoalsGoalIdRoute._addFileChildren(ApiMemberGoalsGoalIdRouteChildren)
+
+interface ApiMemberGoalsRouteChildren {
+  ApiMemberGoalsGoalIdRoute: typeof ApiMemberGoalsGoalIdRouteWithChildren
+}
+
+const ApiMemberGoalsRouteChildren: ApiMemberGoalsRouteChildren = {
+  ApiMemberGoalsGoalIdRoute: ApiMemberGoalsGoalIdRouteWithChildren,
+}
+
+const ApiMemberGoalsRouteWithChildren = ApiMemberGoalsRoute._addFileChildren(
+  ApiMemberGoalsRouteChildren,
+)
+
+interface ApiMemberSecurityRouteChildren {
+  ApiMemberSecurityExportRoute: typeof ApiMemberSecurityExportRoute
+}
+
+const ApiMemberSecurityRouteChildren: ApiMemberSecurityRouteChildren = {
+  ApiMemberSecurityExportRoute: ApiMemberSecurityExportRoute,
+}
+
+const ApiMemberSecurityRouteWithChildren =
+  ApiMemberSecurityRoute._addFileChildren(ApiMemberSecurityRouteChildren)
+
+interface ApiMemberWealthOverviewRouteChildren {
+  ApiMemberWealthOverviewBriefDownloadRoute: typeof ApiMemberWealthOverviewBriefDownloadRoute
+  ApiMemberWealthOverviewParseRoute: typeof ApiMemberWealthOverviewParseRoute
+}
+
+const ApiMemberWealthOverviewRouteChildren: ApiMemberWealthOverviewRouteChildren =
+  {
+    ApiMemberWealthOverviewBriefDownloadRoute:
+      ApiMemberWealthOverviewBriefDownloadRoute,
+    ApiMemberWealthOverviewParseRoute: ApiMemberWealthOverviewParseRoute,
+  }
+
+const ApiMemberWealthOverviewRouteWithChildren =
+  ApiMemberWealthOverviewRoute._addFileChildren(
+    ApiMemberWealthOverviewRouteChildren,
+  )
+
+interface ApiVaultDocumentIdRouteChildren {
+  ApiVaultDocumentIdShareRoute: typeof ApiVaultDocumentIdShareRoute
+}
+
+const ApiVaultDocumentIdRouteChildren: ApiVaultDocumentIdRouteChildren = {
+  ApiVaultDocumentIdShareRoute: ApiVaultDocumentIdShareRoute,
+}
+
+const ApiVaultDocumentIdRouteWithChildren =
+  ApiVaultDocumentIdRoute._addFileChildren(ApiVaultDocumentIdRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   AccessRoute: AccessRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
+  ApplyRoute: ApplyRoute,
+  ApplyAsExpertRoute: ApplyAsExpertRoute,
   ContactRoute: ContactRoute,
+  DemoRoute: DemoRouteWithChildren,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
@@ -986,36 +4316,116 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SecurityRoute: SecurityRoute,
   TermsRoute: TermsRoute,
+  TermsAndConditionsRoute: TermsAndConditionsRoute,
   WaitlistRoute: WaitlistRoute,
-  ApiChatRoute: ApiChatRoute,
+  ApiChatRoute: ApiChatRouteWithChildren,
+  ApiMarketIntelligenceRoute: ApiMarketIntelligenceRoute,
+  ApiNewsRoute: ApiNewsRoute,
+  ApiSendOtpRoute: ApiSendOtpRoute,
+  ApiSupportRoute: ApiSupportRoute,
   ApiUploadRoute: ApiUploadRoute,
-  ApiWaitlistRoute: ApiWaitlistRoute,
+  ApiWaitlistRoute: ApiWaitlistRouteWithChildren,
+  DevEnterRoute: DevEnterRoute,
+  ApiAdminAiSettingsRoute: ApiAdminAiSettingsRoute,
+  ApiAdminBookingsRoute: ApiAdminBookingsRoute,
   ApiAdminDashboardRoute: ApiAdminDashboardRoute,
   ApiAdminInvitesRoute: ApiAdminInvitesRouteWithChildren,
   ApiAdminLoginRoute: ApiAdminLoginRoute,
   ApiAdminLogoutRoute: ApiAdminLogoutRoute,
   ApiAdminUsageRoute: ApiAdminUsageRoute,
+  ApiAuthDemoRoute: ApiAuthDemoRoute,
+  ApiAuthDevBypassRoute: ApiAuthDevBypassRoute,
   ApiAuthForgotPasswordRoute: ApiAuthForgotPasswordRoute,
   ApiAuthOnboardRoute: ApiAuthOnboardRoute,
+  ApiAuthRefreshRoute: ApiAuthRefreshRoute,
+  ApiAuthRegisterRoute: ApiAuthRegisterRoute,
   ApiAuthReserveInviteRoute: ApiAuthReserveInviteRoute,
   ApiAuthResetPasswordRoute: ApiAuthResetPasswordRoute,
   ApiAuthSessionRoute: ApiAuthSessionRoute,
   ApiAuthSignInRoute: ApiAuthSignInRoute,
   ApiAuthSignOutRoute: ApiAuthSignOutRoute,
+  ApiAuthVerifyClientOtpRoute: ApiAuthVerifyClientOtpRoute,
   ApiAuthVerifyInviteRoute: ApiAuthVerifyInviteRoute,
   ApiConversationsConversationIdRoute:
     ApiConversationsConversationIdRouteWithChildren,
+  ApiExpertAppointmentsRoute: ApiExpertAppointmentsRouteWithChildren,
+  ApiExpertAvailabilityRoute: ApiExpertAvailabilityRoute,
+  ApiExpertClientsRoute: ApiExpertClientsRoute,
+  ApiExpertNdaRoute: ApiExpertNdaRoute,
+  ApiExpertsApplyRoute: ApiExpertsApplyRoute,
+  ApiFounderAdminsRoute: ApiFounderAdminsRoute,
+  ApiFounderExpertBookingsRoute: ApiFounderExpertBookingsRoute,
+  ApiFounderExpertsRoute: ApiFounderExpertsRouteWithChildren,
+  ApiFounderOverviewRoute: ApiFounderOverviewRoute,
+  ApiHealthSupabaseRoute: ApiHealthSupabaseRoute,
+  ApiMarketIntelBookmarkRoute: ApiMarketIntelBookmarkRoute,
+  ApiMarketIntelBriefRoute: ApiMarketIntelBriefRoute,
+  ApiMemberAuditRoute: ApiMemberAuditRoute,
+  ApiMemberExpertBookingsRoute: ApiMemberExpertBookingsRouteWithChildren,
+  ApiMemberExpertVaultShareRoute: ApiMemberExpertVaultShareRoute,
+  ApiMemberExpertsRoute: ApiMemberExpertsRouteWithChildren,
+  ApiMemberFamilyRoute: ApiMemberFamilyRoute,
+  ApiMemberGoalsRoute: ApiMemberGoalsRouteWithChildren,
+  ApiMemberIdentityCardRoute: ApiMemberIdentityCardRoute,
+  ApiMemberLegalEntitiesRoute: ApiMemberLegalEntitiesRoute,
+  ApiMemberNotificationsRoute: ApiMemberNotificationsRoute,
+  ApiMemberOnboardingRoute: ApiMemberOnboardingRoute,
+  ApiMemberOnboardingChecklistRoute: ApiMemberOnboardingChecklistRoute,
+  ApiMemberOverviewRoute: ApiMemberOverviewRoute,
+  ApiMemberPreferencesRoute: ApiMemberPreferencesRoute,
+  ApiMemberProfileRoute: ApiMemberProfileRoute,
+  ApiMemberSecurityRoute: ApiMemberSecurityRouteWithChildren,
+  ApiMemberSuccessionRoute: ApiMemberSuccessionRoute,
+  ApiMemberSupportRoute: ApiMemberSupportRoute,
+  ApiMemberTaxCalculatorRoute: ApiMemberTaxCalculatorRoute,
+  ApiMemberUpgradeRequestRoute: ApiMemberUpgradeRequestRoute,
+  ApiMemberWealthOverviewRoute: ApiMemberWealthOverviewRouteWithChildren,
+  ApiMembershipApplyRoute: ApiMembershipApplyRoute,
+  ApiMembershipSettingsRoute: ApiMembershipSettingsRoute,
+  ApiOtpSendRoute: ApiOtpSendRoute,
+  ApiOtpVerifyRoute: ApiOtpVerifyRoute,
   ApiPaymentsCreateOrderRoute: ApiPaymentsCreateOrderRoute,
   ApiPaymentsWebhookRoute: ApiPaymentsWebhookRoute,
-  ApiVaultDocumentIdRoute: ApiVaultDocumentIdRoute,
+  ApiVaultDocumentIdRoute: ApiVaultDocumentIdRouteWithChildren,
+  ApiVaultAskRoute: ApiVaultAskRoute,
+  ApiVaultBulkRoute: ApiVaultBulkRoute,
   ApiConversationsIndexRoute: ApiConversationsIndexRoute,
+  ApiMarketIntelIndexRoute: ApiMarketIntelIndexRoute,
   ApiVaultIndexRoute: ApiVaultIndexRoute,
+  ApiAdminMembershipSettingsRoute: ApiAdminMembershipSettingsRoute,
   ApiDocumentsDocumentIdAnalyzeRoute: ApiDocumentsDocumentIdAnalyzeRoute,
+  ApiDocumentsDocumentIdAskRoute: ApiDocumentsDocumentIdAskRoute,
+  ApiExpertMeetingBookingIdRoute: ApiExpertMeetingBookingIdRoute,
+  ApiFounderMembersMemberIdRoute: ApiFounderMembersMemberIdRoute,
+  ApiMemberChatContextRoute: ApiMemberChatContextRoute,
+  ApiMemberChatExportRoute: ApiMemberChatExportRoute,
+  ApiMemberChatSaveResponseRoute: ApiMemberChatSaveResponseRoute,
+  ApiMemberChatTriggersRoute: ApiMemberChatTriggersRoute,
+  ApiMemberExpertChatExpertIdRoute: ApiMemberExpertChatExpertIdRoute,
+  ApiMemberPrivacyAuditRoute: ApiMemberPrivacyAuditRoute,
+  ApiMemberPrivacyMemoryRoute: ApiMemberPrivacyMemoryRoute,
+  ApiVaultShareTokenRoute: ApiVaultShareTokenRoute,
+  ApiExpertChatIndexRoute: ApiExpertChatIndexRoute,
   ApiAdminMembersMemberIdRevokeRoute: ApiAdminMembersMemberIdRevokeRoute,
+  ApiAdminMembershipMembersMemberIdRoute:
+    ApiAdminMembershipMembersMemberIdRoute,
   ApiAdminWaitlistWaitlistIdApproveRoute:
     ApiAdminWaitlistWaitlistIdApproveRoute,
   ApiAdminWaitlistWaitlistIdDeclineRoute:
     ApiAdminWaitlistWaitlistIdDeclineRoute,
+  ApiExpertChatThreadIdMessagesRoute: ApiExpertChatThreadIdMessagesRoute,
+  ApiFounderSupportTicketIdReplyRoute: ApiFounderSupportTicketIdReplyRoute,
+  ApiFounderSupportTicketIdStatusRoute: ApiFounderSupportTicketIdStatusRoute,
+  ApiFounderWaitlistWaitlistIdNotesRoute:
+    ApiFounderWaitlistWaitlistIdNotesRoute,
+  ApiMemberExpertChatThreadIdMessagesRoute:
+    ApiMemberExpertChatThreadIdMessagesRoute,
+  ApiAdminMembershipApplicationsIndexRoute:
+    ApiAdminMembershipApplicationsIndexRoute,
+  ApiAdminMembershipApplicationsApplicationIdApproveRoute:
+    ApiAdminMembershipApplicationsApplicationIdApproveRoute,
+  ApiAdminMembershipApplicationsApplicationIdRejectRoute:
+    ApiAdminMembershipApplicationsApplicationIdRejectRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
